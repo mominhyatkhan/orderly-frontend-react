@@ -10,9 +10,9 @@ export default function Home() {
       <Head>
         <title>Orderly</title>
       </Head>
-      <div className="grid grid-flow-col h-screen ">
-        <div className="grid bg-[#08101f] text-white"> {login()}</div>
-        <div className="grid place-items-center bg-[#171f2d] text-white h-full col-span-2">
+      <div className="flex h-screen ">
+        <div className="flex bg-[#08101f] text-white w-1/3"> {login()}</div>
+        <div className="flex justify-center bg-[#171f2d] text-white w-full h-full">
           {homePage()}
         </div>
       </div>
