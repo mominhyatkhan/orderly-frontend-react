@@ -1,4 +1,4 @@
-export default function intro() {
+function Home() {
   return (
     <div className="flex flex-col gap-10 mt-80 space-x-10">
       <div className="grid gap-y-8">
@@ -54,3 +54,4 @@ export default function intro() {
     </div>
   );
 }
+export default Home

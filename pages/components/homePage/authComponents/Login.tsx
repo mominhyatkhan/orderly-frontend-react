@@ -1,14 +1,27 @@
-import { useState } from "react";
-
-export default function login() {
+import { FormEvent, useState } from "react";
+import { useDispatch } from "react-redux";
+import { setLoginState } from "../../../slices/loginSlice";
+import { setSignupState } from "../../../slices/signupSlice";
+function Login() {
   const [email, setEmail] = useState<string>("");
   const [password, setPassword] = useState<string>("");
-
+  const dispatch = useDispatch( );
+  const handleDispatch = (e: FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    dispatch(setLoginState({
+      email:email,
+      password:password,
+      isLogged:false
+    }))
+  };
+  const handleSignup=()=>{
+    dispatch(setSignupState({isSigned:true,signState:0}))
+  }
   return (
     <div className="grid mt-36">
       <form
         onSubmit={(e) => {
-          console.log("Submitted: ", email, " ", password), e.preventDefault();
+          handleDispatch(e);
         }}
         className="flex"
       >
@@ -42,13 +55,16 @@ export default function login() {
           </button>
           <div className="flex gap-1 justify-center">
             <label>Have not account?</label>
-            <a className="font-bold">Sign Up</a>
+            <a className="font-bold cursor-pointer" onClick={
+          handleSignup
+        }>Sign Up</a>
           </div>
         </div>
       </form>
       <div className="self-center">
-        <a className="font-bold flex justify-center">Forgot your Password ?</a>
+        <a className="font-bold flex justify-center cursor-pointer">Forgot your Password ?</a>
       </div>
     </div>
   );
 }
+export default Login;

@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-export default function setPassword() {
+function SetPassword() {
   const [password, setpassword] = useState<string>("");
   return (
     <div className="grid">
@@ -38,3 +38,4 @@ export default function setPassword() {
     </div>
   );
 }
+export default SetPassword

@@ -1,21 +1,17 @@
 import Head from "next/head";
-import login from "./components/LoginForm";
-import homePage from "./components/Home";
-import signupMain from "./components/signup/SignUpMain";
-import emailVerify from "./components/signup/EmailVerify";
-import setPassword from "./components/signup/SetPassword";
+import HomePage from "./components/homePage";
+import { useSelector } from "react-redux";
+import { RootState } from "./store";
+import Dashboard from "./components/dashboard";
 export default function Home() {
+  const isLogin = useSelector((state: RootState) => state.isLogin.user.isLogged);
+
   return (
     <>
       <Head>
         <title>Orderly</title>
       </Head>
-      <div className="flex h-screen ">
-        <div className="flex bg-[#08101f] text-white w-1/3"> {login()}</div>
-        <div className="flex justify-center bg-[#171f2d] text-white w-full h-full">
-          {homePage()}
-        </div>
-      </div>
+      {isLogin ?  <Dashboard /> :<HomePage />}
     </>
   );
 }
