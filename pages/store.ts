@@ -1,10 +1,12 @@
 import { configureStore } from '@reduxjs/toolkit'
+import cardsSlice from './slices/cardsSlice'
 import loginSlice from './slices/loginSlice'
 import signupSlice from './slices/signupSlice'
 export const store = configureStore({
   reducer: {
     isLogin:loginSlice,
-    signupState:signupSlice
+    signupState:signupSlice,
+    coinCards:cardsSlice
   },
 })
 

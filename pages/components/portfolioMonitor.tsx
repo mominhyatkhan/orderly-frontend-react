@@ -1,12 +1,25 @@
 import { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { RootState } from "../store";
 import Cards from "./cards";
+import PortfolioModal from "./PortfolioAddressModal";
 
 function PortfolioMonitoring() {
+  const cards = useSelector(
+    (state: RootState) => state.coinCards.cards
+  );
   const [search, setSearch] = useState("");
+  const [modal, setModal] = useState<boolean>(false);
+  const openModal = () => {
+    console.log(modal);
+    setModal(!modal);
+  };
+  const closeModal = () => setModal(false);
   return (
     <>
-      <main className=" flex flex-col bg-[#F6F8FD] h-screen">
-        <div className="flex flex-row space-x-20 m-24">
+      <main className=" flex bg-[#F6F8FD] items-stretch">
+        <div className="flex flex-col space-x-20 w-full ">
+        <div className="flex flex-row space-x-20 m-24 ">
           <div>
             <label className="text-3xl">Setup Portfolio Monitoring</label>
           </div>
@@ -40,26 +53,34 @@ function PortfolioMonitoring() {
             </div>
           </div>
         </div>
-        <div className="grid px-20">
+        <div>
+        <div className="" onClick={openModal}>
           <Cards />
         </div>
-        <footer className="p-4 bg-white shadow md:flex md:items-center md:justify-between md:p-6 dark:bg-white">
-        <span className="ml-16 text-sm text-gray-500 sm:text-center dark:text-gray-400">
-        0 Network(s) Configured
-        </span>
-        <ul className="mr-48 flex flex-wrap items-center mt-3 text-sm text-[#6B8068]-500 dark:text-[#6B8068] sm:mt-0">
-          <li>
-            <a href="#" className="mr-4 hover:underline md:mr-6 ">
-            Skip this step
-            </a>
-          </li>
-          <li>
-            <button className="bg-[#6b8068] w-48 h-12 px-3 py-4 hover:bg-emerald-700 text-white rounded ">
-            Setup Portfolio
-            </button>
-          </li>
-        </ul>
-      </footer>
+        </div>
+        <footer className="m-20 bg-white w-5/6 shadow md:flex md:items-center md:justify-between md:p-6 dark:bg-white">
+          <span className="ml-16 text-sm text-gray-500 sm:text-center dark:text-gray-400">
+            0 Network(s) Configured
+          </span>
+          <ul className="mr-48 flex flex-wrap items-center mt-3 text-sm text-[#6B8068]-500 dark:text-[#6B8068] sm:mt-0">
+            <li>
+              <a href="#" className="mr-4 hover:underline md:mr-6 ">
+                Skip this step
+              </a>
+            </li>
+            <li>
+              <button className="bg-[#6b8068] w-48 h-12 px-3 py-4 hover:bg-emerald-700 text-white rounded ">
+                Setup Portfolio
+              </button>
+            </li>
+          </ul>
+        </footer>
+        </div>
+        <div>
+        <div className="relative flex justify-end items-stretch z-10 h-full ">
+          <PortfolioModal isOpen={modal} onClose={closeModal}/>
+          </div>
+        </div>
       </main>
     </>
   );
