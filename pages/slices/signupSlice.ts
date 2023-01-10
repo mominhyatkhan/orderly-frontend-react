@@ -1,13 +1,13 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 export interface SignupState {
-  signUpState:{ 
-    isSigned:boolean
-    signState:number
+  signUpState: {
+    isSigned: boolean;
+    signState: number;
   };
 }
 const initialState: SignupState = {
-  signUpState: {isSigned:false,signState:0},
+  signUpState: { isSigned: false, signState: 0 },
 };
 export const signupSlice = createSlice({
   name: "signup",
@@ -15,7 +15,7 @@ export const signupSlice = createSlice({
   reducers: {
     setSignupState: (state, action) => {
       state.signUpState = action.payload;
-      console.log(state.signUpState,);
+      console.log(state.signUpState);
     },
   },
 });

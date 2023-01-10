@@ -5,18 +5,20 @@ import { setSignupState } from "../../../slices/signupSlice";
 function Login() {
   const [email, setEmail] = useState<string>("");
   const [password, setPassword] = useState<string>("");
-  const dispatch = useDispatch( );
+  const dispatch = useDispatch();
   const handleDispatch = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    dispatch(setLoginState({
-      email:email,
-      password:password,
-      isLogged:false
-    }))
+    dispatch(
+      setLoginState({
+        email: email,
+        password: password,
+        isLogged: false,
+      })
+    );
   };
-  const handleSignup=()=>{
-    dispatch(setSignupState({isSigned:true,signState:0}))
-  }
+  const handleSignup = () => {
+    dispatch(setSignupState({ isSigned: true, signState: 0 }));
+  };
   return (
     <div className="grid mt-36">
       <form
@@ -55,14 +57,16 @@ function Login() {
           </button>
           <div className="flex gap-1 justify-center">
             <label>Have not account?</label>
-            <a className="font-bold cursor-pointer" onClick={
-          handleSignup
-        }>Sign Up</a>
+            <a className="font-bold cursor-pointer" onClick={handleSignup}>
+              Sign Up
+            </a>
           </div>
         </div>
       </form>
       <div className="self-center">
-        <a className="font-bold flex justify-center cursor-pointer">Forgot your Password ?</a>
+        <a className="font-bold flex justify-center cursor-pointer">
+          Forgot your Password ?
+        </a>
       </div>
     </div>
   );

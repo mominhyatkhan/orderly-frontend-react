@@ -38,4 +38,4 @@ function SetPassword() {
     </div>
   );
 }
-export default SetPassword
+export default SetPassword;

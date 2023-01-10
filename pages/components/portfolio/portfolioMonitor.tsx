@@ -1,16 +1,34 @@
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { RootState } from "../store";
+import { RootState } from "../../store";
 import Cards from "./cards";
 import PortfolioModal from "./PortfolioAddressModal";
 
 function PortfolioMonitoring() {
   const cards = useSelector((state: RootState) => state.coinCards);
-  const [search, setSearch] = useState("");
+  const [search, setSearch] = useState<string>("");
   const [modal, setModal] = useState<boolean>(false);
+  const [name, setName] = useState<string>("");
+  const [symbol, setSymbol] = useState<string>("");
+  const [image, setImage] = useState<string>("");
+  const [address, setAddress] = useState<string[]>([]);
   const openModal = () => {
-    console.log(modal);
     setModal(!modal);
+  };
+
+  const setindex = (
+    index: number,
+    name: string,
+    symbol: string,
+    image: string,
+    address:string[]
+       ) => {
+    console.log("yeh wala", index);
+    setName(name);
+    setSymbol(symbol);
+    setImage(image);
+    setAddress(address)
+    return openModal();
   };
   const closeModal = () => setModal(false);
   return (
@@ -52,8 +70,21 @@ function PortfolioMonitoring() {
             </div>
           </div>
           <div>
-            <div className="" onClick={openModal}>
-              <Cards list={cards} />
+            <div className="grid grid-flow-col">
+              {cards.map((item, index) => (
+                <div
+                  key={index}
+                  onClick={() =>
+                    setindex(index, item.name, item.symbol, item.image, item.addreses)
+                  }
+                >
+                  <Cards
+                    name={item.name}
+                    symbol={item.symbol}
+                    image={item.image}
+                  />
+                </div>
+              ))}
             </div>
           </div>
           <footer className="m-20 bg-white w-5/6 shadow md:flex md:items-center md:justify-between md:p-6 dark:bg-white">
@@ -75,8 +106,15 @@ function PortfolioMonitoring() {
           </footer>
         </div>
         <div>
-          <div className="relative flex justify-end items-stretch z-10 h-full ">
-            <PortfolioModal isOpen={modal} onClose={closeModal} />
+          <div className="flex justify-end h-screen w-full">
+            <PortfolioModal
+              isOpen={modal}
+              onClose={closeModal}
+              Name={name}
+              Symbol={symbol}
+              Img={image}
+              Address={address}
+            />
           </div>
         </div>
       </main>

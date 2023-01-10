@@ -3,15 +3,16 @@ import { useDispatch } from "react-redux";
 import { setSignupState } from "../../../../slices/signupSlice";
 function SignupMain() {
   const [email, setEmail] = useState<string>("");
-  const dispatch=useDispatch();
-  const switchLogin=()=>{
-    dispatch(setSignupState({isSigned:false,signState:0}))
-  }
+  const dispatch = useDispatch();
+  const switchLogin = () => {
+    dispatch(setSignupState({ isSigned: false, signState: 0 }));
+  };
 
   return (
     <div className="grid">
       <form
-        onSubmit={()=>dispatch(setSignupState({isSigned:true,signState:1}))
+        onSubmit={() =>
+          dispatch(setSignupState({ isSigned: true, signState: 1 }))
         }
         className="flex"
       >
