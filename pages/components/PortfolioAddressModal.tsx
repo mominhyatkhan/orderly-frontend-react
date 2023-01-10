@@ -1,5 +1,10 @@
 import * as React from "react";
 import { createPortal } from "react-dom";
+interface listItems {
+  name: string;
+  symbol: string;
+  image: string;
+}
 
 type Props = {
   isOpen: boolean;
@@ -10,7 +15,6 @@ const Modal: React.FC<Props> = ({ isOpen, onClose }) => {
   if (!isOpen) {
     return null;
   }
-
 
   return (
     <div className="bg-white h-auto w-96 ">
@@ -39,10 +43,10 @@ const Modal: React.FC<Props> = ({ isOpen, onClose }) => {
         <div className=" px-6 py-6 lg:px-8">
           <div className="flex space-x-2">
             <h1>img</h1>
-          <h3 className="mb-4 flex flex-col text-2xl font-medium text-black dark:text-black">
-            Pontem
-            <span className="text-sm">PONT</span>
-          </h3>
+            <h3 className="mb-4 flex flex-col text-2xl font-medium text-black dark:text-black">
+              Pontem
+              <span className="text-sm">PONT</span>
+            </h3>
           </div>
           <form className="space-y-6 h-full" action="#">
             <div className="relative">

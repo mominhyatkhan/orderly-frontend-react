@@ -3,7 +3,7 @@ import AuthenticationComponent from "./homePage/authComponent";
 import PortfolioMonitoring from "./portfolioMonitor";
 
 function FrontPage() {
-  const isAccountCreated=true
+  const isAccountCreated=false
   return (
     <>
     {isAccountCreated? <PortfolioMonitoring/>:
