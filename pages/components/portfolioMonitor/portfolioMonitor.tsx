@@ -1,6 +1,7 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../../store";
+import MyComponent from "../axios/globalToken";
 import Cards from "./cards";
 import PortfolioModal from "./PortfolioAddressModal";
 
@@ -21,13 +22,13 @@ function PortfolioMonitoring() {
     name: string,
     symbol: string,
     image: string,
-    address:string[]
-       ) => {
+    address: string[]
+  ) => {
     console.log("yeh wala", index);
     setName(name);
     setSymbol(symbol);
     setImage(image);
-    setAddress(address)
+    setAddress(address);
     return openModal();
   };
   const closeModal = () => setModal(false);
@@ -75,7 +76,13 @@ function PortfolioMonitoring() {
                 <div
                   key={index}
                   onClick={() =>
-                    setindex(index, item.name, item.symbol, item.image, item.addreses)
+                    setindex(
+                      index,
+                      item.name,
+                      item.symbol,
+                      item.image,
+                      item.addreses
+                    )
                   }
                 >
                   <Cards

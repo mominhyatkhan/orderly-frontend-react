@@ -13,7 +13,7 @@ export default function Home() {
       <Head>
         <title>Orderly</title>
       </Head>
-      {isLogin ? <Dashboard /> : <HomePage />}
+      {isLogin ?<HomePage />:  <Dashboard /> }
     </>
   );
 }
