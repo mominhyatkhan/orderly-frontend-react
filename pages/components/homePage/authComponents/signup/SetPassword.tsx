@@ -1,12 +1,15 @@
-import { useState } from "react";
+import { useDebugValue, useState } from "react";
+import { useDispatch } from "react-redux";
+import { setSignupState } from "../../../../slices/signupSlice";
 
 function SetPassword() {
   const [password, setpassword] = useState<string>("");
+  const dispatch =useDispatch()
   return (
     <div className="grid">
-      <form
+      <form 
         onSubmit={(e) => {
-          console.log("Submitted: ", password), e.preventDefault();
+          console.log("Submitted: ", password), e.preventDefault(),dispatch(setSignupState({ isAccountCreated:true}));
         }}
         className="flex"
       >
@@ -26,6 +29,7 @@ function SetPassword() {
           <button
             type="submit"
             className="bg-[#6b8068]  hover:bg-emerald-700 text-white font-bold py-2 px-4 rounded"
+          
           >
             Let's Start
           </button>

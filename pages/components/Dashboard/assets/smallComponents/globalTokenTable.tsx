@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import { isReadable } from "stream";
 const GlobalTokenTable = () => {
   const [data, setData] = useState<Array<Object>>([]);
+  
   async function fetchData() {
     try {
       const response = await axios.get(
@@ -10,8 +11,12 @@ const GlobalTokenTable = () => {
       );
       let a: any[] = [];
       response.data.map((item: any) => {
+        if(item.id=="ethereum")
+        {
+        
         a.push(item);
         console.log(item)
+        }
       });
       setData(a);
     } catch (error) {
@@ -26,7 +31,7 @@ const GlobalTokenTable = () => {
   return (
    
     
-<div className="relative overflow-auto shadow-md sm:rounded-lg">
+<div className="relative overflow-auto shadow-md sm:rounded-lg max-h-96">
     <table className="w-full text-sm font-light text-gray-500 dark:text-gray-400">
         <thead className="font-normal text-gray-700 uppercase bg-white dark:bg-white dark:text-gray-400">
             <tr>
@@ -54,8 +59,12 @@ const GlobalTokenTable = () => {
             </tr>
         </thead>
         <tbody>
-            {data?.map((item:any,index:number)=>(
-            <tr key={item.id} className="bg-white border-b dark:bg-white dark:border-gray-700">
+            {
+            data?.map((item:any,index:number)=>
+                { 
+               if( item.id==="ethereum") 
+               return(
+            <tr key={item.id} className="bg-white dark:bg-white dark:border-gray-200 ">
                 <th scope="row" className="px-6 py-4 font-medium text-black whitespace-nowrap dark:text-black">
                    {index+1}
                 </th>
@@ -66,7 +75,7 @@ const GlobalTokenTable = () => {
                     {item.current_price}
                 </td>
                 <td className="px-6 py-4">
-                    {item.total_volume}
+                    {item.market_cap_change_percentage_24h}
                 </td>
                 <td className="px-6 py-4">
                 </td>
@@ -76,7 +85,9 @@ const GlobalTokenTable = () => {
                     <a href="#" className="font-medium text-blue-600 dark:text-blue-500 hover:underline">Edit</a>
                 </td>
             </tr>
-           ) )}
+               )
+                }
+           ) }
         </tbody>
     </table>
 </div>

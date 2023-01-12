@@ -3,10 +3,12 @@ import { useSelector } from "react-redux";
 import { RootState } from "../../../store";
 import EmailVerify from "./signup/EmailVerify";
 import SetPassword from "./signup/SetPassword";
+import PortfolioMonitoring from "../../portfolioMonitor/portfolioMonitor";
 function Signup() {
   const signstate = useSelector(
     (state: RootState) => state.signupState.signUpState.signState
   );
+  
   return (
     <>
       {(() => {

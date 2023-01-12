@@ -5,10 +5,11 @@ export interface SignupState {
     isSigned: boolean;
     signState: number;
     email:string;
+    isAccountCreated:boolean;
   };
 }
 const initialState: SignupState = {
-  signUpState: { isSigned: false, signState: 0 ,email:'mohib@gmail.com'},
+  signUpState: { isSigned: false, signState: 0 ,email:'mohib@gmail.com',isAccountCreated:false},
 };
 export const signupSlice = createSlice({
   name: "signup",
