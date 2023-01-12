@@ -1,5 +1,6 @@
 import { configureStore } from "@reduxjs/toolkit";
 import cardsSlice from "./slices/cardsSlice";
+import dashboardSlice from "./slices/dashboardSlice";
 import loginSlice from "./slices/loginSlice";
 import signupSlice from "./slices/signupSlice";
 export const store = configureStore({
@@ -7,6 +8,7 @@ export const store = configureStore({
     isLogin: loginSlice,
     signupState: signupSlice,
     coinCards: cardsSlice,
+    dashboard:dashboardSlice
   },
 });
 

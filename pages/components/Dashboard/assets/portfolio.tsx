@@ -1,3 +1,4 @@
+
 import GlobalTokenTable from "./smallComponents/globalTokenTable";
 import PriceCard from "./smallComponents/priceCards";
 import Table from "./smallComponents/upcomingTokenTable";
@@ -10,14 +11,14 @@ const Portfolio = () => {
       </div>
       <div className="flex flex-col gap-y-6 justify-center">
         <div className="grid self-center gap-x-6 grid-flow-col">
-          <PriceCard />
-          <PriceCard />
-          <PriceCard />
+          <PriceCard heading='Liquid Value ($)' price='0' />
+          <PriceCard heading='Liquid ATH ($ All-Time High Value)' price='0.00'/>
+          <PriceCard heading='Liquid ATL ($ All-Time Low Value)' price='0.00'/>
         </div>
         <div className="grid self-center gap-x-6 grid-flow-col">
-          <PriceCard />
-          <PriceCard />
-          <PriceCard />
+          <PriceCard heading='Locked Value ($)' price='0.00'/>
+          <PriceCard heading='Locked ATH ($)' price='0.00'/>
+          <PriceCard heading='Locked ATL ($)' price='0.00'/>
         </div>
       </div>
       <div className="flex justify-center mt-10 gap-3">

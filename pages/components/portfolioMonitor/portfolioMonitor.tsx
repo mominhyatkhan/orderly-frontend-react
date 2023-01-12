@@ -1,8 +1,8 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { setDashboardState } from "../../slices/dashboardSlice";
 import { setLoginState } from "../../slices/loginSlice";
 import { RootState } from "../../store";
-import MyComponent from "../axios/globalToken";
 import Cards from "./cards";
 import PortfolioModal from "./PortfolioAddressModal";
 
@@ -14,15 +14,24 @@ function PortfolioMonitoring() {
   const [symbol, setSymbol] = useState<string>("");
   const [image, setImage] = useState<string>("");
   const [address, setAddress] = useState<string[]>([]);
-  const dispatch=useDispatch();
+  const dispatch = useDispatch();
   const openModal = () => {
     setModal(!modal);
   };
- const showDashboard=()=>{
-  dispatch(setLoginState({
-    isLogged: true,
-  }))
- }
+  const showDashboard = () => {
+    dispatch(
+      setLoginState({
+        isLogged: true,
+      })
+    );
+  };
+  const showMonitor = () => {
+    dispatch(
+      setDashboardState(
+        1
+      )
+    );
+  };
   const setindex = (
     index: number,
     name: string,
@@ -30,7 +39,6 @@ function PortfolioMonitoring() {
     image: string,
     address: string[]
   ) => {
-    console.log("yeh wala", index);
     setName(name);
     setSymbol(symbol);
     setImage(image);
@@ -106,12 +114,17 @@ function PortfolioMonitoring() {
             </span>
             <ul className="mr-48 flex flex-wrap items-center mt-3 text-sm text-[#6B8068]-500 dark:text-[#6B8068] sm:mt-0">
               <li>
-                <a href="#" className="mr-4 hover:underline md:mr-6">
+                <a 
+                  onClick={showMonitor}
+                 className="mr-4 hover:underline md:mr-6">
                   Skip this step
                 </a>
               </li>
               <li>
-                <button className="bg-[#6b8068] w-48 h-12 px-3 py-4 hover:bg-emerald-700 text-white rounded" onClick={showDashboard}>
+                <button
+                  className="bg-[#6b8068] w-48 h-12 px-3 py-4 hover:bg-emerald-700 text-white rounded"
+                  onClick={showDashboard}
+                >
                   Setup Portfolio
                 </button>
               </li>
