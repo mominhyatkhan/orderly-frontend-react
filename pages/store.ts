@@ -3,12 +3,14 @@ import cardsSlice from "./slices/cardsSlice";
 import dashboardSlice from "./slices/dashboardSlice";
 import loginSlice from "./slices/loginSlice";
 import signupSlice from "./slices/signupSlice";
+import  tokenSlice  from "./slices/tokenslice";
 export const store = configureStore({
   reducer: {
     isLogin: loginSlice,
     signupState: signupSlice,
     coinCards: cardsSlice,
-    dashboard:dashboardSlice
+    dashboard:dashboardSlice,
+    tokens:tokenSlice
   },
 });
 

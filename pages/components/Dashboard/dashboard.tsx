@@ -1,15 +1,16 @@
 import { useSelector } from "react-redux";
 import { RootState } from "../../store";
-import Analyzer from "./assets/smallComponents/sidebarComponents/analyzer";
-import Calender from "./assets/smallComponents/sidebarComponents/Calendar";
-import Contacts from "./assets/smallComponents/sidebarComponents/contacts";
-import Distributor from "./assets/smallComponents/sidebarComponents/distributor";
-import InvestmentsManager from "./assets/smallComponents/sidebarComponents/investmentsManager";
-import Monitoring from "./assets/smallComponents/sidebarComponents/monitoring";
-import OTC from "./assets/smallComponents/sidebarComponents/OTC";
-import Portfolio from "./assets/smallComponents/sidebarComponents/portfolio";
+
 import Rightbar from "./assets/rightbar";
 import SideBar from "./assets/sidebar";
+import Analyzer from "./assets/dashboardComponents/analyzer";
+import Calender from "./assets/dashboardComponents/Calendar";
+import Contacts from "./assets/dashboardComponents/contacts";
+import Distributor from "./assets/dashboardComponents/distributor";
+import InvestmentsManager from "./assets/dashboardComponents/investmentsManager";
+import Monitoring from "./assets/dashboardComponents/monitoring";
+import OTC from "./assets/dashboardComponents/OTC";
+import Portfolio from "./assets/dashboardComponents/portfolio";
 
 function Dashboard() {
   const dashboard = useSelector(

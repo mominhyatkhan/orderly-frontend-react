@@ -1,7 +1,9 @@
+import GlobalTokenTable from "../smallComponents/globalTokenTable";
+import PreviousTokenTable from "../smallComponents/previousTokenTable";
+import PriceCard from "../smallComponents/priceCards";
+import UpcomingTokenTable from "../smallComponents/upcomingTokenTable";
 
-import GlobalTokenTable from "../globalTokenTable";
-import PriceCard from "../priceCards";
-import Table from "../upcomingTokenTable";
+
 
 const Portfolio = () => {
   
@@ -24,14 +26,14 @@ const Portfolio = () => {
       </div>
       <div className="flex justify-center mt-10 gap-3">
         <div className="bg-white">
-          <Table />
+          <UpcomingTokenTable />
         </div>
         <div className="bg-white">
-          <Table />
+          <PreviousTokenTable />
         </div>
       </div>
       <div className="bg-white ml-20 mr-20 grid overflow-y-scroll mt-2 ">
-        <GlobalTokenTable />
+        <GlobalTokenTable/>
       </div>
     </main>
   );
