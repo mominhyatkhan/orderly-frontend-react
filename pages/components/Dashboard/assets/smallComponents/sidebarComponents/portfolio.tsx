@@ -1,9 +1,10 @@
 
-import GlobalTokenTable from "../smallComponents/globalTokenTable";
-import PriceCard from "../smallComponents/priceCards";
-import Table from "../smallComponents/upcomingTokenTable";
+import GlobalTokenTable from "../globalTokenTable";
+import PriceCard from "../priceCards";
+import Table from "../upcomingTokenTable";
 
 const Portfolio = () => {
+  
   return (
     <main className="flex justify-center flex-col">
       <div className="p-10 ">
