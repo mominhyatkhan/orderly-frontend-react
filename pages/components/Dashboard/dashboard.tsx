@@ -1,13 +1,13 @@
 import { useSelector } from "react-redux";
 import { RootState } from "../../store";
-import Analyzer from "./assets/analyzer";
-import Calender from "./assets/Calendar";
-import Contacts from "./assets/contacts";
-import Distributor from "./assets/distributor";
-import InvestmentsManager from "./assets/investmentsManager";
-import Monitoring from "./assets/monitoring";
-import OTC from "./assets/OTC";
-import Portfolio from "./assets/portfolio";
+import Analyzer from "./assets/sidebarComponents/analyzer";
+import Calender from "./assets/sidebarComponents/Calendar";
+import Contacts from "./assets/sidebarComponents/contacts";
+import Distributor from "./assets/sidebarComponents/distributor";
+import InvestmentsManager from "./assets/sidebarComponents/investmentsManager";
+import Monitoring from "./assets/sidebarComponents/monitoring";
+import OTC from "./assets/sidebarComponents/OTC";
+import Portfolio from "./assets/sidebarComponents/portfolio";
 import Rightbar from "./assets/rightbar";
 import SideBar from "./assets/sidebar";
 
