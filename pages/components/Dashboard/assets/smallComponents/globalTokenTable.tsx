@@ -4,8 +4,10 @@ import { useSelector } from "react-redux";
 import { RootState } from "../../../../store";
 const GlobalTokenTable = () => {
   const [data, setData] = useState<Array<Object>>([]);
+  const [isBscScan, setIsBscScan] = useState(true);
   const cards = useSelector((state: RootState) => state.coinCards);
   const apikey = "J1IXZNAEZW3JEQWX3J4WM7JBAUGJUSD8BP";
+  const bscApiKey = '7W8WQYR6D9ACWR3Y5P7EDJK121X24PXE4D';
   const [address, setAddress] = useState<string>("");
   const [result, setResult] = useState<string>("");
   
@@ -33,6 +35,34 @@ const GlobalTokenTable = () => {
       console.error(error);
     }
   }
+  async function fetchBscScan (){
+    try {
+      // const response = await axios.get(
+      //   `https://api.bscscan.com/api?module=account&action=balance&address=${address}&apikey=${bscApiKey}`
+      // );
+      // console.log(response);
+      
+      // let a: any[] = [];
+      // response.data.map(async (item: any) => {
+      //   if (item.id == "ethereum") {
+      //     a.push(item);
+      //     console.log(item);
+          
+      //   }
+      // });
+      // setData(a);
+      // console.log(address);
+      const holdings = await axios.get(
+        `https://api.bscscan.com/api?module=account&action=balance&address=${address}&apikey=${bscApiKey}`
+      );
+      console.log(holdings);
+      
+      // setResult(holdings.data.result);
+    } catch (error) {
+      console.error(error);
+    }
+
+  }
   function getAddress() {
     cards.map((item) => {
       if (item.name == "Ethereum") {
@@ -44,6 +74,11 @@ const GlobalTokenTable = () => {
   useEffect(() => {
     getAddress();
     address && fetchData();
+    if (isBscScan){
+      console.log("bsc scan true");
+      
+      fetchBscScan();
+    }
   }, [address]);
 
   return (
