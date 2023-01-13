@@ -1,5 +1,7 @@
 import * as React from "react";
 import { createPortal } from "react-dom";
+import TokenList from "./tokenList";
+
 interface listItems {
   name: string;
   symbol: string;
@@ -24,6 +26,12 @@ const Modal: React.FC<Props> = ({
   Img,
   Address,
 }) => {
+  const [tokenModel, setTokenModal] = React.useState<boolean>(false);
+  const [selectedIndex, setSelectedIndex] = React.useState<number>(0);
+
+  const handleSelect = (index: number) => {
+    setSelectedIndex(index);
+  };
   if (!isOpen) {
     return null;
   }
@@ -67,11 +75,12 @@ const Modal: React.FC<Props> = ({
                   <input
                     type="text"
                     defaultValue={item}
-                    key={index}
-                    onChange={(e) => (item = e.currentTarget.value)}
-                    id="floating_filled"
+                    onChange={(e) => (
+                      (item = e.currentTarget.value),
+                      setTokenModal(true),
+                      handleSelect(index)
+                    )}
                     className="block rounded-t-lg px-2.5 pb-2.5 pt-5 w-full text-sm text-black bg-gray-100 dark:bg-gray-100 border-0 border-b-2 border-gray-300 appearance-none dark:text-black dark:border-gray-600 dark:focus:border-gray-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
-                    placeholder={item}
                   />
                   <label
                     htmlFor="floating_filled"
@@ -79,22 +88,7 @@ const Modal: React.FC<Props> = ({
                   >
                     Address {index + 1}
                   </label>
-                </div>
-                <div className="relative">
-                  <input
-                    key={item.length}
-                    type="text"
-                    onChange={(e) => (item = e.currentTarget.value)}
-                    id="optional_floating_filled"
-                    className="block rounded-t-lg px-2.5 pb-2.5 pt-5 w-full text-sm text-black bg-gray-100 dark:bg-gray-100 border-0 border-b-2 border-gray-300 appearance-none dark:text-black dark:border-gray-600 dark:focus:border-gray-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
-                    placeholder=""
-                  />
-                  <label
-                    htmlFor="floating_filled"
-                    className="absolute text-sm text-black dark:text-black duration-300 transform -translate-y-4 scale-75 top-4 z-10 origin-[0] left-2.5 peer-focus:text-black-600 peer-focus:dark:text-black-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-4"
-                  >
-                    Address {index + 1} alias
-                  </label>
+                  {selectedIndex == index && tokenModel && <TokenList />}
                 </div>
               </>
             ))}

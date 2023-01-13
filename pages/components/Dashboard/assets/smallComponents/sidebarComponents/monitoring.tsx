@@ -1,5 +1,5 @@
 import { useState } from "react";
-import PortfolioMonitoring from "../../../portfolioMonitor/portfolioMonitor";
+import PortfolioMonitoring from "../../../../portfolioMonitor/portfolioMonitor";
 
 const Monitoring = () => {
   const [isMonitor, setMonitor] = useState<boolean>(false);
