@@ -6,7 +6,7 @@ export interface CardsState
 
 const initialState: CardsState[] = 
    [
-    { name: "Ethereum", symbol: "ETH", image: "/etherum.png", addreses:['0x2F22e6c6195dB2Aa79c79b44DfEa463aD029611A']},
+    { name: "Ethereum", symbol: "ETH", image: "/etherum.png", addreses:['0x61Dd481A114A2E761c554B641742C973867899D3']},
     { name: "Tether", symbol: "USDT", image: "/etherum.png", addreses:['rew32','2rdew']},
     { name: "Cardano", symbol: "ADA ", image: "/etherum.png",addreses:['trds43','ewrwefwe'] },
   ]
