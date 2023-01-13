@@ -1,7 +1,7 @@
 
-import GlobalTokenTable from "./smallComponents/globalTokenTable";
-import PriceCard from "./smallComponents/priceCards";
-import Table from "./smallComponents/upcomingTokenTable";
+import GlobalTokenTable from "../smallComponents/globalTokenTable";
+import PriceCard from "../smallComponents/priceCards";
+import Table from "../smallComponents/upcomingTokenTable";
 
 const Portfolio = () => {
   return (
