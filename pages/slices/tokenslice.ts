@@ -9,7 +9,7 @@ export interface TokenState {
   };
 }
 const initialState: TokenState = {
-  tokenState: { ether: false, bnc: false ,polygon:false},
+  tokenState: { ether: true, bnc: true ,polygon:false},
 };
 export const tokenSlice = createSlice({
   name: "signup",

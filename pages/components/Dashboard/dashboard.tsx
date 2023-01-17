@@ -37,13 +37,13 @@ function Dashboard() {
           case 1:
             return (
               <div className="w-full">
-                <Monitoring />;
+                <Monitoring />
               </div>
             );
           case 2:
             return (
               <div className="w-full">
-                <Analyzer />;
+                <Analyzer />
               </div>
             );
 
@@ -56,26 +56,26 @@ function Dashboard() {
           case 4:
             return (
               <div className="w-full">
-                <InvestmentsManager />;
+                <InvestmentsManager />
               </div>
             );
           case 5:
             return (
               <div className="w-full">
-                <Calender />;
+                <Calender />
               </div>
             );
           case 6:
             return (
               <div className="w-full">
-                <Contacts />;
+                <Contacts />
               </div>
             );
           case 7:
             return (
               <div className="w-full">
                 {" "}
-                <OTC />;
+                <OTC />
               </div>
             );
         }
