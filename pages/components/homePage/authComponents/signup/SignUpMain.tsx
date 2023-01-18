@@ -6,6 +6,7 @@ function SignupMain() {
   const dispatch = useDispatch();
   const switchLogin = () => {
     dispatch(setSignupState({ isSigned: false, signState: 0 }));
+   
   };
 
   return (

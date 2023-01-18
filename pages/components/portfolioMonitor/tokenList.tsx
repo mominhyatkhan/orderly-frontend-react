@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useDispatch } from "react-redux";
-import { setBscState, setEtherState, setPolygonState } from "../../slices/tokenslice";
+import { setBscState, setEtherState } from "../../slices/tokenslice";
 
 const TokenList = () => {
   const [ether, setEther] = useState<boolean>(true);
@@ -16,10 +16,10 @@ const TokenList = () => {
     setBsc(!bsc);
     dispatch(setBscState(bsc));
   };
-  const changePolygon = () => {
+  /* const changePolygon = () => {
     setPolygon(!polygon);
     dispatch(setPolygonState(polygon));
-  };
+  }; */
   return (
     <>
       <ul className="w-48 text-sm font-medium text-black bg-white border border-gray-200 rounded-lg dark:bg-white dark:border-gray-200 dark:text-black">
@@ -62,7 +62,7 @@ const TokenList = () => {
             <input
               id="angular-checkbox"
               type="checkbox"
-              onChange={changePolygon}
+              /* onChange={changePolygon} */
               className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500"
             />
             <label

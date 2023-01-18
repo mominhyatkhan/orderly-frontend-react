@@ -55,8 +55,8 @@ const GlobalTokenTable = () => {
   }
   useEffect(() => {
     getAddress();
-    token.tokenState.ether && address && getEther();
-    token.tokenState.bnc && address && getBsc(); 
+    token[0].state && address && getEther();
+    token[1].state && address && getBsc(); 
   }, []);
 
   return (

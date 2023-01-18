@@ -26,9 +26,12 @@ export const loginSlice = createSlice({
         console.log(state.user.isLogged, "sjksjsks");
       }
     },
+    setEmail: (state, action) => {
+      state.user.email = action.payload;
+      console.log(state.user.email);
+    },
   },
 });
 
-export const { setLoginState } = loginSlice.actions;
-
+export const { setLoginState, setEmail } = loginSlice.actions;
 export default loginSlice.reducer;

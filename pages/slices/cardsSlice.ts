@@ -1,4 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
+import Cards from "../components/portfolioMonitor/cards";
 
 export interface CardsState {
   name: string;
@@ -32,11 +33,10 @@ const initialState: CardsState[] = [
   },
 ];
 
-
-export const loginSlice = createSlice({
+export const cardSlice = createSlice({
   name: "user",
   initialState,
   reducers: {
   },
 });
-export default loginSlice.reducer;
+export default cardSlice.reducer;

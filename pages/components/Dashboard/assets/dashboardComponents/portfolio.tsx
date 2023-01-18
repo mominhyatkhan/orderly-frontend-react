@@ -6,7 +6,7 @@ import UpcomingTokenTable from "../smallComponents/upcomingTokenTable";
 
 
 const Portfolio = () => {
-  
+
   return (
     <main className="flex justify-center flex-col">
       <div className="p-10 ">
