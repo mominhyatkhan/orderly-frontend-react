@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { RootState } from "../../../../store";
 const GlobalTokenTable = () => {
-  const data = useSelector((state:RootState)=>state.tokens[0].tokenlist)
+  const data = useSelector((state: RootState) => state.tokens);
   const cards = useSelector((state: RootState) => state.coinCards);
   const token = useSelector((state: RootState) => state.tokens);
   const apikey = "J1IXZNAEZW3JEQWX3J4WM7JBAUGJUSD8BP";
@@ -40,37 +40,78 @@ const GlobalTokenTable = () => {
           </tr>
         </thead>
         <tbody>
-          {data?.map((item: any, index: number) => {
-            console.log(item, "yeh item hs");
-            return (
-              <tr
-                key={item.id}
-                className="bg-white dark:bg-white dark:border-gray-200 "
-              >
-                <th
-                  scope="row"
-                  className="px-6 py-4 font-medium text-black whitespace-nowrap dark:text-black"
+          {data[0].tableState &&
+            data[0].tokenlist.map((item: any, index: number) => {
+              console.log(item, "yeh item hs");
+              return (
+                <tr
+                  key={item.id}
+                  className="bg-white dark:bg-white dark:border-gray-200 "
                 >
-                  {index + 1}
-                </th>
-                <td className="px-6 py-4">{item.name}</td>
-                <td className="px-6 py-4"></td>
-                <td className="px-6 py-4">
-                  {item.market_cap_change_percentage_24h}
-                </td>
-                <td className="px-6 py-4">{item.balance/10**(item.decimals)}</td>
-                <td></td>
-                <td className="px-6 py-4">
-                  <a
-                    href="#"
-                    className="font-medium text-blue-600 dark:text-blue-500 hover:underline"
+                  <th
+                    scope="row"
+                    className="px-6 py-4 font-medium text-black whitespace-nowrap dark:text-black"
                   >
-                    Edit
-                  </a>
-                </td>
-              </tr>
-            );
-          })}
+                    {index + 1}
+                  </th>
+                  <td className="px-6 py-4">
+                    <h1 className=" text-black">{item.name}</h1>ETH
+                  </td>
+                  <td className="px-6 py-4"></td>
+                  <td className="px-6 py-4">
+                    {item.market_cap_change_percentage_24h}
+                  </td>
+                  <td className="px-6 py-4">
+                    {item.balance / 10 ** item.decimals}
+                  </td>
+                  <td></td>
+                  <td className="px-6 py-4">
+                    <a
+                      href="#"
+                      className="font-medium text-blue-600 dark:text-blue-500 hover:underline"
+                    >
+                      Edit
+                    </a>
+                  </td>
+                </tr>
+              );
+            })}
+          {data[1].tableState &&
+            data[1].tokenlist.map((item: any, index: number) => {
+              console.log(item, "yeh item hs");
+              return (
+                <tr
+                  key={item.id}
+                  className="bg-white dark:bg-white dark:border-gray-200 "
+                >
+                  <th
+                    scope="row"
+                    className="px-6 py-4 font-medium text-black whitespace-nowrap dark:text-black"
+                  >
+                    {index + 1}
+                  </th>
+                  <td className="px-6 py-4">
+                    <h1 className=" text-black">{item.name}</h1> BSC
+                  </td>
+                  <td className="px-6 py-4"></td>
+                  <td className="px-6 py-4">
+                    {item.market_cap_change_percentage_24h}
+                  </td>
+                  <td className="px-6 py-4">
+                    {item.balance / 10 ** item.decimals}
+                  </td>
+                  <td></td>
+                  <td className="px-6 py-4">
+                    <a
+                      href="#"
+                      className="font-medium text-blue-600 dark:text-blue-500 hover:underline"
+                    >
+                      Edit
+                    </a>
+                  </td>
+                </tr>
+              );
+            })}
         </tbody>
       </table>
     </div>

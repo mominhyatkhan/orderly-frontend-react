@@ -1,6 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { ADDRCONFIG } from "dns";
-
+import { access } from "fs";
 export interface TokenState {
   tokenState: {
     address: string;
@@ -11,15 +11,19 @@ export interface TokenState {
 export interface chainToken 
 {
   state: boolean,
+  tableState:boolean,
   name: string,
+  image:string,
   nativeValue: number,
   totalTokenValue: number,
   tokenlist:string[]
 }[];
 const initialState: chainToken[]=[
     {
-      state: false, 
-      name: "ETHEREUM", 
+      state: true, 
+      name: "ETHEREUM",
+      tableState:true, 
+      image:'../../../assets/images/ethereum.svg',
       nativeValue: 0, 
       totalTokenValue: 0,
       tokenlist:[]
@@ -27,7 +31,9 @@ const initialState: chainToken[]=[
     },
     {
       state: false,
+      tableState:true, 
       name: "BSC", 
+      image:'../../../assets/images/binance-logo.svg',
       nativeValue: 0,
       totalTokenValue: 0,
       tokenlist:[]
@@ -47,50 +53,34 @@ export const tokenSlice = createSlice({
     },
     setEtherNative: (state, action) => {
       state[0].nativeValue = action.payload;
-      console.log("this is token:", state[0].nativeValue);
+      console.log("this is etherNative: ", state[0].nativeValue);
     },
     setBscNative: (state, action) => {
       state[1].nativeValue = action.payload;
-      console.log("this is token:", state[1].nativeValue);
+      console.log("this is bscNative: ", state[1].nativeValue);
     },
     setEtherTotalToken: (state, action) => {
       state[0].totalTokenValue = action.payload;
-      console.log("this is token:", state[0].totalTokenValue);
+      console.log("this is ethertotal: ", state[0].totalTokenValue);
     },
     setBscTotalToken: (state, action) => {
       state[1].totalTokenValue = action.payload;
-      console.log("this is token:", state[1].totalTokenValue);
+      console.log("this is bsctotal: ", state[1].totalTokenValue);
     },
     setEtherTokenList:(state, action) => {
       state[0].tokenlist = action.payload;
-      console.log("this is token:", state[0].tokenlist);
+      console.log("this is etherlist :", state[0].tokenlist);
     },
     setBscTokenList: (state, action) => {
       state[1].tokenlist = action.payload;
-      console.log("this is token:", state[1].tokenlist);
+      console.log("this is Bsclist:", state[1].tokenlist);
     },
-   /*  setPolygonState: (state, action) => {
-      state.chainToken[2] = action.payload;
-      console.log("this is token:", state.chainToken[2]);
-    }, */
-   /*  setAddress: (state, action) => {
-      console.log(action.payload);
-      state.tokenState.address = action.payload;
-
-      console.log("this is addreses: ", state.tokenState.address);
-    },
-    setNative: (state, action) => {
-      console.log(action.payload);
-      state.tokenState.nativevalue = action.payload;
-
-      console.log("this is addreses: ", state.tokenState.nativevalue);
-    },
-    setTotal: (state, action) => {
-      console.log(action.payload);
-      state.tokenState.totalTokenValue = action.payload;
-
-      console.log("this is addreses: ", state.tokenState.totalTokenValue);
-    }, */
+   setEtherTableState:(state,action)=>{
+    state[0].tableState=action.payload;
+   },
+   setBscTableState:(state,action)=>{
+    state[1].tableState=action.payload;
+   }
   },
 });
 export const {
@@ -102,10 +92,8 @@ export const {
   setBscTotalToken,
   setEtherTokenList,
   setBscTokenList,
- /*  setPolygonState, */
-  /* setAddress,
-  setTotal,
-  setNative, */
+  setBscTableState,
+  setEtherTableState
 } = tokenSlice.actions;
 
 export default tokenSlice.reducer;

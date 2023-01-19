@@ -5,6 +5,7 @@ import { createPortal } from "react-dom";
 import { useDispatch, useSelector } from "react-redux";
 import {
   setBscNative,
+  setBscTokenList,
   setBscTotalToken,
   setEtherNative,
   setEtherState,
@@ -64,13 +65,13 @@ const Modal: React.FC<Props> = ({
     return null;
   }
   const saveAddress = async () => {
+    await Moralis.start({
+      apiKey:
+        "yv2QT1y7W5ePG3KBqRrxTBgm8uUTowv8RRIctpmBdycaGmGi1bQxmD39W9TMJOzH",
+      // ...and any other configuration
+    });
     chainTokens.map(async (listItem, index) => {
-      if (listItem.state) {
-        await Moralis.start({
-          apiKey:
-            "yv2QT1y7W5ePG3KBqRrxTBgm8uUTowv8RRIctpmBdycaGmGi1bQxmD39W9TMJOzH",
-          // ...and any other configuration
-        });
+      if (listItem.state) { 
         let chain;
         console.log(listItem.name, " index ", index);
         if (listItem.name == "ETHEREUM") {
@@ -90,7 +91,7 @@ const Modal: React.FC<Props> = ({
           }
         );
 
-        let balance = Number(response.result.balance) / 10 ** 18;
+        
         console.log("total: ",tokenResponse.toJSON())
         let total = 0;
         tokenResponse.toJSON().map((item) => {
@@ -99,13 +100,15 @@ const Modal: React.FC<Props> = ({
         });
 
         if (listItem.name == "ETHEREUM") {
+          let balance = Number(response.result.balance) / 10 ** 18;
           dispatch(setEtherNative(balance));
           dispatch(setEtherTotalToken(total));
           dispatch(setEtherTokenList(tokenResponse.toJSON()));
-        } else if (listItem.name == "BNC") {
+        } else if (listItem.name == "BSC") {
+          let balance = Number(response.result.balance) / 10 ** 8;
           dispatch(setBscNative(balance));
           dispatch(setBscTotalToken(total));
-          dispatch(setEtherTokenList(tokenResponse.toJSON()));
+          dispatch(setBscTokenList(tokenResponse.toJSON()));
         }
         /* dispatch(setTotal(total));
       dispatch(setAddress(address)); */
