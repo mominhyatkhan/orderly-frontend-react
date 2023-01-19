@@ -45,6 +45,30 @@ export const tokenSlice = createSlice({
       state[1].state = action.payload;
       console.log("this is token:", state[1].state);
     },
+    setEtherNative: (state, action) => {
+      state[0].nativeValue = action.payload;
+      console.log("this is token:", state[0].nativeValue);
+    },
+    setBscNative: (state, action) => {
+      state[1].nativeValue = action.payload;
+      console.log("this is token:", state[1].nativeValue);
+    },
+    setEtherTotalToken: (state, action) => {
+      state[0].totalTokenValue = action.payload;
+      console.log("this is token:", state[0].totalTokenValue);
+    },
+    setBscTotalToken: (state, action) => {
+      state[1].totalTokenValue = action.payload;
+      console.log("this is token:", state[1].totalTokenValue);
+    },
+    setEtherTokenList:(state, action) => {
+      state[0].tokenlist = action.payload;
+      console.log("this is token:", state[0].tokenlist);
+    },
+    setBscTokenList: (state, action) => {
+      state[1].tokenlist = action.payload;
+      console.log("this is token:", state[1].tokenlist);
+    },
    /*  setPolygonState: (state, action) => {
       state.chainToken[2] = action.payload;
       console.log("this is token:", state.chainToken[2]);
@@ -72,6 +96,12 @@ export const tokenSlice = createSlice({
 export const {
   setEtherState,
   setBscState,
+  setEtherNative,
+  setBscNative,
+  setEtherTotalToken,
+  setBscTotalToken,
+  setEtherTokenList,
+  setBscTokenList,
  /*  setPolygonState, */
   /* setAddress,
   setTotal,

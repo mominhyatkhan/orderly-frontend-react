@@ -3,7 +3,14 @@ import Moralis from "moralis";
 import * as React from "react";
 import { createPortal } from "react-dom";
 import { useDispatch, useSelector } from "react-redux";
-import {  setEtherState,} from "../../slices/tokenslice";
+import {
+  setBscNative,
+  setBscTotalToken,
+  setEtherNative,
+  setEtherState,
+  setEtherTokenList,
+  setEtherTotalToken,
+} from "../../slices/tokenslice";
 import { RootState } from "../../store";
 import TokenList from "./tokenList";
 
@@ -45,9 +52,7 @@ const Modal: React.FC<Props> = ({
   const dispatch = useDispatch();
   const [nativeBalance, setNativeBalance] = React.useState<number>(0);
   const [result, setResult] = React.useState<Result>();
-  const chainTokens = useSelector(
-    (state: RootState) => state.tokens
-  );
+  const chainTokens = useSelector((state: RootState) => state.tokens);
   const handleSelect = (
     index: number,
     e: React.ChangeEvent<HTMLInputElement>
@@ -59,43 +64,53 @@ const Modal: React.FC<Props> = ({
     return null;
   }
   const saveAddress = async () => {
-    
-    chainTokens.every(async(listItem,index)=>{
-      listItem.state && await Moralis.start({
-        apiKey:
-          "yv2QT1y7W5ePG3KBqRrxTBgm8uUTowv8RRIctpmBdycaGmGi1bQxmD39W9TMJOzH",
-        // ...and any other configuration
-      });
-      let chain
-      console.log(listItem.name," inex ",index)
-      if(listItem.name=='ETHERUM'){
-       chain = EvmChain.ETHEREUM;
-      }
-      else if(listItem.name=='BSC'){
-       chain=EvmChain.BSC;
-      }
-      const response = await Moralis.EvmApi.balance.getNativeBalance({
-        address,
-        chain,
-      });
-  
-      const tokenResponse = await Moralis.EvmApi.token.getWalletTokenBalances({
-        address,
-        chain,
-      });
-  
-      let balance = Number(response.result.balance) / 10 ** 18;
-      let total = 0;
-      tokenResponse.toJSON().map((item) => {
-        total = total + Number(item.balance);
-      });
-      
-      setNativeBalance(balance);
-      dispatch(setEtherState(balance));
-      /* dispatch(setTotal(total));
+    chainTokens.map(async (listItem, index) => {
+      if (listItem.state) {
+        await Moralis.start({
+          apiKey:
+            "yv2QT1y7W5ePG3KBqRrxTBgm8uUTowv8RRIctpmBdycaGmGi1bQxmD39W9TMJOzH",
+          // ...and any other configuration
+        });
+        let chain;
+        console.log(listItem.name, " index ", index);
+        if (listItem.name == "ETHEREUM") {
+          chain = EvmChain.ETHEREUM;
+        } else if (listItem.name == "BSC") {
+          chain = EvmChain.BSC;
+        }
+        const response = await Moralis.EvmApi.balance.getNativeBalance({
+          address,
+          chain,
+        });
+
+        const tokenResponse = await Moralis.EvmApi.token.getWalletTokenBalances(
+          {
+            address,
+            chain,
+          }
+        );
+
+        let balance = Number(response.result.balance) / 10 ** 18;
+        console.log("total: ",tokenResponse.toJSON())
+        let total = 0;
+        tokenResponse.toJSON().map((item) => {
+          total = total + Number(item.balance)/10**(Number(item.decimals));
+          console.log("total: ",total)
+        });
+
+        if (listItem.name == "ETHEREUM") {
+          dispatch(setEtherNative(balance));
+          dispatch(setEtherTotalToken(total));
+          dispatch(setEtherTokenList(tokenResponse.toJSON()));
+        } else if (listItem.name == "BNC") {
+          dispatch(setBscNative(balance));
+          dispatch(setBscTotalToken(total));
+          dispatch(setEtherTokenList(tokenResponse.toJSON()));
+        }
+        /* dispatch(setTotal(total));
       dispatch(setAddress(address)); */
-    })
-    
+      }
+    });
   };
   return (
     <div className="bg-white h-auto w-96 ">

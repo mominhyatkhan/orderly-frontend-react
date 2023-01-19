@@ -3,61 +3,13 @@ import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { RootState } from "../../../../store";
 const GlobalTokenTable = () => {
-  const [data, setData] = useState<Object[]>([]);
+  const data = useSelector((state:RootState)=>state.tokens[0].tokenlist)
   const cards = useSelector((state: RootState) => state.coinCards);
   const token = useSelector((state: RootState) => state.tokens);
   const apikey = "J1IXZNAEZW3JEQWX3J4WM7JBAUGJUSD8BP";
   const bscApiKey = "7W8WQYR6D9ACWR3Y5P7EDJK121X24PXE4D";
   const [address, setAddress] = useState<string>("");
   const [result, setResult] = useState<number[]>([]);
-
-  async function fetchData(requiredToken: string, api: string) {
-    try {
-      const response = await axios.get(
-        "https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&order=market_cap_desc&per_page=10&page=1&sparkline=false"
-      );
-      await response.data.map((item: any) => {
-        console.log(response.data);
-        if (item.id == requiredToken) {
-          data.push(item);
-          setData(data);
-        }
-      });
-      const holdings = await axios.get(api);
-      result.push(holdings.data.result);
-      setResult(result);
-      console.log("this is result", result);
-    } catch (error) {
-      console.error(error);
-    }
-  }
-  console.log(result);
-
-  async function getEther() {
-    let api = `https://api.etherscan.io/api?module=account&action=balance&address=${address}&tag=latest&apikey=${apikey}`;
-    await fetchData("ethereum", api);
-  }
-  async function getBsc() {
-    let api = `https://api.bscscan.com/api?module=account&action=balance&address=${address}&apikey=${bscApiKey}`;
-    await fetchData("binancecoin", api);
-  }
-  /* async function getPolygon() {
-    let a: any[] = [];
-    a.push(await fetchData("polygon",api),);
-    console.log("poly", a);
-  } */
-  function getAddress() {
-    cards.map((item) => {
-      if (item.name == "Ethereum") {
-        setAddress(item.addreses[0]);
-      }
-    });
-  }
-  useEffect(() => {
-    getAddress();
-    token[0].state && address && getEther();
-    token[1].state && address && getBsc(); 
-  }, []);
 
   return (
     <div className="relative overflow-auto shadow-md sm:rounded-lg max-h-96">
@@ -89,7 +41,7 @@ const GlobalTokenTable = () => {
         </thead>
         <tbody>
           {data?.map((item: any, index: number) => {
-            console.log(result, "yeh item hs");
+            console.log(item, "yeh item hs");
             return (
               <tr
                 key={item.id}
@@ -101,13 +53,13 @@ const GlobalTokenTable = () => {
                 >
                   {index + 1}
                 </th>
-                <td className="px-6 py-4">{item.id}</td>
-                <td className="px-6 py-4">{item.current_price}</td>
+                <td className="px-6 py-4">{item.name}</td>
+                <td className="px-6 py-4"></td>
                 <td className="px-6 py-4">
                   {item.market_cap_change_percentage_24h}
                 </td>
-                <td className="px-6 py-4">{result[index]}</td>
-                <td className="px-6 py-4"></td>
+                <td className="px-6 py-4">{item.balance/10**(item.decimals)}</td>
+                <td></td>
                 <td className="px-6 py-4">
                   <a
                     href="#"
