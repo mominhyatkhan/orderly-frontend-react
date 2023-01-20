@@ -1,10 +1,10 @@
-import Dropdown from "./smallComponents/vesting";
-import GenralComponent from "./smallComponents/Genral";
-import InvestmentModalInput from "./smallComponents/Genral";
-import VestingComponent from "./smallComponents/vesting";
-import DistributionType from "./smallComponents/distributionType";
-import InvestmentType from "./smallComponents/investmentType";
-import About from "./smallComponents/about";
+import Dropdown from "./SubComponents/vesting";
+import GenralComponent from "./SubComponents/Genral";
+import InvestmentModalInput from "./SubComponents/Genral";
+import VestingComponent from "./SubComponents/vesting";
+import DistributionType from "./SubComponents/distributionType";
+import InvestmentType from "./SubComponents/investmentType";
+import About from "./SubComponents/about";
 
 const InvestmentDetailModel = () => {
   return (

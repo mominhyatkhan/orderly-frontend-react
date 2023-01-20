@@ -1,9 +1,9 @@
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../../../../store";
-import GlobalTokenTable from "../smallComponents/globalTokenTable";
-import PreviousTokenTable from "../smallComponents/previousTokenTable";
-import PriceCard from "../smallComponents/priceCards";
-import UpcomingTokenTable from "../smallComponents/upcomingTokenTable";
+import GlobalTokenTable from "../SubComponents/globalTokenTable";
+import PreviousTokenTable from "../SubComponents/previousTokenTable";
+import PriceCard from "../SubComponents/priceCards";
+import UpcomingTokenTable from "../SubComponents/upcomingTokenTable";
 
 const Portfolio = () => {
   const data = useSelector((state: RootState) => state.tokens);

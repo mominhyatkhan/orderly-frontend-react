@@ -9,7 +9,7 @@ function SetPassword() {
     <div className="grid">
       <form 
         onSubmit={(e) => {
-          console.log("Submitted: ", password), e.preventDefault(),dispatch(setSignupState({ isAccountCreated:true}));
+          e.preventDefault(),dispatch(setSignupState({ isAccountCreated:true}));
         }}
         className="flex"
       >

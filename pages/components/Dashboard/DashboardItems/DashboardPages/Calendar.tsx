@@ -1,4 +1,4 @@
-import AllTokenCalender from "../smallComponents/calenderTabComponents/calenderForAllTokens";
+import AllTokenCalender from "../SubComponents/calenderTabComponents/calenderForAllTokens";
 
 const Calender = () => {
   return (

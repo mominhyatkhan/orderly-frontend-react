@@ -1,5 +1,5 @@
-import InvesterDetail from "../smallComponents/investmentTabComponents/investmentDetailForm";
-import InvestmentDetailModel from "../smallComponents/investmentTabComponents/investmentDetailModel";
+import InvesterDetail from "../SubComponents/investmentTabComponents/investmentDetailForm";
+import InvestmentDetailModel from "../SubComponents/investmentTabComponents/investmentDetailModel";
 
 const InvestmentsManager = () => {
   return (

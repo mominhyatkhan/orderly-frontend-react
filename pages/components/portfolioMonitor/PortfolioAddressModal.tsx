@@ -32,6 +32,8 @@ const Modal: React.FC<Props> = ({
   const [address, setAdress] = React.useState<string>("");
   const dispatch = useDispatch();
   const saveAddress = () => {
+    
+    
     setWallet({
       state: true,
       name: Name,
@@ -43,48 +45,7 @@ const Modal: React.FC<Props> = ({
       tokenlist: [],
     });
     dispatch(addWallet(wallet));
-    /* chainTokens.map(async (listItem, index) => {
-      if (listItem.state) {
-        let chain;
-        console.log(listItem.name, " index ", index);
-        if (listItem.symbol == "ETH") {
-          chain = EvmChain.ETHEREUM;
-        } else if (listItem.symbol == "BSC") {
-          chain = EvmChain.BSC;
-        }
-        const response = await Moralis.EvmApi.balance.getNativeBalance({
-          address,
-          chain,
-        });
-
-        const tokenResponse = await Moralis.EvmApi.token.getWalletTokenBalances(
-          {
-            address,
-            chain,
-          }
-        );
-
-        console.log("total: ", tokenResponse.toJSON());
-        let total = 0;
-        tokenResponse.toJSON().map((item) => {
-          total = total + Number(item.balance) / 10 ** Number(item.decimals);
-          console.log("total: ", total);
-        });
-
-        if (listItem.name == "ETHEREUM") {
-          let balance = Number(response.result.balance) / 10 ** 18;
-          dispatch(setEtherNative(balance));
-          dispatch(setEtherTotalToken(total));
-          dispatch(setEtherTokenList(tokenResponse.toJSON()));
-        } else if (listItem.name == "BSC") {
-          let balance = Number(response.result.balance) / 10 ** 8;
-          dispatch(setBscNative(balance));
-          dispatch(setBscTotalToken(total));
-          dispatch(setBscTokenList(tokenResponse.toJSON()));
-        } 
-      }
-    }); */
-  };
+      };
   return (
     <div className="bg-white h-auto w-96 ">
       <div className=" bg-white rounded-lg shadow dark:bg-white h-full">

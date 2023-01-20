@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import StartMoralis from "../../api/hello";
+import {StartMoralis} from "../../api/hello";
 import { setDashboardState } from "../../slices/dashboardSlice";
 import { setLoginState } from "../../slices/loginSlice";
 import { RootState } from "../../store";
@@ -16,9 +16,7 @@ function PortfolioMonitoring() {
   const [image, setImage] = useState<string>("");
   const [address, setAddress] = useState<string[]>([]);
   const dispatch = useDispatch();
-  const openModal = () => {
-    setModal(!modal);
-  };
+
   const showDashboard = () => {
     dispatch(
       setLoginState({
@@ -41,7 +39,7 @@ function PortfolioMonitoring() {
     setImage(image);
     setAddress(address);
     StartMoralis;
-    return openModal();
+    setModal(!modal);
   };
   const closeModal = () => setModal(false);
   return (

@@ -1,10 +1,10 @@
-import HomePage from "./Home";
+import Home from "./Home";
 import AuthenticationComponent from "./authComponents/authComponent";
 import PortfolioMonitoring from "../portfolioMonitor/portfolioSetup";
 import { useSelector } from "react-redux";
 import { RootState } from "../../store";
 
-function FrontPage() {
+function HomePage() {
   const isAccountCreated = useSelector( (state: RootState) => state.signupState.signUpState.isAccountCreated)
   return (
     <>
@@ -16,11 +16,11 @@ function FrontPage() {
           <AuthenticationComponent />
         </div>
         <div className="flex justify-center bg-[#171f2d] text-white w-full h-full">
-          <HomePage />
+          <Home />
         </div>
       </div>
         }
     </>
   );
 }
-export default FrontPage;
+export default HomePage;
