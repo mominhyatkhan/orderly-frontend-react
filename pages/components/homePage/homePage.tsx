@@ -1,6 +1,6 @@
 import HomePage from "./Home";
 import AuthenticationComponent from "./authComponents/authComponent";
-import PortfolioMonitoring from "../portfolioMonitor/portfolioMonitor";
+import PortfolioMonitoring from "../portfolioMonitor/portfolioSetup";
 import { useSelector } from "react-redux";
 import { RootState } from "../../store";
 

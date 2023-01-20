@@ -18,15 +18,15 @@ const initialState: CardsState[] = [
   
   },
   {
-    name: "Tether",
-    symbol: "USDT",
+    name: "Binance",
+    symbol: "BSC",
     image: "/etherum.png",
     addreses: ["rew32"],
   
   },
   {
-    name: "Cardano",
-    symbol: "ADA ",
+    name: "Polygon",
+    symbol: "MATIC",
     image: "/etherum.png",
     addreses: ["trds43"],
   

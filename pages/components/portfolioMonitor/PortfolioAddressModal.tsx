@@ -1,35 +1,7 @@
-import { EvmChain, EvmNative } from "@moralisweb3/common-evm-utils";
-import Moralis from "moralis";
 import * as React from "react";
-import { createPortal } from "react-dom";
 import { useDispatch, useSelector } from "react-redux";
-import {
-  setBscNative,
-  setBscTokenList,
-  setBscTotalToken,
-  setEtherNative,
-  setEtherState,
-  setEtherTokenList,
-  setEtherTotalToken,
-} from "../../slices/tokenslice";
-import { RootState } from "../../store";
-import TokenList from "./tokenList";
+import { addWallet } from "../../slices/tokenslice";
 
-interface listItems {
-  name: string;
-  symbol: string;
-  image: string;
-  address: string[];
-}
-type Result = {
-  token_address: string;
-  name: string;
-  symbol: string;
-  logo?: string | undefined;
-  thumbnail?: string | undefined;
-  decimals: number;
-  balance: string;
-};
 type Props = {
   isOpen: boolean;
   onClose: () => void;
@@ -38,7 +10,16 @@ type Props = {
   Img: string;
   Address: string[];
 };
-
+type Wallet = {
+  state: boolean;
+  name: string;
+  symbol: string;
+  tableState: boolean;
+  address: string;
+  nativeValue: number;
+  totalTokenValue: number;
+  tokenlist: [];
+};
 const Modal: React.FC<Props> = ({
   isOpen,
   onClose,
@@ -47,36 +28,28 @@ const Modal: React.FC<Props> = ({
   Img,
   Address,
 }) => {
-  const [tokenModel, setTokenModal] = React.useState<boolean>(false);
-  const [selectedIndex, setSelectedIndex] = React.useState<number>(0);
+  const [wallet, setWallet] = React.useState<Wallet>();
   const [address, setAdress] = React.useState<string>("");
   const dispatch = useDispatch();
-  const [nativeBalance, setNativeBalance] = React.useState<number>(0);
-  const [result, setResult] = React.useState<Result>();
-  const chainTokens = useSelector((state: RootState) => state.tokens);
-  const handleSelect = (
-    index: number,
-    e: React.ChangeEvent<HTMLInputElement>
-  ) => {
-    setSelectedIndex(index);
-    console.log(Address);
-  };
-  if (!isOpen) {
-    return null;
-  }
-  const saveAddress = async () => {
-    await Moralis.start({
-      apiKey:
-        "yv2QT1y7W5ePG3KBqRrxTBgm8uUTowv8RRIctpmBdycaGmGi1bQxmD39W9TMJOzH",
-      // ...and any other configuration
+  const saveAddress = () => {
+    setWallet({
+      state: true,
+      name: Name,
+      symbol: Symbol,
+      tableState: true,
+      address: address,
+      nativeValue: 0,
+      totalTokenValue: 0,
+      tokenlist: [],
     });
-    chainTokens.map(async (listItem, index) => {
-      if (listItem.state) { 
+    dispatch(addWallet(wallet));
+    /* chainTokens.map(async (listItem, index) => {
+      if (listItem.state) {
         let chain;
         console.log(listItem.name, " index ", index);
-        if (listItem.name == "ETHEREUM") {
+        if (listItem.symbol == "ETH") {
           chain = EvmChain.ETHEREUM;
-        } else if (listItem.name == "BSC") {
+        } else if (listItem.symbol == "BSC") {
           chain = EvmChain.BSC;
         }
         const response = await Moralis.EvmApi.balance.getNativeBalance({
@@ -91,12 +64,11 @@ const Modal: React.FC<Props> = ({
           }
         );
 
-        
-        console.log("total: ",tokenResponse.toJSON())
+        console.log("total: ", tokenResponse.toJSON());
         let total = 0;
         tokenResponse.toJSON().map((item) => {
-          total = total + Number(item.balance)/10**(Number(item.decimals));
-          console.log("total: ",total)
+          total = total + Number(item.balance) / 10 ** Number(item.decimals);
+          console.log("total: ", total);
         });
 
         if (listItem.name == "ETHEREUM") {
@@ -109,11 +81,9 @@ const Modal: React.FC<Props> = ({
           dispatch(setBscNative(balance));
           dispatch(setBscTotalToken(total));
           dispatch(setBscTokenList(tokenResponse.toJSON()));
-        }
-        /* dispatch(setTotal(total));
-      dispatch(setAddress(address)); */
+        } 
       }
-    });
+    }); */
   };
   return (
     <div className="bg-white h-auto w-96 ">
@@ -154,18 +124,16 @@ const Modal: React.FC<Props> = ({
             }}
           >
             <div className="relative">
+            
               <input
                 type="text"
-                onChange={(e) => (
-                  setAdress(e.currentTarget.value), setTokenModal(true)
-                )}
+                onChange={(e) => setAdress(e.currentTarget.value)}
                 className="block rounded-t-lg px-2.5 pb-2.5 pt-5 w-full text-sm text-black bg-gray-100 dark:bg-gray-100 border-0 border-b-2 border-gray-300 appearance-none dark:text-black dark:border-gray-600 dark:focus:border-gray-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
               />
               <label
                 htmlFor="floating_filled"
                 className="absolute text-sm text-black dark:text-black duration-300 transform -translate-y-4 scale-75 top-4 z-10 origin-[0] left-2.5 peer-focus:text-black-600 peer-focus:dark:text-black-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-4"
               ></label>
-              {tokenModel && <TokenList />}
             </div>
             <a className="mt-6 cursor-pointer text-[#6B8068]">
               + Add Additional Address

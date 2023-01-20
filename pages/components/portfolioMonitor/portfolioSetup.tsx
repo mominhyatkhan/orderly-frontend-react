@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import StartMoralis from "../../api/hello";
 import { setDashboardState } from "../../slices/dashboardSlice";
 import { setLoginState } from "../../slices/loginSlice";
 import { RootState } from "../../store";
@@ -26,11 +27,7 @@ function PortfolioMonitoring() {
     );
   };
   const showMonitor = () => {
-    dispatch(
-      setDashboardState(
-        1
-      )
-    );
+    dispatch(setDashboardState(1));
   };
   const setindex = (
     index: number,
@@ -43,13 +40,14 @@ function PortfolioMonitoring() {
     setSymbol(symbol);
     setImage(image);
     setAddress(address);
+    StartMoralis;
     return openModal();
   };
   const closeModal = () => setModal(false);
   return (
-    <>
-      <main className=" flex bg-[#F6F8FD] items-stretch">
-        <div className="flex flex-col space-x-20 w-full ">
+    
+      <main className="relative flex flex-col bg-[#F6F8FD] items-stretch h-screen">
+        <div className="flex flex-col space-x-20 w-full h-5/6">
           <div className="flex flex-row space-x-20 m-24 ">
             <div>
               <label className="text-3xl">Setup Portfolio Monitoring</label>
@@ -84,10 +82,11 @@ function PortfolioMonitoring() {
               </div>
             </div>
           </div>
-          <div>
-            <div className="grid grid-flow-col">
+          <div >
+            <div className="flex flex-row space-x-56 ">
               {cards.map((item, index) => (
                 <div
+                className="cursor-pointer rounded  " 
                   key={index}
                   onClick={() =>
                     setindex(
@@ -108,15 +107,30 @@ function PortfolioMonitoring() {
               ))}
             </div>
           </div>
-          <footer className="m-20 bg-white w-5/6 shadow md:flex md:items-center md:justify-between md:p-6 dark:bg-white">
+        </div>
+        {modal&&<div className="overlay-div absolute z-10 w-full bg-opacity-40 bg-gray-800 flex justify-end">
+          <div className="flex h-screen w-96 bg-white justify-end">
+            <PortfolioModal
+              isOpen={modal}
+              onClose={closeModal}
+              Name={name}
+              Symbol={symbol}
+              Img={image}
+              Address={address}
+            />
+          </div>
+        </div>}
+        
+        <footer className="m-20 bg-white w-5/6 shadow md:flex md:items-center md:justify-between md:p-6 dark:bg-white">
             <span className="ml-16 text-sm text-gray-500 sm:text-center dark:text-gray-400">
               0 Network(s) Configured
             </span>
             <ul className="mr-48 flex flex-wrap items-center mt-3 text-sm text-[#6B8068]-500 dark:text-[#6B8068] sm:mt-0">
               <li>
-                <a 
+                <a
                   onClick={showMonitor}
-                 className="mr-4 hover:underline md:mr-6">
+                  className="mr-4 hover:underline md:mr-6"
+                >
                   Skip this step
                 </a>
               </li>
@@ -130,21 +144,7 @@ function PortfolioMonitoring() {
               </li>
             </ul>
           </footer>
-        </div>
-        <div>
-          <div className="flex justify-end h-screen w-full">
-            <PortfolioModal
-              isOpen={modal}
-              onClose={closeModal}
-              Name={name}
-              Symbol={symbol}
-              Img={image}
-              Address={address}
-            />
-          </div>
-        </div>
       </main>
-    </>
   );
 }
 export default PortfolioMonitoring;

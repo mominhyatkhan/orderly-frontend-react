@@ -1,5 +1,5 @@
 import { useState } from "react";
-import PortfolioMonitoring from "../../../portfolioMonitor/portfolioMonitor";
+import PortfolioMonitoring from "../../../portfolioMonitor/portfolioSetup";
 
 
 const Monitoring = () => {

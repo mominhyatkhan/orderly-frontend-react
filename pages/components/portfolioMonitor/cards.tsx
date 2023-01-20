@@ -8,9 +8,9 @@ type Props = {
 
 const Cards: React.FC<Props> = ({ name, symbol, image }) => {
   return (
-    <div className="grid grid-flow-col">
-      <div className="w-full max-w-sm bg-white border border-gray-200 rounded-lg shadow-md dark:bg-white">
-        <div className="flex justify-end px-4 pt-4">
+    <div className="w-96 grid grid-flow-col ">
+      <div className="w-full max-w-sm bg-white border border-gray-200 rounded-lg shadow-md">
+        <div className="flex justify-end pt-4">
           <button
             id="dropdownButton"
             data-dropdown-toggle="dropdown"
