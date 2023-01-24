@@ -3,6 +3,7 @@ import { useSelector } from "react-redux";
 import { RootState } from "../../../store";
 import EmailVerify from "./signup/EmailVerify";
 import SetPassword from "./signup/SetPassword";
+import Router from "next/router";
 import PortfolioMonitoring from "../../portfolioMonitor/portfolioSetup";
 function Signup() {
   const signstate = useSelector(
@@ -16,7 +17,7 @@ function Signup() {
           case 0:
             return <SignupMain />;
           case 1:
-            return <EmailVerify />;
+            return <EmailVerify/>;
           case 2:
             return <SetPassword />;
           default:

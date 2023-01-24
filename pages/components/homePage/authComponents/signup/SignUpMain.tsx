@@ -2,7 +2,7 @@ import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { setSignupState } from "../../../../slices/signupSlice";
 function SignupMain() {
-  const [email, setEmail] = useState<string>("");
+  const [mail, setmail] = useState<string>("");
   const dispatch = useDispatch();
   const switchLogin = () => {
     dispatch(setSignupState({ isSigned: false, signState: 0 }));
@@ -13,7 +13,7 @@ function SignupMain() {
     <div className="grid">
       <form
         onSubmit={() =>
-          dispatch(setSignupState({ isSigned: true, signState: 1 }))
+          dispatch(setSignupState({ isSigned: true, signState: 1,email:mail }))
         }
         className="flex"
       >
@@ -22,7 +22,7 @@ function SignupMain() {
           <input
             type="email"
             onChange={(e) => {
-              setEmail(e.currentTarget.value);
+              setmail(e.currentTarget.value);
             }}
             id="email"
             className="bg-white w-80 h-14 px-3 py-4 border text-black text-sm rounded-lg focus:ring-blue-500 block placeholder-black dark:text-black dark:focus:ring-blue-500 dark:focus:border-blue-500"

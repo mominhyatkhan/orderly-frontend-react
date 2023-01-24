@@ -1,16 +1,16 @@
 import { EvmChain } from "@moralisweb3/common-evm-utils";
+import axios from "axios";
 import Moralis from "moralis";
 import { useSelector } from "react-redux";
 import { RootState } from "../store";
 
-export async function StartMoralis(){
+export async function StartMoralis() {
   await Moralis.start({
-    apiKey:
-      "yv2QT1y7W5ePG3KBqRrxTBgm8uUTowv8RRIctpmBdycaGmGi1bQxmD39W9TMJOzH",
+    apiKey: "yv2QT1y7W5ePG3KBqRrxTBgm8uUTowv8RRIctpmBdycaGmGi1bQxmD39W9TMJOzH",
   });
 }
-export function GetWallletData(){
-  const wallets=useSelector((state:RootState)=>state.tokens)
+export function GetWallletData() {
+  const wallets = useSelector((state: RootState) => state.tokens);
   wallets.map(async (listItem, index) => {
     if (listItem.state) {
       let chain;
@@ -20,18 +20,16 @@ export function GetWallletData(){
       } else if (listItem.symbol == "BSC") {
         chain = EvmChain.BSC;
       }
-      let address=listItem.address
+      let address = listItem.address;
       const response = await Moralis.EvmApi.balance.getNativeBalance({
         address,
         chain,
       });
 
-      const tokenResponse = await Moralis.EvmApi.token.getWalletTokenBalances(
-        {
-          address,
-          chain,
-        }
-      );
+      const tokenResponse = await Moralis.EvmApi.token.getWalletTokenBalances({
+        address,
+        chain,
+      });
 
       console.log("total: ", tokenResponse.toJSON());
       let total = 0;
@@ -40,7 +38,7 @@ export function GetWallletData(){
         console.log("total: ", total);
       });
 
-     /*  if (listItem.name == "ETHEREUM") {
+      /*  if (listItem.name == "ETHEREUM") {
         let balance = Number(response.result.balance) / 10 ** 18;
        
       } else if (listItem.name == "BSC") {
@@ -49,4 +47,18 @@ export function GetWallletData(){
       }  */
     }
   });
+}
+export default async function signupApi(userdata: any) {
+  try {
+    const response = await axios.post("http://localhost:8000/signup", {
+      email: userdata.email,
+      password: userdata.password,
+      role: userdata.role,
+      confirmation: userdata.confirmation,
+    });
+    return response;
+  } catch (error) {
+    //@ts-ignore
+    console.log("error in sign up", error.data);
+  }
 }

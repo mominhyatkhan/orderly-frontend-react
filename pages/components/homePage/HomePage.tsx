@@ -5,7 +5,7 @@ import { useSelector } from "react-redux";
 import { RootState } from "../../store";
 
 function HomePage() {
-  const isAccountCreated = useSelector( (state: RootState) => state.signupState.signUpState.isAccountCreated)
+  const isAccountCreated = useSelector( (state: RootState) => state.signupState.signUpState.confirmation)
   return (
     <>
     {isAccountCreated ?
