@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import {StartMoralis} from "../../api/hello";
+
 import { setDashboardState } from "../../slices/dashboardSlice";
 import { setLoginState } from "../../slices/loginSlice";
 import { RootState } from "../../store";
@@ -13,6 +13,7 @@ function PortfolioMonitoring() {
   const [modal, setModal] = useState<boolean>(false);
   const [name, setName] = useState<string>("");
   const [symbol, setSymbol] = useState<string>("");
+  const [chainId, setChainId] = useState<string>("");
   const [image, setImage] = useState<string>("");
   const [address, setAddress] = useState<string[]>([]);
   const dispatch = useDispatch();
@@ -27,18 +28,18 @@ function PortfolioMonitoring() {
   const showMonitor = () => {
     dispatch(setDashboardState(1));
   };
-  const setindex = (
-    index: number,
+  const setWallet = (
     name: string,
     symbol: string,
+    chainId:string,
     image: string,
     address: string[]
   ) => {
     setName(name);
     setSymbol(symbol);
+    setChainId(chainId);
     setImage(image);
     setAddress(address);
-    StartMoralis;
     setModal(!modal);
   };
   const closeModal = () => setModal(false);
@@ -87,10 +88,10 @@ function PortfolioMonitoring() {
                 className="cursor-pointer rounded  " 
                   key={index}
                   onClick={() =>
-                    setindex(
-                      index,
+                    setWallet(
                       item.name,
                       item.symbol,
+                      item.chainId,
                       item.image,
                       item.addreses
                     )
@@ -113,6 +114,7 @@ function PortfolioMonitoring() {
               onClose={closeModal}
               Name={name}
               Symbol={symbol}
+              chainId={chainId}
               Img={image}
               Address={address}
             />

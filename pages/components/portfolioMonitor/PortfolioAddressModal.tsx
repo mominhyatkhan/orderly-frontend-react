@@ -1,3 +1,4 @@
+import { chainList } from "@moralisweb3/common-evm-utils/lib/data/chaindata";
 import * as React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { GetWallletData } from "../../api/hello";
@@ -8,6 +9,7 @@ type Props = {
   onClose: () => void;
   Name: string;
   Symbol: string;
+  chainId:string;
   Img: string;
   Address: string[];
 };
@@ -31,6 +33,7 @@ const Modal: React.FC<Props> = ({
   onClose,
   Name,
   Symbol,
+  chainId,
   Img,
   Address,
 }) => {
@@ -40,7 +43,7 @@ const Modal: React.FC<Props> = ({
   const dispatch = useDispatch();
   const saveAddress = async () => {
     
- setResponse(await GetWallletData(Symbol, address));
+ setResponse(await GetWallletData(chainId, address));
     setWallet({
       state: true,
       name: Name,

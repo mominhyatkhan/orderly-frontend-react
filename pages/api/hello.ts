@@ -1,53 +1,40 @@
-import { EvmChain } from "@moralisweb3/common-evm-utils";
+
 import axios from "axios";
-import Moralis from "moralis";
 import { useState } from "react";
-import { useSelector } from "react-redux";
-import { RootState } from "../store";
-type data={
-  TotalNative:number,
-  totalTokenBalance:number,
-  tokenList:any[]
-}
-export async function StartMoralis() {
-  await Moralis.start({
-    apiKey: "yv2QT1y7W5ePG3KBqRrxTBgm8uUTowv8RRIctpmBdycaGmGi1bQxmD39W9TMJOzH",
+
+type data = {
+  TotalNative: number;
+  totalTokenBalance: number;
+  tokenList: any[];
+};
+export async function GetWallletData(chainId: string, address: string) {
+  const [walletdata, setwalletdata] = useState<data>();
+  const [balance, setBalance] = useState<number>(0);
+  let tokenResponse: any;
+
+ 
+    tokenResponse = await axios.get(
+      `http://localhost:8000/monitor-address/get-token-balance?address=${address}&chain=${chainId}`
+    );
+    setBalance(
+      await axios.get(
+        `http://localhost:8000/monitor-address/native-balance?address=${address}&chain=${chainId}`
+      )
+    );
+ 
+
+  console.log("total: ", tokenResponse.toJSON());
+  let total = 0;
+  tokenResponse.toJSON().map((item: { balance: any; decimals: any }) => {
+    total = total + Number(item.balance) / 10 ** Number(item.decimals);
   });
-}
-export async function GetWallletData(symbol:string,address:string) {
-const [walletdata,setwalletdata]=useState<data>()
-  const [balance,setBalance] =useState<number>(0)
-      let chain;
-      if (symbol == "ETH") {
-        chain = EvmChain.ETHEREUM;
-      } else if (symbol == "BSC") {
-        chain = EvmChain.BSC;
-      }
 
-      const response = await Moralis.EvmApi.balance.getNativeBalance({
-        address,
-        chain,
-      });
-
-      const tokenResponse = await Moralis.EvmApi.token.getWalletTokenBalances({
-        address,
-        chain,
-      });
-
-      console.log("total: ", tokenResponse.toJSON());
-      let total = 0;
-      tokenResponse.toJSON().map((item) => {
-        total = total + Number(item.balance) / 10 ** Number(item.decimals);
-      });
-      
-       if (symbol == "ETH") {
-        setBalance( Number(response.result.balance) / 10 ** 18);
-       
-      } else if (symbol == "BSC") {
-        setBalance( Number(response.result.balance) / 10 ** 8);
-      } 
-    setwalletdata({TotalNative:total,totalTokenBalance:balance,tokenList:tokenResponse.toJSON()})
-    return walletdata
+  setwalletdata({
+    TotalNative: total,
+    totalTokenBalance: balance,
+    tokenList: tokenResponse.toJSON(),
+  });
+  return walletdata;
 }
 export default async function signupApi(userdata: any) {
   try {
