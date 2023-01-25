@@ -76,7 +76,7 @@ const GlobalTokenTable = () => {
                 </tr>
               );
             })}
-          {data[1].tableState &&
+          {/* {data[1].tableState &&
             data[1].tokenlist.map((item: any, index: number) => {
               console.log(item, "yeh item hs");
               return (
@@ -111,7 +111,7 @@ const GlobalTokenTable = () => {
                   </td>
                 </tr>
               );
-            })}
+            })} */}
         </tbody>
       </table>
     </div>

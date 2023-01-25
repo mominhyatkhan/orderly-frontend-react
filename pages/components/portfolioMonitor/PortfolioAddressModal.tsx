@@ -1,5 +1,6 @@
 import * as React from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { GetWallletData } from "../../api/hello";
 import { addWallet } from "../../slices/tokenslice";
 
 type Props = {
@@ -10,6 +11,11 @@ type Props = {
   Img: string;
   Address: string[];
 };
+type walletresponse={
+  TotalNative:number,
+  totalTokenBalance:number,
+  tokenList:any[]
+}
 type Wallet = {
   state: boolean;
   name: string;
@@ -18,7 +24,7 @@ type Wallet = {
   address: string;
   nativeValue: number;
   totalTokenValue: number;
-  tokenlist: [];
+  tokenlist: any[];
 };
 const Modal: React.FC<Props> = ({
   isOpen,
@@ -30,19 +36,20 @@ const Modal: React.FC<Props> = ({
 }) => {
   const [wallet, setWallet] = React.useState<Wallet>();
   const [address, setAdress] = React.useState<string>("");
+  const [response,setResponse]=React.useState<walletresponse>();
   const dispatch = useDispatch();
-  const saveAddress = () => {
+  const saveAddress = async () => {
     
-    
+ setResponse(await GetWallletData(Symbol, address));
     setWallet({
       state: true,
       name: Name,
       symbol: Symbol,
       tableState: true,
       address: address,
-      nativeValue: 0,
-      totalTokenValue: 0,
-      tokenlist: [],
+      nativeValue: response!.TotalNative,
+      totalTokenValue: response!.totalTokenBalance,
+      tokenlist: response!.tokenList,
     });
     dispatch(addWallet(wallet));
       };
