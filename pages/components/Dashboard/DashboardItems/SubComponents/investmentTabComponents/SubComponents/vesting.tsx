@@ -1,7 +1,15 @@
 import React, { useState } from "react";
-
-const VestingComponent = () => {
-  const [isOpen, setIsOpen] = useState(false);
+type props = {
+  lockup: React.Dispatch<React.SetStateAction<number>>;
+  percentofToken: React.Dispatch<React.SetStateAction<number>>;
+  vestingPeriod: React.Dispatch<React.SetStateAction<string>>;
+};
+const VestingComponent: React.FC<props> = ({
+  lockup,
+  percentofToken,
+  vestingPeriod,
+}) => {
+ 
 
   return (
     <div className="flex flex-col bg-white rounded-lg shadow dark:bg-white space-y-2.5">
@@ -15,8 +23,10 @@ const VestingComponent = () => {
             Lockup
           </label>
           <input
+          type='number'
             placeholder="$0.00"
-            id="investmentLink"
+            onChange={(e)=>{lockup(parseInt(e.currentTarget.value))}}
+            id="lockup"
             className="bg-gray-100 w-full h-6  rounded-md"
           />
         </div>
@@ -30,19 +40,24 @@ const VestingComponent = () => {
             Percent of tokens
           </label>
           <input
+          type='number'
+          onChange={(e)=>{percentofToken(parseInt(e.currentTarget.value))}}
             placeholder="0%"
-            id="investmentLink"
+            id="percent of tokens"
             className="bg-gray-100 w-full h-6  rounded-md"
           />
         </div>
       </div>
       <div className="flex flex-col w-full bg-gray-100 h-14 ">
-      <h1 className="block px-4 py-2 pr-8 text-sm font-medium leading-5 text-gray-700">Visiting period</h1>
+        <h1 className="block px-4 py-2 pr-8 text-sm font-medium leading-5 text-gray-700">
+          Visiting period
+        </h1>
         <select
           className="  bg-gray-100  px-4 py-2 pr-8 rounded-lg"
-          onClick={() => setIsOpen(!isOpen)}
+          onChange={(e)=>{vestingPeriod(e.currentTarget.value)}}
         >
-          <option>1 Month </option>  
+          <option>none</option>
+          <option>1 Month </option>
           <option>2 Months</option>
           <option>3 Months</option>
           <option>4 Months</option>

@@ -23,8 +23,8 @@ export const signupSlice = createSlice({
     setSignupState: (state, action) => {
       state.signUpState = action.payload;
       const userdata=[{email:state.signUpState.email},{password:state.signUpState.password},{role:state.signUpState.role},{confirmation:state.signUpState.confirmation}]
-      const response= signupApi(userdata);
-      console.log(state.signUpState,response);
+     /*  const response= signupApi(userdata); */
+      console.log(state.signUpState);
     },
   },
 });

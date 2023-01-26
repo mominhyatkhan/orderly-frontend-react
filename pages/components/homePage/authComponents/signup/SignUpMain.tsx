@@ -8,7 +8,7 @@ function SignupMain() {
     dispatch(setSignupState({ isSigned: false, signState: 0 }));
    
   };
-
+    
   return (
     <div className="grid">
       <form

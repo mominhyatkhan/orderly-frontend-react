@@ -1,4 +1,4 @@
-import { useDebugValue, useState } from "react";
+import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { setSignupState } from "../../../../slices/signupSlice";
 
@@ -9,7 +9,7 @@ function SetPassword() {
     <div className="grid">
       <form 
         onSubmit={(e) => {
-          e.preventDefault(),dispatch(setSignupState({ isAccountCreated:true}));
+          e.preventDefault(),dispatch(setSignupState({ confirmation:true}));
         }}
         className="flex"
       >

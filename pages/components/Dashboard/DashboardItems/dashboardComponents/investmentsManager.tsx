@@ -63,7 +63,7 @@ const InvestmentsManager = () => {
       <div className="mt-10 w-full">
         <InvesterDetail/>
       </div>
-      <InvestmentDetailModel/>
+     
     </div>
   );
 };

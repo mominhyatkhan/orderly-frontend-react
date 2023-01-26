@@ -9,15 +9,16 @@ type Props = {
   onClose: () => void;
   Name: string;
   Symbol: string;
-  chainId:string;
+  chainId: string;
   Img: string;
   Address: string[];
+  background: React.Dispatch<React.SetStateAction<string[]>>;
 };
-type walletresponse={
-  TotalNative:number,
-  totalTokenBalance:number,
-  tokenList:any[]
-}
+type walletresponse = {
+  TotalNative: number;
+  totalTokenBalance: number;
+  tokenList: any[];
+};
 type Wallet = {
   state: boolean;
   name: string;
@@ -36,14 +37,15 @@ const Modal: React.FC<Props> = ({
   chainId,
   Img,
   Address,
+  background,
 }) => {
   const [wallet, setWallet] = React.useState<Wallet>();
   const [address, setAdress] = React.useState<string>("");
-  const [response,setResponse]=React.useState<walletresponse>();
+  const [response, setResponse] = React.useState<walletresponse>();
+  const [saved, setSaved] = React.useState<boolean>(false);
   const dispatch = useDispatch();
   const saveAddress = async () => {
-    
- setResponse(await GetWallletData(chainId, address));
+    setResponse(await GetWallletData(chainId, address));
     setWallet({
       state: true,
       name: Name,
@@ -55,13 +57,16 @@ const Modal: React.FC<Props> = ({
       tokenlist: response!.tokenList,
     });
     dispatch(addWallet(wallet));
-      };
+    setSaved(true);
+  };
   return (
     <div className="bg-white h-auto w-96 ">
       <div className=" bg-white rounded-lg shadow dark:bg-white h-full">
         <button
           type="button"
-          onClick={onClose}
+          onClick={() => {
+            onClose(), background(["bg-white", "bg-white", "bg-white"]);
+          }}
           className="absolute top-3 right-2.5 text-[#6B8068] bg-transparent hover:bg-white-200 hover:text-black-900 rounded-lg text-sm p-1.5 ml-auto inline-flex items-center dark:hover:bg-gray-800 dark:hover:text-white"
           data-modal-hide="authentication-modal"
         >
@@ -95,7 +100,6 @@ const Modal: React.FC<Props> = ({
             }}
           >
             <div className="relative">
-            
               <input
                 type="text"
                 onChange={(e) => setAdress(e.currentTarget.value)}
@@ -109,6 +113,7 @@ const Modal: React.FC<Props> = ({
             <a className="mt-6 cursor-pointer text-[#6B8068]">
               + Add Additional Address
             </a>
+            {saved && <label className="text-[#6B8068]">Data Saved</label>}
             <div>
               <button type="submit">SAVE</button>
             </div>

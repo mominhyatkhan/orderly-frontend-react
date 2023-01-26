@@ -16,6 +16,7 @@ function PortfolioMonitoring() {
   const [chainId, setChainId] = useState<string>("");
   const [image, setImage] = useState<string>("");
   const [address, setAddress] = useState<string[]>([]);
+  const [background,setbackground]=useState<string[]>(['bg-white','bg-white','bg-white'])
   const dispatch = useDispatch();
 
   const showDashboard = () => {
@@ -82,19 +83,21 @@ function PortfolioMonitoring() {
             </div>
           </div>
           <div >
-            <div className="flex flex-row space-x-56 ">
+            <div className="flex flex-row space-x-36">
               {cards.map((item, index) => (
                 <div
-                className="cursor-pointer rounded  " 
+                className={`cursor-pointer rounded  ${background[index]}`} 
                   key={index}
                   onClick={() =>
-                    setWallet(
+                   {setWallet(
                       item.name,
                       item.symbol,
                       item.chainId,
                       item.image,
                       item.addreses
                     )
+                    background[index]='bg-[#6B8068]'
+                   }
                   }
                 >
                   <Cards
@@ -107,7 +110,7 @@ function PortfolioMonitoring() {
             </div>
           </div>
         </div>
-        {modal&&<div className="overlay-div absolute z-10 w-full bg-opacity-40 bg-gray-800 flex justify-end">
+        {modal&&<div className="overlay-div absolute z-10 w-full bg-opacity-5 bg-gray-800 flex justify-end">
           <div className="flex h-screen w-96 bg-white justify-end">
             <PortfolioModal
               isOpen={modal}
@@ -117,6 +120,7 @@ function PortfolioMonitoring() {
               chainId={chainId}
               Img={image}
               Address={address}
+              background={setbackground}
             />
           </div>
         </div>}

@@ -5,15 +5,46 @@ import VestingComponent from "./SubComponents/vesting";
 import DistributionType from "./SubComponents/distributionType";
 import InvestmentType from "./SubComponents/investmentType";
 import About from "./SubComponents/about";
-
-const InvestmentDetailModel = () => {
+import { useState } from "react";
+type props = {
+  isOpen: React.Dispatch<React.SetStateAction<boolean>>;
+};
+const InvestmentDetailModel: React.FC<props> = ({ isOpen }) => {
+  const [chain, setChain] = useState<string>("");
+  const [amountInvested, setAmountInvested] = useState<number>(0);
+  const [investmentTrasactionLink, setInvestmentTransactionLink] =
+    useState<string>("");
+  const [lockup, setLockup] = useState<number>(0);
+  const [percentOfToken, setPercentOfToken] = useState<number>(0);
+  const [vestingPeriod, setVestingPeriod] = useState<string>("");
+  const showdata = () => {
+    console.log(
+      "chain:",
+      chain,
+      "amount:",
+      amountInvested,
+      "investmentlink:",
+      investmentTrasactionLink,
+      "lockup:",
+      lockup,
+      "percent of token:",
+      percentOfToken,
+      "vesting period:",
+      vestingPeriod
+    );
+  };
+  const canceled = () => {
+    setChain("");
+    setAmountInvested(0);
+  };
   return (
-    <div className="bg-white w-3/6 rounded-lg shadow dark:bg-white ">
-      <div className="h-auto space-y-8 m-10">
-        <div className=" flex bg-white rounded-lg shadow h-full">
+    <div className="bg-white w-full h-max rounded-lg shadow dark:bg-white">
+      <div className="h-5/6 space-y-8 m-10">
+        <div className=" flex bg-white rounded-lg shadow">
           <h1 className=" text-2xl self-center">Add New Investment</h1>
           <button
             type="button"
+            onClick={()=>isOpen(false)}
             className=" top-3 right-2.5 text-[#6B8068] bg-transparent hover:bg-white-200 hover:text-black-900 rounded-lg text-sm p-1.5 ml-auto inline-flex items-center dark:hover:bg-gray-800 dark:hover:text-white"
             data-modal-hide="authentication-modal"
           >
@@ -33,27 +64,36 @@ const InvestmentDetailModel = () => {
             <span className="sr-only">Close modal</span>
           </button>
         </div>
-       <GenralComponent/>
-       <VestingComponent/>
-       <DistributionType/>
-        <InvestmentType/>
-        <About/>
+        <GenralComponent
+          Chain={setChain}
+          amountInvested={setAmountInvested}
+          investmentTransactionLink={setInvestmentTransactionLink}
+        />
+        <VestingComponent
+          lockup={setLockup}
+          percentofToken={setPercentOfToken}
+          vestingPeriod={setVestingPeriod}
+        />
+        <DistributionType />
+        <InvestmentType />
+        <About />
       </div>
       <div className="flex mt-20 justify-end self-end w-full">
-     <div className="flex  space-x-6 mb-7 mr-8">
-      <button
+        <div className="flex  space-x-6 mb-7 mr-8">
+          <button
             type="button"
             className="bg-[#687780] w-40 h-10  hover:bg-emerald-700 text-white rounded"
           >
-             Cancel
+            Cancel
           </button>
           <button
             type="button"
+            onClick={showdata}
             className="bg-[#6b8068] w-40 h-10  hover:bg-emerald-700 text-white rounded"
           >
-             Add
+            Add
           </button>
-          </div>
+        </div>
       </div>
     </div>
   );

@@ -2,14 +2,16 @@
 import axios from "axios";
 import { useState } from "react";
 
-type data = {
+type walletresponse = {
   TotalNative: number;
   totalTokenBalance: number;
   tokenList: any[];
 };
+
 export async function GetWallletData(chainId: string, address: string) {
-  const [walletdata, setwalletdata] = useState<data>();
+  const [walletdata,setwalletdata]=useState<walletresponse>();
   const [balance, setBalance] = useState<number>(0);
+  
   let tokenResponse: any;
 
  
