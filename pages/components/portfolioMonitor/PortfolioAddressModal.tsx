@@ -45,7 +45,9 @@ const Modal: React.FC<Props> = ({
   const [saved, setSaved] = React.useState<boolean>(false);
   const dispatch = useDispatch();
   const saveAddress = async () => {
-    setResponse(await GetWallletData(chainId, address));
+    setSaved(true);
+    /* setResponse(await GetWallletData(chainId, address));
+    
     setWallet({
       state: true,
       name: Name,
@@ -57,7 +59,7 @@ const Modal: React.FC<Props> = ({
       tokenlist: response!.tokenList,
     });
     dispatch(addWallet(wallet));
-    setSaved(true);
+     */
   };
   return (
     <div className="bg-white h-auto w-96 ">
@@ -113,9 +115,10 @@ const Modal: React.FC<Props> = ({
             <a className="mt-6 cursor-pointer text-[#6B8068]">
               + Add Additional Address
             </a>
+            
+            <div className="flex flex-col space-y-5">
             {saved && <label className="text-[#6B8068]">Data Saved</label>}
-            <div>
-              <button type="submit">SAVE</button>
+              <button className="self-start bg-[#6B8068] w-24 h-8 text-white" type="submit">SAVE</button>
             </div>
           </form>
         </div>
