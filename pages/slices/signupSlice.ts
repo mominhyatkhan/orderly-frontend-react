@@ -1,7 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import axios from "axios";
-import signupApi from "../api/hello";
-import signup from "../api/hello";
+import { setpassword, signupMail} from "../api/hello";
 
 export interface SignupState {
   signUpState: {
@@ -22,13 +20,20 @@ export const signupSlice = createSlice({
   reducers: {
     setSignupState: (state, action) => {
       state.signUpState = action.payload;
-      const userdata=[{email:state.signUpState.email},{password:state.signUpState.password},{role:state.signUpState.role},{confirmation:state.signUpState.confirmation}]
-     /*  const response= signupApi(userdata); */
-      console.log(state.signUpState);
+      
     },
+    setemail:(state)=>{
+      /* let user=[{email:state.signUpState.email,password:state.signUpState.password,emailVerified:false, role:'user',emailVerification:''}] */
+      const response= signupMail(state.signUpState.email);
+      console.log('this is response',response );
+    },
+    setPassword:(state,action)=>{
+      state.signUpState.password=action.payload;
+      setpassword(state.signUpState.password)
+    }
   },
 });
 
-export const { setSignupState } = signupSlice.actions;
+export const { setSignupState,setemail,setPassword } = signupSlice.actions;
 
 export default signupSlice.reducer;

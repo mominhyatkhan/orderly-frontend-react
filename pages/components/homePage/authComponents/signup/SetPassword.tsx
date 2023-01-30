@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useDispatch } from "react-redux";
-import { setSignupState } from "../../../../slices/signupSlice";
+import { setPassword, setSignupState } from "../../../../slices/signupSlice";
 
 function SetPassword() {
   const [password, setpassword] = useState<string>("");
@@ -9,7 +9,7 @@ function SetPassword() {
     <div className="grid">
       <form 
         onSubmit={(e) => {
-          e.preventDefault(),dispatch(setSignupState({ confirmation:true}));
+          e.preventDefault(),dispatch(setPassword(password));
         }}
         className="flex"
       >

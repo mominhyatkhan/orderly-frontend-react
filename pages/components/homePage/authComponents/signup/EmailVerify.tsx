@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { setSignupState } from "../../../../slices/signupSlice";
 
@@ -9,6 +10,10 @@ function EmailVerify() {
   const showPassword=()=>{
     dispatch(setSignupState({ isSigned: true, signState: 2 }))
   }
+
+
+
+
   return (
     <div className="grid ml-12">
       <div className="grid w-4/5 grid-flow-row gap-y-6 self-center item-center text-center">

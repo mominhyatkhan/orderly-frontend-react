@@ -3,6 +3,7 @@ import * as React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { GetWallletData } from "../../api/hello";
 import { addWallet } from "../../slices/tokenslice";
+import { RootState } from "../../store";
 
 type Props = {
   isOpen: boolean;
@@ -14,7 +15,7 @@ type Props = {
   Address: string[];
   background: React.Dispatch<React.SetStateAction<string[]>>;
 };
-type walletresponse = {
+type Walletresponse = {
   TotalNative: number;
   totalTokenBalance: number;
   tokenList: any[];
@@ -24,7 +25,7 @@ type Wallet = {
   name: string;
   symbol: string;
   tableState: boolean;
-  address: string;
+  chainAddress: string;
   nativeValue: number;
   totalTokenValue: number;
   tokenlist: any[];
@@ -39,27 +40,29 @@ const Modal: React.FC<Props> = ({
   Address,
   background,
 }) => {
-  const [wallet, setWallet] = React.useState<Wallet>();
+  const wallet:Wallet=({state:true,name:Name,symbol:Symbol,tableState:true,chainAddress:'',nativeValue:0,totalTokenValue:0,tokenlist:[]});
   const [address, setAdress] = React.useState<string>("");
-  const [response, setResponse] = React.useState<walletresponse>();
+  let response:Walletresponse=({TotalNative:0,totalTokenBalance:0,tokenList:[]});
   const [saved, setSaved] = React.useState<boolean>(false);
+  let data=useSelector((state:RootState)=>state.tokens.wallet)
   const dispatch = useDispatch();
   const saveAddress = async () => {
-    setSaved(true);
-    /* setResponse(await GetWallletData(chainId, address));
     
-    setWallet({
-      state: true,
-      name: Name,
-      symbol: Symbol,
-      tableState: true,
-      address: address,
-      nativeValue: response!.TotalNative,
-      totalTokenValue: response!.totalTokenBalance,
-      tokenlist: response!.tokenList,
-    });
+    response=await GetWallletData(chainId, address);
+    console.log(response);
+    
+    
+    wallet.chainAddress= address,
+    wallet.nativeValue= response.TotalNative,
+    wallet.totalTokenValue= response.totalTokenBalance,
+    wallet.tokenlist= response.tokenList,
+    console.log('im list',response.tokenList,wallet.tokenlist);
+    
+    console.log(wallet.tokenlist)
+    setSaved(true);
     dispatch(addWallet(wallet));
-     */
+    
+    console.log('final data:',data)
   };
   return (
     <div className="bg-white h-auto w-96 ">

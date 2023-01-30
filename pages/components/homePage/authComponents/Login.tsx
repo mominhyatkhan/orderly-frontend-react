@@ -1,3 +1,4 @@
+import axios from "axios";
 import { FormEvent, useState } from "react";
 import { useDispatch } from "react-redux";
 import { setLoginState } from "../../../slices/loginSlice";
@@ -6,8 +7,17 @@ function Login() {
   const [email, setEmail] = useState<string>("");
   const [password, setPassword] = useState<string>("");
   const dispatch = useDispatch();
-  const handleDispatch = (e: FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
+  const handleDispatch = async (e: FormEvent<HTMLFormElement>) => {
+  
+    try {
+      const data = await axios.get(
+        `http://localhost:8000/user/login?email=${email}&password=${password}`
+      );
+      console.log(data);
+    } catch (error) {
+      console.log(error);
+    }
+
     dispatch(
       setLoginState({
         email: email,
@@ -23,7 +33,9 @@ function Login() {
     <div className="grid mt-36">
       <form
         onSubmit={(e) => {
-          handleDispatch(e);
+    e.preventDefault();
+    handleDispatch(e);
+
         }}
         className="flex"
       >

@@ -46,7 +46,7 @@ function PortfolioMonitoring() {
   const closeModal = () => setModal(false);
   return (
     
-      <main className="relative flex flex-col bg-[#F6F8FD] items-stretch h-screen">
+      <div className="relative flex flex-col bg-[#F6F8FD] items-stretch h-screen">
         <div className="flex flex-col space-x-20 w-full h-5/6">
           <div className="flex flex-row space-x-20 m-24 ">
             <div>
@@ -83,10 +83,10 @@ function PortfolioMonitoring() {
             </div>
           </div>
           <div >
-            <div className="flex flex-row space-x-36">
+            <div className="flex flex-row overflow-auto space-x-32">
               {cards.map((item, index) => (
                 <div
-                className={`cursor-pointer rounded  ${background[index]}`} 
+                className={`cursor-pointer ml-20 rounded  ${background[index]}`} 
                   key={index}
                   onClick={() =>
                    {setWallet(
@@ -110,7 +110,7 @@ function PortfolioMonitoring() {
             </div>
           </div>
         </div>
-        {modal&&<div className="overlay-div absolute z-10 w-full bg-opacity-5 bg-gray-800 flex justify-end">
+        {modal&&<div className="overlay-div absolute z-10 w-full  bg-opacity-5 bg-gray-800 flex justify-end">
           <div className="flex h-screen w-96 bg-white justify-end">
             <PortfolioModal
               isOpen={modal}
@@ -148,7 +148,7 @@ function PortfolioMonitoring() {
               </li>
             </ul>
           </footer>
-      </main>
+      </div>
   );
 }
 export default PortfolioMonitoring;
