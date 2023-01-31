@@ -1,6 +1,7 @@
 import axios from "axios";
 import { FormEvent, useState } from "react";
 import { useDispatch } from "react-redux";
+import { checkLogin } from "../../../api/hello";
 import { setLoginState } from "../../../slices/loginSlice";
 import { setSignupState } from "../../../slices/signupSlice";
 function Login() {
@@ -8,23 +9,18 @@ function Login() {
   const [password, setPassword] = useState<string>("");
   const dispatch = useDispatch();
   const handleDispatch = async (e: FormEvent<HTMLFormElement>) => {
-  
     try {
-      const data = await axios.get(
-        `http://localhost:8000/user/login?email=${email}&password=${password}`
-      );
-      console.log(data);
+      const data = await checkLogin(email, password);
+      if (data.data.emailVerified) {
+        dispatch(
+          setLoginState({email:email, password: password,isLogged: true,
+          })
+        );
+        console.log(data);
+      }
     } catch (error) {
       console.log(error);
     }
-
-    dispatch(
-      setLoginState({
-        email: email,
-        password: password,
-        isLogged: false,
-      })
-    );
   };
   const handleSignup = () => {
     dispatch(setSignupState({ isSigned: true, signState: 0 }));
@@ -33,9 +29,8 @@ function Login() {
     <div className="grid mt-36">
       <form
         onSubmit={(e) => {
-    e.preventDefault();
-    handleDispatch(e);
-
+          e.preventDefault();
+          handleDispatch(e);
         }}
         className="flex"
       >

@@ -9,7 +9,7 @@ function SetPassword() {
     <div className="grid">
       <form 
         onSubmit={(e) => {
-          e.preventDefault(),dispatch(setPassword(password));
+          e.preventDefault(),dispatch(setPassword({password}));
         }}
         className="flex"
       >

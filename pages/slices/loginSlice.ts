@@ -1,4 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
+import axios from "axios";
+import { checkLogin } from "../api/hello";
 
 export interface LoginState {
   user: {
@@ -15,16 +17,9 @@ export const loginSlice = createSlice({
   name: "user",
   initialState,
   reducers: {
-    setLoginState: (state, action) => {
+    setLoginState:(state, action) => {
       state.user = action.payload;
       console.log(state.user, action.payload, "ksskks");
-      if (
-        state.user.email === "mohib@gmail.com" &&
-        state.user.password == "imhere"
-      ) {
-        state.user.isLogged = true;
-        console.log(state.user.isLogged, "sjksjsks");
-      }
     },
     setEmail: (state, action) => {
       state.user.email = action.payload;

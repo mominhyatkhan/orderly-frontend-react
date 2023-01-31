@@ -17,69 +17,71 @@ function Dashboard() {
     (state: RootState) => state.dashboard.dashboardState
   );
   return (
-    <div className="flex bg-[#F6F8FD] h-fit">
-      <div className=" ">
+    <div className="flex bg-[#F6F8FD] ">
+      <div className="">
         <SideBar />
       </div>
-      {(() => {
-        switch (dashboard) {
-          case 0:
-            return (
-              <>
-                <div className="w-full">
-                  <Portfolio />
+      <div className="w-full">
+        {(() => {
+          switch (dashboard) {
+            case 0:
+              return (
+                <div className="flex flex-row">
+                  <div className="w-full">
+                    <Portfolio />
+                  </div>
+                  <div className="h-full">
+                    <Rightbar />
+                  </div>
                 </div>
-                <div className="h-full">
-                  <Rightbar />
-                </div>{" "}
-              </>
-            );
-          case 1:
-            return (
-              <div className="w-full">
-                <Monitoring />
-              </div>
-            );
-          case 2:
-            return (
-              <div className="w-full">
-                <Analyzer />
-              </div>
-            );
+              );
+            case 1:
+              return (
+                <div className="w-full h-screen">
+                  <Monitoring />
+                </div>
+              );
+            case 2:
+              return (
+                <div className="w-full h-screen">
+                  <Analyzer />
+                </div>
+              );
 
-          case 3:
-            return (
-              <div className="w-full">
-                <Distributor />
-              </div>
-            );
-          case 4:
-            return (
-              <div className="w-full">
-                <InvestmentsManager />
-              </div>
-            );
-          case 5:
-            return (
-              <div className="w-full">
-                <Calender />
-              </div>
-            );
-          case 6:
-            return (
-              <div className="w-full">
-                <Contacts />
-              </div>
-            );
-          case 7:
-            return (
-              <div className="w-full">
-                {" "}
-                <OTC />
-              </div>
-            );
-        }
-      })()}
+            case 3:
+              return (
+                <div className="w-full h-screen">
+                  <Distributor />
+                </div>
+              );
+            case 4:
+              return (
+                <div className="w-full h-screen">
+                  <InvestmentsManager />
+                </div>
+              );
+            case 5:
+              return (
+                <div className="w-full h-screen">
+                  <Calender />
+                </div>
+              );
+            case 6:
+              return (
+                <div className="w-full h-screen">
+                  <Contacts />
+                </div>
+              );
+            case 7:
+              return (
+                <div className="w-full h-screen ">
+                  {" "}
+                  <OTC />
+                </div>
+              );
+          }
+        })()}
+      </div>
     </div>
   );
 }

@@ -5,7 +5,7 @@ import { RootState } from "../../../store";
 
 const SideBar = () => {
   const email = useSelector(
-    (state: RootState) => state.signupState.signUpState.email
+    (state: RootState) => state.isLogin.user.email
   );
   const dispatch = useDispatch();
   const logout = () => {
@@ -23,8 +23,8 @@ const SideBar = () => {
     dispatch(setDashboardState(index))
   }
   return (
-    <aside className="flex " aria-label="Sidebar">
-      <div className="py-4 w-72 h-screen bg-[#08101F] dark:bg-[#08101F]">
+    <aside className="flex h-full" aria-label="Sidebar">
+      <div className="py-4 w-72 h-full bg-[#08101F] dark:bg-[#08101F]">
         <span className="flex px-5 flex-row p-2 text-base font-normal text-gray-900 rounded-lg dark:text-white">
           <span className="text-2xl font-semibold whitespace-nowrap dark:text-white">
             <h1>Order</h1>

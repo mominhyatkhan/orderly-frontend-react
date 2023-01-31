@@ -70,3 +70,10 @@ export async function setpassword(password:string) {
   const response=await axios.post('http://localhost:8000/user/set-password',{password})
   console.log('password response',response)
 }
+export async function checkLogin(email:string,password:string) {
+
+ const data= await axios.get(
+    `http://localhost:8000/user/login?email=${email}&password=${password}`
+  );
+  return data;
+}
