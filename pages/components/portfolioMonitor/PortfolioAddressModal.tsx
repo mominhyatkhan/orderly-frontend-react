@@ -40,29 +40,40 @@ const Modal: React.FC<Props> = ({
   Address,
   background,
 }) => {
-  const wallet:Wallet=({state:true,name:Name,symbol:Symbol,tableState:true,chainAddress:'',nativeValue:0,totalTokenValue:0,tokenlist:[]});
+  const wallet: Wallet = {
+    state: true,
+    name: Name,
+    symbol: Symbol,
+    tableState: true,
+    chainAddress: "",
+    nativeValue: 0,
+    totalTokenValue: 0,
+    tokenlist: [],
+  };
   const [address, setAdress] = React.useState<string>("");
-  let response:Walletresponse=({TotalNative:0,totalTokenBalance:0,tokenList:[]});
+  let response: Walletresponse = {
+    TotalNative: 0,
+    totalTokenBalance: 0,
+    tokenList: [],
+  };
   const [saved, setSaved] = React.useState<boolean>(false);
-  let data=useSelector((state:RootState)=>state.tokens.wallet)
+  let data = useSelector((state: RootState) => state.tokens.wallet);
   const dispatch = useDispatch();
   const saveAddress = async () => {
-    
-    response=await GetWallletData(chainId, address);
+    response = await GetWallletData(chainId, address);
     console.log(response);
-    
-    
-    wallet.chainAddress= address,
-    wallet.nativeValue= response.TotalNative,
-    wallet.totalTokenValue= response.totalTokenBalance,
-    wallet.tokenlist= response.tokenList,
-    console.log('im list',response.tokenList,wallet.tokenlist);
-    
-    console.log(wallet.tokenlist)
+
+    (wallet.chainAddress = address),
+      (wallet.nativeValue = response.TotalNative),
+      (wallet.totalTokenValue = response.totalTokenBalance),
+      (wallet.tokenlist = response.tokenList),
+      console.log("im list", response.tokenList, wallet.tokenlist);
+
+    console.log(wallet.tokenlist);
     setSaved(true);
     dispatch(addWallet(wallet));
-    
-    console.log('final data:',data)
+
+    console.log("final data:", data);
   };
   return (
     <div className="bg-white h-auto w-96 ">
@@ -118,10 +129,15 @@ const Modal: React.FC<Props> = ({
             <a className="mt-6 cursor-pointer text-[#6B8068]">
               + Add Additional Address
             </a>
-            
+
             <div className="flex flex-col space-y-5">
-            {saved && <label className="text-[#6B8068]">Data Saved</label>}
-              <button className="self-start bg-[#6B8068] w-24 h-8 text-white" type="submit">SAVE</button>
+              {saved && <label className="text-[#6B8068]">Data Saved</label>}
+              <button
+                className="self-start bg-[#6B8068] w-24 h-8 text-white"
+                type="submit"
+              >
+                SAVE
+              </button>
             </div>
           </form>
         </div>

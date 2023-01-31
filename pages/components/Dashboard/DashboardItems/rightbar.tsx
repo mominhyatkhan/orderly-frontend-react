@@ -21,11 +21,11 @@ const Rightbar = () => {
       setNativetotal(nativetotal + wallet.nativeValue);
       setTotal(total + wallet.totalTokenValue);
     });
-  }, [wallets]);
+  }, []);
 
   return (
-    <aside className="flex w-80 h-full" aria-label="Rightbar">
-      <div className="py-4 overflow-y-auto h-screen bg-[#FFFFFF] dark:bg-[#FFFFFF]">
+    <aside className="flex  h-full" aria-label="Rightbar">
+      <div className="py-4 w-72 overflow-y-auto h-screen bg-[#FFFFFF] dark:bg-[#FFFFFF]">
         <div className="p-5 mb-5">
           <h2 className="mb-3 text-[#687780] text-sm">Assets Balance</h2>
 
@@ -37,17 +37,20 @@ const Rightbar = () => {
         <div className="text-black px-4 bg-[#F6F8FD]">A pie chart</div>
         {wallets &&
           wallets.map((wallet) => {
-            return (
-              <div className="text-black px-4 bg-[#F6F8FD] w-full flex flex-col mb-3 mt-3">
-                <div className="flex">
-                  <h1>{wallet.symbol}</h1>
-                  <h6 className="text-sm font-bold ml-2 self-center">{wallet.nativeValue}</h6>
+            if (wallet.tableState)
+              return (
+                <div className="text-black px-4 bg-[#F6F8FD] w-full flex flex-col mb-3 mt-3">
+                  <div className="flex">
+                    <h1>{wallet.symbol}</h1>
+                    <h6 className="text-sm font-bold ml-2 self-center">
+                      {wallet.nativeValue}
+                    </h6>
+                  </div>
+                  <div className="mt-2">
+                    <h6 className="text-sm">{wallet.totalTokenValue}</h6>
+                  </div>
                 </div>
-                <div className="mt-2">
-                  <h6 className="text-sm">{wallet.totalTokenValue}</h6>
-                </div>
-              </div>
-            );
+              );
           })}
       </div>
     </aside>

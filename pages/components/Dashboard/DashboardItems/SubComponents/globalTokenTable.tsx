@@ -11,7 +11,7 @@ const GlobalTokenTable = () => {
             <th scope="col" className="px-6 py-3">
               #
             </th>
-            <th scope="col" className="px-6 py-3 w-full text-start">
+            <th scope="col" className="px-6 py-3 w-48 text-start">
               NAME
             </th>
             <th scope="col" className="px-6 py-3">
@@ -34,7 +34,7 @@ const GlobalTokenTable = () => {
         <tbody>
           {data &&
             data.map((item: any, index: number) => {
-              if (item.tableState)
+              if (item.tableState&&item.state)
                 return item.tokenlist.map((token: any, tokenindex: number) => {
                   return token.map((final: any, finalIndex: number) => {
                     return (
