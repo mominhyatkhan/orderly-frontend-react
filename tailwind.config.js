@@ -8,6 +8,12 @@ module.exports = {
   ],
   plugins: [],
   theme: {
+    fontFamily: {
+      serif: [
+        "Inter",
+        { fontFeatureSettings: '"cv11", "ss01"' },
+      ],
+    },
     screens: {
       'sm': '480px',
       // => @media (min-width: 640px) { ... }
@@ -26,10 +32,6 @@ module.exports = {
     }
   },
   extend: {
-    fontFamily: {
-      sans: [
-        '"Inter"',
-      ],
-    }},
+   },
 };
 
