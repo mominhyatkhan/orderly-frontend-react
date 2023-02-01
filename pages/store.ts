@@ -1,6 +1,7 @@
 import { configureStore } from "@reduxjs/toolkit";
 import cardsSlice from "./slices/cardsSlice";
 import dashboardSlice from "./slices/dashboardSlice";
+import investmentSlice from "./slices/investmentSlice";
 import loginSlice from "./slices/loginSlice";
 import signupSlice from "./slices/signupSlice";
 import  tokenSlice  from "./slices/tokenslice";
@@ -10,7 +11,8 @@ export const store = configureStore({
     signupState: signupSlice,
     coinCards: cardsSlice,
     dashboard:dashboardSlice,
-    tokens:tokenSlice
+    tokens:tokenSlice,
+    investment:investmentSlice
   },
 });
 

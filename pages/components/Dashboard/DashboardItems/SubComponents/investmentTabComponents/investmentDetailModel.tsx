@@ -18,24 +18,15 @@ const InvestmentDetailModel: React.FC<props> = ({ isOpen }) => {
   const [percentOfToken, setPercentOfToken] = useState<number>(0);
   const [vestingPeriod, setVestingPeriod] = useState<string>("");
   const showdata = () => {
-    console.log(
-      "chain:",
-      chain,
-      "amount:",
-      amountInvested,
-      "investmentlink:",
-      investmentTrasactionLink,
-      "lockup:",
-      lockup,
-      "percent of token:",
-      percentOfToken,
-      "vesting period:",
-      vestingPeriod
-    );
+    
   };
   const canceled = () => {
     setChain("");
     setAmountInvested(0);
+    setInvestmentTransactionLink('');
+    setLockup(0);
+    setPercentOfToken(0);
+    setVestingPeriod('');
   };
   return (
     <div className="bg-white w-full h-max rounded-lg shadow dark:bg-white">
@@ -81,6 +72,7 @@ const InvestmentDetailModel: React.FC<props> = ({ isOpen }) => {
       <div className="flex mt-20 justify-end self-end w-full">
         <div className="flex  space-x-6 mb-7 mr-8">
           <button
+          onClick={canceled}
             type="button"
             className="bg-[#687780] w-40 h-10  hover:bg-emerald-700 text-white rounded"
           >

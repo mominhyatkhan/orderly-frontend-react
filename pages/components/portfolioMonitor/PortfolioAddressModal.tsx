@@ -1,7 +1,7 @@
 import { chainList } from "@moralisweb3/common-evm-utils/lib/data/chaindata";
 import * as React from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { GetWallletData } from "../../api/hello";
+import { GetWallletData, saveWallet } from "../../api/hello";
 import { addWallet } from "../../slices/tokenslice";
 import { RootState } from "../../store";
 
@@ -59,15 +59,16 @@ const Modal: React.FC<Props> = ({
   const [saved, setSaved] = React.useState<boolean>(false);
   let data = useSelector((state: RootState) => state.tokens.wallet);
   const dispatch = useDispatch();
+  const email = useSelector((state: RootState) => state.isLogin.user.email);
   const saveAddress = async () => {
+    await saveWallet(chainId, address, email);
     response = await GetWallletData(chainId, address);
     console.log(response);
-
-    (wallet.chainAddress = address),
-      (wallet.nativeValue = response.TotalNative),
-      (wallet.totalTokenValue = response.totalTokenBalance),
-      (wallet.tokenlist = response.tokenList),
-      console.log("im list", response.tokenList, wallet.tokenlist);
+    wallet.chainAddress = address;
+    wallet.nativeValue = response.TotalNative;
+    wallet.totalTokenValue = response.totalTokenBalance;
+    wallet.tokenlist = response.tokenList;
+    console.log("im list", response.tokenList, wallet.tokenlist);
 
     console.log(wallet.tokenlist);
     setSaved(true);

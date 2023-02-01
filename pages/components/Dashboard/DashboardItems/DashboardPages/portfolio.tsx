@@ -1,6 +1,10 @@
+import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { getwallets, GetWallletData } from "../../../../api/hello";
 import { setDashboardState } from "../../../../slices/dashboardSlice";
 import {
+  addWallet,
+  addWalletDB,
   filterWallets,
   filterWalletsChains,
 } from "../../../../slices/tokenslice";
@@ -12,7 +16,8 @@ import UpcomingTokenTable from "../SubComponents/upcomingTokenTable";
 
 const Portfolio = () => {
   const wallets = useSelector((state: RootState) => state.tokens.wallet);
-  const dispatch = useDispatch(); 
+  const email = useSelector((state: RootState) => state.isLogin.user.email);
+  const dispatch = useDispatch();
   const changeState = (index: number) => {
     dispatch(setDashboardState(index));
   };
@@ -20,9 +25,57 @@ const Portfolio = () => {
     dispatch(filterWalletsChains(name));
   }
   function filterwallet(address: string, name: string) {
-    console.log(address)
+    console.log(address);
     dispatch(filterWallets({ address, name }));
   }
+  useEffect(() => {
+    (async () => {
+      try {
+        if (!wallets.length) {
+          const response = await getwallets(email);
+          if (response.data) {
+            response.data.map(async (item: any, index: number) => {
+              let wallet: any = {
+                state: true,
+                name: "",
+                symbol: "",
+                tableState: true,
+                chainAddress: "",
+                nativeValue: 0,
+                totalTokenValue: 0,
+                tokenlist: [],
+              };
+              const dataresponse = await GetWallletData(
+                item.chain,
+                item.address
+              );
+              if (item.chain == "0x1") {
+                wallet.name = "Ethereum";
+                wallet.symbol = "ETH";
+              }
+              if (item.chain == "0x38") {
+                wallet.name = "Binance";
+                wallet.symbol = "BSC";
+              }
+              if (item.chain == "0x89") {
+                wallet.name = "Polygon";
+                wallet.symbol = "MATIC";
+              }
+              wallet.chainAddress = item.address;
+              wallet.nativeValue = dataresponse.TotalNative;
+              wallet.totalTokenValue = dataresponse.totalTokenBalance;
+              wallet.tokenlist = dataresponse.tokenList;
+              console.log("wallet", index, ":", wallet);
+              dispatch(addWallet(wallet));
+            });
+          }
+        } 
+      } catch (error) {
+        console.error(error);
+      }
+    })();
+  }, []);
+
   return (
     <main className="flex justify-center h-full flex-col overflow-auto">
       <div className="w-full p-10 flex flex-row">
@@ -40,18 +93,20 @@ const Portfolio = () => {
             </option>
           </select>
           <select className="p-1">
-            <option onClick={() => filterwallet('','all')}>All wallet</option>
+            <option onClick={() => filterwallet("", "all")}>All wallet</option>
             {wallets &&
               wallets.map((wallet, index) => {
-                console.log(wallet);  
-                  return (
-                    <option
-                      className=""
-                      onClick={() => filterwallet(wallet.chainAddress, wallet.name)}
-                    >
-                      <span>{wallet.symbol}</span> <span>{index + 1}</span>
-                    </option>
-                  );
+                console.log(wallet);
+                return (
+                  <option
+                    className=""
+                    onClick={() =>
+                      filterwallet(wallet.chainAddress, wallet.name)
+                    }
+                  >
+                    <span>{wallet.symbol}</span> <span>{index + 1}</span>
+                  </option>
+                );
               })}
           </select>
         </div>

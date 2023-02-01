@@ -1,5 +1,7 @@
 import axios from "axios";
 import { useState } from "react";
+import { useDispatch } from "react-redux";
+import { addWallet } from "../slices/tokenslice";
 
 type Walletresponse = {
   TotalNative: number;
@@ -66,14 +68,32 @@ export async function checkVerified(email: string) {
     );
   } catch (error) {}
 }
-export async function setpassword(password:string) {
-  const response=await axios.post('http://localhost:8000/user/set-password',{password})
-  console.log('password response',response)
+export async function setpassword(password: string) {
+  const response = await axios.post("http://localhost:8000/user/set-password", {
+    password,
+  });
+  console.log("password response", response);
 }
-export async function checkLogin(email:string,password:string) {
-
- const data= await axios.get(
+export async function checkLogin(email: string, password: string) {
+  const data = await axios.get(
     `http://localhost:8000/user/login?email=${email}&password=${password}`
   );
   return data;
+}
+export async function saveWallet(
+  chain: string,
+  address: string,
+  email: string
+) {
+  const response = await axios.post(
+    "http://localhost:8000/wallets/add-wallet",
+    { email, address, chain }
+  );
+  console.log("wallet save response:", response);
+}
+export async function getwallets(email: string) {
+  const response = await axios.get(
+    `http://localhost:8000/wallets/get-wallets?email=${email}`
+  );
+  return response
 }

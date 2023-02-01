@@ -1,5 +1,4 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { table } from "console";
 type Tokenlist = {
   balance: number;
   decimals: number;
@@ -32,6 +31,10 @@ export const tokenSlice = createSlice({
       console.log("this is all wallets:", state.wallet);
       return state;
     },
+    addWalletDB:(state,action)=>{
+      state.wallet=action.payload
+      console.log('Done',action.payload)
+    },
     filterWalletsChains: (state, action) => {
       let data = action.payload;
       state.wallet.map((item) => {
@@ -54,17 +57,20 @@ export const tokenSlice = createSlice({
         if (data.name == "all") {
           item.tableState = true;
         } else {
-          console.log(item.chainAddress,"=",data.address)
+          console.log(item.chainAddress, "=", data.address);
           if (item.chainAddress === data.address) {
-            if (item.name === data.name) {item.tableState = true;}
-            else{item.tableState=false}
+            if (item.name === data.name) {
+              item.tableState = true;
+            }
+          } else {
+            item.tableState = false;
           }
         }
       });
     },
   },
 });
-export const { addWallet, filterWalletsChains, filterWallets } =
+export const { addWallet, filterWalletsChains, filterWallets,addWalletDB } =
   tokenSlice.actions;
 
 export default tokenSlice.reducer;

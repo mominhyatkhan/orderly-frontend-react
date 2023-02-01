@@ -37,7 +37,7 @@ const Rightbar = () => {
         <div className="text-black px-4 bg-[#F6F8FD]">A pie chart</div>
         {wallets &&
           wallets.map((wallet) => {
-            if (wallet.tableState)
+            if (wallet.tableState&&wallet.state)
               return (
                 <div className="text-black px-4 bg-[#F6F8FD] w-full flex flex-col mb-3 mt-3">
                   <div className="flex">
