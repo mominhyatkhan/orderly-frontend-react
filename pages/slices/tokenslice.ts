@@ -53,16 +53,22 @@ export const tokenSlice = createSlice({
     filterWallets: (state, action) => {
       let data = action.payload;
       state.wallet.map((item) => {
-        console.log(data);
+        console.log("im chain",item.name);
         if (data.name == "all") {
           item.tableState = true;
         } else {
           console.log(item.chainAddress, "=", data.address);
           if (item.chainAddress === data.address) {
+            console.log(item.name, "=", data.name);
             if (item.name === data.name) {
+             console.log(" idher kyu aya ")
               item.tableState = true;
             }
-          } else {
+            else {
+              item.tableState = false;
+            }
+          } 
+          else {
             item.tableState = false;
           }
         }

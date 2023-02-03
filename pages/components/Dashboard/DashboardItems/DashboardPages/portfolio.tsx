@@ -100,6 +100,7 @@ const Portfolio = () => {
                 return (
                   <option
                     className=""
+                    key={index}
                     onClick={() =>
                       filterwallet(wallet.chainAddress, wallet.name)
                     }
