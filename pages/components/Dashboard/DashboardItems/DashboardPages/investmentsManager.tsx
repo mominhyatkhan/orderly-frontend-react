@@ -5,10 +5,11 @@ import InvestmentDetailModel from "../SubComponents/investmentTabComponents/inve
 const InvestmentsManager = () => {
   const [modal, setModal] = useState<boolean>(false);
   return (
-    <>
-      <div className="mt-20 ml-32 w-5/6 h-auto">
-        <div className="flex">
-          <div className="flex  w-full">
+    <div className="h-screen">
+      <div className=" w-5/6">
+        <div className="p-20 h-min">
+        <div className="flex ">
+          <div className="flex w-full">
             <h1 className="text-3xl">Investments Manager</h1>
           </div>
           <div className="flex w-5/6 justify-end">
@@ -67,15 +68,16 @@ const InvestmentsManager = () => {
         <div className="mt-10 w-full">
           <InvesterDetail />
         </div>
-      </div>
-      {modal && (
-        <div className="overlay-div absolute top-0 right-0 z-10 w-5/6 bg-opacity-10 bg-gray-500 flex justify-end h-screen">
-          <div className="flex h-screen overflow-auto w-2/6 bg-white justify-end">
+        {modal && (
+        <div className="overlay-div absolute top-0 right-0 z-10 w-full bg-opacity-10 bg-gray-500 flex justify-end h-full">
+          <div className="flex h-full overflow-auto w-[560px] bg-white justify-end">
             <InvestmentDetailModel isOpen={setModal} />
           </div>
         </div>
       )}
-    </>
+      </div>
+      </div>
+    </div>
   );
 };
 export default InvestmentsManager;

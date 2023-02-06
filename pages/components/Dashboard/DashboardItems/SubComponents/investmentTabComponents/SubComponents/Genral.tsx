@@ -21,7 +21,7 @@ const GenralComponent: React.FC<props> = ({
           >
             <option>Select an Token</option>
             <option>Ethereum</option>
-            <option>BitCoin</option>
+            <option>Binance</option>
             <option>Polygon</option>
           </select>
         </div>
@@ -39,7 +39,7 @@ const GenralComponent: React.FC<props> = ({
             placeholder="$0.00"
             id="investmentLink"
             onChange={(e)=>{amountInvested(parseInt(e.currentTarget.value))}}
-            className="bg-gray-100 w-full h-7 rounded-md"
+            className="bg-gray-100 w-full h-7 rounded-md "
           />
         </div>
       </div>

@@ -17,16 +17,14 @@ const InvestmentDetailModel: React.FC<props> = ({ isOpen }) => {
   const [lockup, setLockup] = useState<number>(0);
   const [percentOfToken, setPercentOfToken] = useState<number>(0);
   const [vestingPeriod, setVestingPeriod] = useState<string>("");
-  const showdata = () => {
-    
-  };
+  const showdata = () => {};
   const canceled = () => {
     setChain("");
     setAmountInvested(0);
-    setInvestmentTransactionLink('');
+    setInvestmentTransactionLink("");
     setLockup(0);
     setPercentOfToken(0);
-    setVestingPeriod('');
+    setVestingPeriod("");
   };
   return (
     <div className="bg-white w-full h-max rounded-lg shadow dark:bg-white">
@@ -35,7 +33,7 @@ const InvestmentDetailModel: React.FC<props> = ({ isOpen }) => {
           <h1 className=" text-2xl self-center">Add New Investment</h1>
           <button
             type="button"
-            onClick={()=>isOpen(false)}
+            onClick={() => isOpen(false)}
             className=" top-3 right-2.5 text-[#6B8068] bg-transparent hover:bg-white-200 hover:text-black-900 rounded-lg text-sm p-1.5 ml-auto inline-flex items-center dark:hover:bg-gray-800 dark:hover:text-white"
             data-modal-hide="authentication-modal"
           >
@@ -72,9 +70,9 @@ const InvestmentDetailModel: React.FC<props> = ({ isOpen }) => {
       <div className="flex mt-20 justify-end self-end w-full">
         <div className="flex  space-x-6 mb-7 mr-8">
           <button
-          onClick={canceled}
+            onClick={canceled}
             type="button"
-            className="bg-[#687780] w-40 h-10  hover:bg-emerald-700 text-white rounded"
+            className="bg-[#687780] w-40 h-10  hover:bg-gray-600 text-white rounded"
           >
             Cancel
           </button>
