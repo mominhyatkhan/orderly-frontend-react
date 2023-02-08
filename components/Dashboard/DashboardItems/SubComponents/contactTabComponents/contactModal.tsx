@@ -11,7 +11,7 @@ const ContactModal: React.FC<props> = ({ isOpen }) => {
     console.log("name:", name, "address:", address, "group:", group);
   };
   return (
-    <div className="bg-white w-full h-max rounded-lg shadow dark:bg-white">
+    <div className="bg-white w-full h-max rounded-lg dark:bg-white">
       <div className=" flex bg-white rounded-lg p-10">
         <h1 className=" text-2xl self-center">Add New Contact</h1>
         <button
@@ -54,6 +54,7 @@ const ContactModal: React.FC<props> = ({ isOpen }) => {
           onChange={(e) => setGroup(e.target.value)}
         >
           <option>Select Group</option>
+          <option>simple Group</option>
         </select>
       </div>
       <div className="flex mt-20 justify-end self-end w-full">

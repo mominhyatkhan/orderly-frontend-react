@@ -1,6 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
-import axios from "axios";
-import { checkLogin } from "../api/hello";
+
+
 
 export interface LoginState {
   user: {

@@ -1,19 +1,18 @@
-import Home from "./components/homePage/Home";
-import AuthenticationComponent from "./components/homePage/authComponents/authComponent";
-import PortfolioMonitoring from "./components/portfolioMonitor/portfolioSetup";
 import { useSelector } from "react-redux";
 import { RootState } from "./store";
-import SetPassword from "./components/homePage/authComponents/signup/SetPassword";
-import { useEffect } from "react";
-import axios from "axios";
+
 import { useRouter } from "next/router";
+
+import PortfolioMonitoring from "../components/portfolioMonitor/portfolioSetup";
+import SetPassword from "../components/homePage/authComponents/signup/SetPassword";
+import Home from "../components/homePage/Home";
 
 function HomePage() {
   const isAccountCreated = useSelector(
     (state: RootState) => state.signupState.signUpState.confirmation
   );
   const router = useRouter();
-/*   useEffect(()=>{
+  /*   useEffect(()=>{
     const { token } = router.query;
     const response=axios.get(`http://localhost:8000/user/verify?token=${token}`)
     console.log('verified user',response)
@@ -22,7 +21,9 @@ function HomePage() {
     <>
       {isAccountCreated ? (
         <div className="w-screen bg-[#F6F8FD]">
-          <div className="w-full"><PortfolioMonitoring /></div>
+          <div className="w-full">
+            <PortfolioMonitoring />
+          </div>
         </div>
       ) : (
         <div className="flex h-screen ">

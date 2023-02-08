@@ -12,7 +12,7 @@ const GenralComponent: React.FC<props> = ({
   const [isOpen, setIsOpen] = useState(false);
   return (
     <>
-      <div className="flex flex-col bg-white rounded-lg shadow dark:bg-white space-y-2.5">
+      <div className="flex flex-col bg-white rounded-lg dark:bg-white space-y-2.5">
         <h1>General</h1>
         <div className="relative">
           <select
@@ -52,7 +52,7 @@ const GenralComponent: React.FC<props> = ({
             Investment transaction link
           </label>
           <input
-            placeholder="sbakdaksjdbkasbdj"
+            placeholder="9188jaklz0918a-jz08180z5"
             id="investmentLink"
             onChange={(e)=>{investmentTransactionLink(e.currentTarget.value)}}
             className="bg-gray-100 w-full h-6  rounded-md"

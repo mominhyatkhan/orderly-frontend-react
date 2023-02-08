@@ -18,10 +18,12 @@ export const investmentSlice = createSlice({
     name: "investmentSlice",
     initialState,
     reducers: {
-     
+     addInvestment:(state,action)=>{
+      state.investment=action.payload()
+     }
     },
   });
-  export const {  } =
+  export const { addInvestment } =
     investmentSlice.actions;
   
   export default investmentSlice.reducer;

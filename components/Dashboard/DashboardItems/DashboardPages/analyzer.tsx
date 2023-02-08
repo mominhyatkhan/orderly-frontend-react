@@ -1,4 +1,4 @@
-import PriceCard from "../SubComponents/priceCards";
+
 
 const Analyzer = () => {
   return (

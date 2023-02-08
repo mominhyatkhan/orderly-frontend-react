@@ -1,8 +1,10 @@
-import Home from "./Home";
-import AuthenticationComponent from "./authComponents/authComponent";
-import PortfolioMonitoring from "../portfolioMonitor/portfolioSetup";
+
 import { useSelector } from "react-redux";
-import { RootState } from "../../store";
+
+import AuthenticationComponent from "../components/homePage/authComponents/authComponent";
+import Home from "../components/homePage/Home";
+
+import { RootState } from "./store";
 
 function HomePage() {
   const isAccountCreated = useSelector(

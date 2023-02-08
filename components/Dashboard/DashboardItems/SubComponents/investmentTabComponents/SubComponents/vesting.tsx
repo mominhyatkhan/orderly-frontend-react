@@ -2,7 +2,7 @@ import React, { useState } from "react";
 type props = {
   lockup: React.Dispatch<React.SetStateAction<number>>;
   percentofToken: React.Dispatch<React.SetStateAction<number>>;
-  vestingPeriod: React.Dispatch<React.SetStateAction<string>>;
+  vestingPeriod: React.Dispatch<React.SetStateAction<number>>;
 };
 const VestingComponent: React.FC<props> = ({
   lockup,
@@ -12,7 +12,7 @@ const VestingComponent: React.FC<props> = ({
  
 
   return (
-    <div className="flex flex-col bg-white rounded-lg shadow dark:bg-white space-y-2.5">
+    <div className="flex flex-col bg-white rounded-lg  dark:bg-white space-y-2.5">
       <h1>Vesting Details</h1>
       <div className="mb-4 bg-white">
         <div className="h-14 bg-gray-100 appearance-none w-full bg-white hover:border-gray-500 px-4 py-2 pr-8 rounded-lg">
@@ -24,14 +24,14 @@ const VestingComponent: React.FC<props> = ({
           </label>
           <input
           type='number'
-            placeholder="$0.00"
+            placeholder="0"
             onChange={(e)=>{lockup(parseInt(e.currentTarget.value))}}
             id="lockup"
-            className="bg-gray-100 w-full h-6  rounded-md"
+            className="bg-gray-100 w-full h-7  rounded-md"
           />
         </div>
       </div>
-      <div className="mb-4 bg-white">
+      <div className="mb-4 bg-white w-full">
         <div className="h-14 bg-gray-100 appearance-none w-full bg-white hover:border-gray-500 px-4 py-2 pr-8 rounded-lg">
           <label
             htmlFor="investmentLink"
@@ -44,7 +44,7 @@ const VestingComponent: React.FC<props> = ({
           onChange={(e)=>{percentofToken(parseInt(e.currentTarget.value))}}
             placeholder="0%"
             id="percent of tokens"
-            className="bg-gray-100 w-full h-6  rounded-md"
+            className="bg-gray-100 w-full h-7 rounded-md"
           />
         </div>
       </div>
@@ -52,16 +52,13 @@ const VestingComponent: React.FC<props> = ({
         <h1 className="block px-4 py-2 pr-8 text-sm font-medium leading-5 text-gray-700">
           Visiting period
         </h1>
-        <select
-          className="  bg-gray-100  px-4 py-2 pr-8 rounded-lg"
-          onChange={(e)=>{vestingPeriod(e.currentTarget.value)}}
-        >
-          <option>none</option>
-          <option>1 Month </option>
-          <option>2 Months</option>
-          <option>3 Months</option>
-          <option>4 Months</option>
-        </select>
+        <input
+          type='number'
+          onChange={(e)=>{vestingPeriod(parseInt(e.currentTarget.value))}}
+            placeholder="0"
+            id="percent of tokens"
+            className="bg-gray-100 w-full h-7 rounded-md"
+          />
       </div>
     </div>
   );

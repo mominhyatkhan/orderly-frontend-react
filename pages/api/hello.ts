@@ -1,7 +1,5 @@
 import axios from "axios";
-import { useState } from "react";
-import { useDispatch } from "react-redux";
-import { addWallet } from "../slices/tokenslice";
+
 
 type Walletresponse = {
   TotalNative: number;

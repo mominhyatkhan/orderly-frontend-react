@@ -1,6 +1,8 @@
 import { ChangeEvent, useState } from "react";
 import ConstructSchedule from "./constructSchedule";
+type Props={
 
+}
 const DistributionType = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [isScheduleAdded, setIsScheduleAdded] = useState(false);
@@ -50,7 +52,7 @@ const DistributionType = () => {
     }
   };
   return (
-    <div className="flex flex-col bg-white rounded-lg shadow dark:bg-white space-y-2.5">
+    <div className="flex flex-col bg-white rounded-lg dark:bg-white space-y-2.5">
       <h1>Distribution Type</h1>
 
       <div className="relative">
@@ -59,6 +61,7 @@ const DistributionType = () => {
           onClick={() => setIsOpen(!isOpen)}
           onChange={(e) => handledistribution(e.target.value)}
         >
+          <option>select distribution</option>
           <option>Dynamic distribution</option>
           <option>Monthly</option>
           <option>Linear</option>

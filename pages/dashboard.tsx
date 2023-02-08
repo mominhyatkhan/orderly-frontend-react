@@ -1,16 +1,15 @@
 import { useSelector } from "react-redux";
-import { RootState } from "../../store";
-
-import Rightbar from "./DashboardItems/rightbar";
-import SideBar from "./DashboardItems/sidebar";
-import Analyzer from "./DashboardItems/DashboardPages/analyzer";
-import Calender from "./DashboardItems/DashboardPages/Calendar";
-import Contacts from "./DashboardItems/DashboardPages/contacts";
-import Distributor from "./DashboardItems/DashboardPages/distributor";
-import InvestmentsManager from "./DashboardItems/DashboardPages/investmentsManager";
-import Monitoring from "./DashboardItems/DashboardPages/monitoring";
-import OTC from "./DashboardItems/DashboardPages/OTC";
-import Portfolio from "./DashboardItems/DashboardPages/portfolio";
+import InvestmentsManager from "../components/Dashboard/DashboardItems/DashboardPages/investmentsManager";
+import Analyzer from "../components/Dashboard/DashboardItems/DashboardPages/analyzer";
+import Calender from "../components/Dashboard/DashboardItems/DashboardPages/Calendar";
+import Contacts from "../components/Dashboard/DashboardItems/DashboardPages/contacts";
+import Distributor from "../components/Dashboard/DashboardItems/DashboardPages/distributor";
+import Monitoring from "../components/Dashboard/DashboardItems/DashboardPages/monitoring";
+import OTC from "../components/Dashboard/DashboardItems/DashboardPages/OTC";
+import Portfolio from "../components/Dashboard/DashboardItems/DashboardPages/portfolio";
+import Rightbar from "../components/Dashboard/DashboardItems/rightbar";
+import SideBar from "../components/Dashboard/DashboardItems/sidebar";
+import { RootState } from "./store";
 
 function Dashboard() {
   const dashboard = useSelector(

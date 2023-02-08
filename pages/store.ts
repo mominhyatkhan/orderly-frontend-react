@@ -5,6 +5,7 @@ import investmentSlice from "./slices/investmentSlice";
 import loginSlice from "./slices/loginSlice";
 import signupSlice from "./slices/signupSlice";
 import  tokenSlice  from "./slices/tokenslice";
+
 export const store = configureStore({
   reducer: {
     isLogin: loginSlice,

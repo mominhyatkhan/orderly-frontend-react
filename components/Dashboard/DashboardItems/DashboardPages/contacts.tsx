@@ -13,7 +13,7 @@ const Contacts = () => {
           <button
             type="button"
             className="bg-[#6b8068] w-44 h-10 hover:bg-emerald-700 text-white rounded"
-            onClick={()=>setModal(true)}
+            onClick={() => setModal(true)}
           >
             Add New Contacts
           </button>
@@ -40,12 +40,13 @@ const Contacts = () => {
           <a className="cursor-pointer">+ Add Group</a>
         </div>
       </div>
-      {modal&&<div className="overlay-div absolute top-0 right-0 z-10 w-full bg-opacity-10 bg-gray-500 flex justify-end h-full">
+      {modal && (
+        <div className="overlay-div absolute top-0 right-0 z-10 w-full bg-opacity-10 bg-gray-500 flex justify-end h-full">
           <div className="flex h-full overflow-auto max-w-[560px] bg-white justify-end">
             <ContactModal isOpen={setModal} />
           </div>
         </div>
-}
+      )}
     </div>
   );
 };

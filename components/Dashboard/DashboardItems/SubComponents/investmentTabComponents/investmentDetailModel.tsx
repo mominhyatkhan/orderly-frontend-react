@@ -1,6 +1,4 @@
-import Dropdown from "./SubComponents/vesting";
 import GenralComponent from "./SubComponents/Genral";
-import InvestmentModalInput from "./SubComponents/Genral";
 import VestingComponent from "./SubComponents/vesting";
 import DistributionType from "./SubComponents/distributionType";
 import InvestmentType from "./SubComponents/investmentType";
@@ -16,7 +14,11 @@ const InvestmentDetailModel: React.FC<props> = ({ isOpen }) => {
     useState<string>("");
   const [lockup, setLockup] = useState<number>(0);
   const [percentOfToken, setPercentOfToken] = useState<number>(0);
-  const [vestingPeriod, setVestingPeriod] = useState<string>("");
+  const [vestingPeriod, setVestingPeriod] = useState<number>(0);
+  const [investmentType,setInvestmentType]=useState<string>("");
+  const [investmentAddress,setInvestmentAddress]=useState<string[]>();
+  const [saftFile,setSaftFile]=useState<File>();
+  const [website,setWebsite]=useState<string>();
   const showdata = () => {};
   const canceled = () => {
     setChain("");
@@ -24,11 +26,11 @@ const InvestmentDetailModel: React.FC<props> = ({ isOpen }) => {
     setInvestmentTransactionLink("");
     setLockup(0);
     setPercentOfToken(0);
-    setVestingPeriod("");
+    setVestingPeriod(0);
   };
   return (
-    <div className="bg-white w-full h-max rounded-lg shadow dark:bg-white">
-      <div className="h-5/6 space-y-8 m-10">
+    <div className=" w-full h-max rounded-lg shadow dark:bg-white">
+      <div className=" space-y-8 m-10">
         <div className=" flex bg-white rounded-lg shadow">
           <h1 className=" text-2xl self-center">Add New Investment</h1>
           <button
