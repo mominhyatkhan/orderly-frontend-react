@@ -1,8 +1,13 @@
 import { BlobOptions } from "buffer";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { getContacts, getGroupList } from "../../../../pages/api/BackendApi";
 import {
+  getContactInGroupApi,
+  getContacts,
+  getGroupList,
+} from "../../../../pages/api/BackendApi";
+import {
+  addContactInGroup,
   addGroupContact,
   addPersonalContact,
 } from "../../../../pages/slices/contactSlice";
@@ -28,10 +33,18 @@ const Contacts = () => {
     console.log(data);
     dispatch(addPersonalContact({ data }));
     group = await getGroupList(email);
-    dispatch(addGroupContact({ group }));
+    group.map(async (item: any) => {
+      let data = await getContactInGroupApi(email, item.name);
+      console.log("im", data);
+      if (data.data) {
+        dispatch(addContactInGroup({ name: item.name, members: data.data }));
+      }
+    });
+    
     console.log("im personal", personalContact, "im Group", Group);
   }
   useEffect(() => {
+    
     fetchData();
   }, [reload]);
 
@@ -94,11 +107,16 @@ const Contacts = () => {
                 })}
 
                 {Group.map((group: any) => {
+                  console.log("im group", group);
                   return (
-                    <>
-                      <tr>{group.name}</tr>
-                      <tr>{group.contactId}</tr>
-                    </>
+                    <tr>
+                      <td>
+                        {group.name}
+                        {group.members.map((member: any) => {
+                          return <tr>{member.contactAddress}</tr>;
+                        })}
+                      </td>   
+                    </tr>
                   );
                 })}
               </tbody>
@@ -145,7 +163,11 @@ const Contacts = () => {
       {modal && (
         <div className="overlay-div absolute top-0 right-0 z-10 w-full bg-opacity-10 bg-gray-500 flex justify-end h-full">
           <div className="flex h-full overflow-auto max-w-[560px] bg-white justify-end">
-            <ContactModal isOpen={setModal} />
+            <ContactModal
+              isOpen={setModal}
+              setReload={setReload}
+              reload={reload}
+            />
           </div>
         </div>
       )}

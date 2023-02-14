@@ -56,7 +56,7 @@ const Portfolio = () => {
               if (item.chain == "0x1") {
                 wallet.name = "Ethereum";
                 wallet.symbol = "ETH";
-              }
+              }dataresponse
               if (item.chain == "0x38") {
                 wallet.name = "Binance";
                 wallet.symbol = "BSC";

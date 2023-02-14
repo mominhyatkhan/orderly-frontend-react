@@ -7,11 +7,7 @@ export type Personal = {
 
 type Group = {
   name: string;
-  members: {
-    name: string;
-    address: string;
-  }[];
-  token: string;
+  members:any[];
 };
 const initialState = {
   personal: [] as Personal[],
@@ -39,11 +35,10 @@ export const contactSlice = createSlice({
     },
     addContactInGroup: (state, action) => {
         let data = action.payload;
-        state.groups.map((group) => {
-          if (group.name == data.group) {
-           group.members.push(data.name,data.address)
-          }
-        });
+        console.log('im the data',data)
+           state.groups.push(data)
+          
+     
       },
     deleteContactInGroup: (state, action) => {
       let data = action.payload;

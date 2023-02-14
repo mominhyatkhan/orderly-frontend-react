@@ -25,10 +25,16 @@ const AddContactsInGroup: React.FC<Props> = ({
   const [contactError, setContactError] = useState<boolean>(false);
   const handleGroup = async () => {
     try {
+      if(name==''||contactAddress=='')
+      {
+        setContactError(true)
+      }
+      else{
       let response = await addContactInGroup(name, email, contactAddress);
       console.log("im response",response)
       setIsContact(false);
       setReload(!reload)
+      }
     } catch (error) {
       setContactError(true);
     }
@@ -41,7 +47,7 @@ const AddContactsInGroup: React.FC<Props> = ({
           onChange={(e) => setContactAddress(e.target.value)}
           className="text-gray-600 "
         >
-          <option>select Contact</option>
+          <option key='noone'>select Contact</option>
           {contacts.map((contact) => {
             return (
               <option key={contact._id} value={contact.address} className="text-gray-600">
@@ -57,6 +63,7 @@ const AddContactsInGroup: React.FC<Props> = ({
           onChange={(e) => setName(e.currentTarget.value)}
           className="flex text-gray-600"
         >
+          <option>select Group</option>
           {groups.map((group) => {
             return (
               <option>
@@ -76,7 +83,7 @@ const AddContactsInGroup: React.FC<Props> = ({
         >
           Add contact
         </button>
-        {contactError && <label className="text-red-300">Data Not Added</label>}
+        {contactError && <label className="text-red-300">Please select/add contact and Group</label>}
       </div>
     </div>
   );

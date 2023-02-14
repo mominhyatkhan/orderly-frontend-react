@@ -139,13 +139,13 @@ export async function addGroupList(name: string, email: string) {
     console.error(error);
   }
 }
-export async function getContactInGroup(email: string, name: string) {
+export async function getContactInGroupApi(email: string, name: string) {
   let data = await axios.get(
-    `http://localhost:8000/group/get-group?email=${email}`
+    `http://localhost:8000/group/get-group?email=${email}&&name=${name}`
   );
-  return data.data;
+  return data;
 }
-export async function addContactInGroup(
+export async function addContactInGroupApi(
   name: string,
   email: string,
   contactAddress: string
@@ -156,7 +156,7 @@ export async function addContactInGroup(
       name,
       contactAddress
     });
-    return response.data;
+    return response;
   } catch (error) {
     console.error(error);
   }
