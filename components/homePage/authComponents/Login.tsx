@@ -1,7 +1,7 @@
 import axios from "axios";
 import { FormEvent, useState } from "react";
 import { useDispatch } from "react-redux";
-import { checkLogin } from "../../../pages/api/hello";
+import { checkLogin } from "../../../pages/api/BackendApi";
 
 import { setLoginState } from "../../../pages/slices/loginSlice";
 import { setSignupState } from "../../../pages/slices/signupSlice";

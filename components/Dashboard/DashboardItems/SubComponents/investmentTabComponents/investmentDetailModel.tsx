@@ -19,7 +19,9 @@ const InvestmentDetailModel: React.FC<props> = ({ isOpen }) => {
   const [investmentAddress,setInvestmentAddress]=useState<string[]>();
   const [saftFile,setSaftFile]=useState<File>();
   const [website,setWebsite]=useState<string>();
-  const showdata = () => {};
+  const showdata = () => {
+
+  };
   const canceled = () => {
     setChain("");
     setAmountInvested(0);
@@ -66,7 +68,7 @@ const InvestmentDetailModel: React.FC<props> = ({ isOpen }) => {
           vestingPeriod={setVestingPeriod}
         />
         <DistributionType />
-        <InvestmentType />
+        <InvestmentType setInvestmentType={setInvestmentType} setInvestmentAddress={setInvestmentAddress} />
         <About />
       </div>
       <div className="flex mt-20 justify-end self-end w-full">

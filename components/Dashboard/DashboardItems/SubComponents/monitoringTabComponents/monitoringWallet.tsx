@@ -1,8 +1,8 @@
-import { Dispatch, SetStateAction } from "react";
+import { Dispatch, SetStateAction, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../../../../../pages/store";
-import { filterWalletsChains } from "../../../../../pages/slices/tokenslice";
-
+import { changeMonitoring, filterWalletsChains } from "../../../../../pages/slices/tokenslice";
+import { setportfolioMonitor } from "../../../../../pages/slices/cardsSlice";
 
 type Props = {
   setMonitor: Dispatch<SetStateAction<boolean>>;
@@ -12,6 +12,11 @@ const MonitoringWallet: React.FC<Props> = ({ setMonitor, isMonitor }) => {
   const chains = useSelector((state: RootState) => state.coinCards);
   const wallets = useSelector((state: RootState) => state.tokens.wallet);
   const dispatch = useDispatch();
+  const setProfileMonitor = (name: string, monitor: boolean) => {
+    dispatch(setportfolioMonitor({name,monitor}))
+    dispatch(changeMonitoring({name,monitor}))
+    console.log(name, monitor);
+  };
   return (
     <div className="flex h-full w-3/4 flex-col ml-40 mr-40 mt-28 ">
       <div className="flex flex-row items-center">
@@ -26,9 +31,9 @@ const MonitoringWallet: React.FC<Props> = ({ setMonitor, isMonitor }) => {
         </div>
       </div>
       <div className="flex flex-col mt-10">
-        {chains.map((item) => {
+        {chains.map((item,index) => {
           return (
-            <div className="mb-6">
+            <div key={item.chainId+index} className="mb-6">
               <div className="relative overflow-x-auto shadow-md sm:rounded-lg">
                 <div className="flex flex-row mb-1  text-xs text-gray-700 bg-white uppercase bg-whtie sm:rounded-lg  border-b ">
                   <div className="m-6 ml-10 w-3/6">
@@ -51,16 +56,21 @@ const MonitoringWallet: React.FC<Props> = ({ setMonitor, isMonitor }) => {
                     </label>
                     <h1 className="text-gray-300">On</h1>
                   </div>
-                  <div className="ml-5 w-56 text-gray-400 flex items-center flex-row justify-center space-x-2">
+                  <div className="ml-5 w-56 text-gray-400 flex items-center flex-row justify-center space-x-2 cursor-pointer">
                     <h1>Show in portfolio</h1>
                     <div
-                      className="cursor-pointer"
-                      onClick={() => dispatch(filterWalletsChains(item.name))}
+                      onClick={() => {  
+                          setProfileMonitor(item.name, !item.monintorState);
+                      }}
                     >
                       <svg
                         aria-hidden="true"
-                        fill="none"
-                        className="w-5 h-5"
+                        fill="currentColor"
+                        className={`${
+                          item.monintorState
+                            ? "text-green-500 fill-green"
+                            : "text-gray-500"
+                        } w-4 h-4`}
                         stroke="currentColor"
                         strokeWidth="1.5"
                         viewBox="0 0 24 24"
@@ -123,7 +133,7 @@ const MonitoringWallet: React.FC<Props> = ({ setMonitor, isMonitor }) => {
                   </thead>
 
                   {wallets.map((wallet) => {
-                    if (wallet.symbol == item.symbol)
+                    if (wallet.symbol == item.symbol) {
                       return (
                         <tbody key={wallet.chainAddress}>
                           <tr
@@ -136,6 +146,7 @@ const MonitoringWallet: React.FC<Props> = ({ setMonitor, isMonitor }) => {
                             >
                               {wallet.chainAddress}
                             </th>
+
                             <td className="px-6 py-4">
                               {wallet.tokenlist.length}
                             </td>
@@ -167,6 +178,7 @@ const MonitoringWallet: React.FC<Props> = ({ setMonitor, isMonitor }) => {
                           </tr>
                         </tbody>
                       );
+                    }
                   })}
                 </table>
                 <div className="bg-white flex justify-center"></div>

@@ -1,4 +1,6 @@
 import React, { useState } from "react";
+import { useSelector } from "react-redux";
+import { RootState } from "../../../../../../pages/store";
 type props = {
   Chain: React.Dispatch<React.SetStateAction<string>>;
   amountInvested: React.Dispatch<React.SetStateAction<number>>;
@@ -9,7 +11,13 @@ const GenralComponent: React.FC<props> = ({
   amountInvested,
   investmentTransactionLink,
 }) => {
+  const wallets = useSelector((state: RootState) => state.tokens.wallet);
   const [isOpen, setIsOpen] = useState(false);
+  const [chainName,setChainName]=useState('')
+  const setchain=(e: React.MouseEvent<HTMLSelectElement, MouseEvent>)=>{
+    Chain(e.currentTarget.value);
+    setChainName(e.currentTarget.value)
+  }
   return (
     <>
       <div className="flex flex-col bg-white rounded-lg dark:bg-white space-y-2.5">
@@ -17,14 +25,38 @@ const GenralComponent: React.FC<props> = ({
         <div className="relative">
           <select
             className="h-14 bg-gray-100 appearance-none w-full bg-white hover:border-gray-500 px-4 py-2 pr-8 rounded-lg"
-            onClick={(e) => {setIsOpen(!isOpen),Chain(e.currentTarget.value)}}
+            onClick={(e) => {
+              setIsOpen(!isOpen), setchain(e);
+            }}
           >
-            <option>Select an Token</option>
+            <option>Select an chain</option>
             <option>Ethereum</option>
             <option>Binance</option>
             <option>Polygon</option>
           </select>
         </div>
+      </div>
+
+      <div className="relative">
+        <select
+          className="h-14 bg-gray-100 appearance-none w-full bg-white hover:border-gray-500 px-4 py-2 pr-8 rounded-lg"
+          onClick={(e) => {
+            setIsOpen(!isOpen), Chain(e.currentTarget.value);
+          }}
+        >
+          <option>Select an Token</option>
+          {wallets &&
+          
+            wallets.map((wallet) => {
+              if(wallet.name==chainName)
+              return (
+                <option>
+                  {wallet.chainAddress}
+                </option>
+                
+              );
+            })}
+        </select>
       </div>
       <div className="mb-4 bg-white">
         <div className="flex flex-col h-14 bg-gray-100 appearance-none w-full bg-white hover:border-gray-500 px-4 py-2 rounded-lg">
@@ -35,10 +67,12 @@ const GenralComponent: React.FC<props> = ({
             Amount Invested
           </label>
           <input
-          type='number'
+            type="number"
             placeholder="$0.00"
             id="investmentLink"
-            onChange={(e)=>{amountInvested(parseInt(e.currentTarget.value))}}
+            onChange={(e) => {
+              amountInvested(parseInt(e.currentTarget.value));
+            }}
             className="bg-gray-100 w-full h-7 rounded-md "
           />
         </div>
@@ -54,7 +88,9 @@ const GenralComponent: React.FC<props> = ({
           <input
             placeholder="9188jaklz0918a-jz08180z5"
             id="investmentLink"
-            onChange={(e)=>{investmentTransactionLink(e.currentTarget.value)}}
+            onChange={(e) => {
+              investmentTransactionLink(e.currentTarget.value);
+            }}
             className="bg-gray-100 w-full h-6  rounded-md"
           />
         </div>

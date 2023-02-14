@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { setpassword, signupMail } from "../api/hello";
+import { setpassword, signupMail } from "../api/BackendApi";
 
 
 export interface SignupState {

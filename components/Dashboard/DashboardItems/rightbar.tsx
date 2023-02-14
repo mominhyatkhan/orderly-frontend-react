@@ -2,7 +2,6 @@ import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../../../pages/store";
 
-
 const Rightbar = () => {
   const email = useSelector(
     (state: RootState) => state.signupState.signUpState.email
@@ -59,25 +58,25 @@ const Rightbar = () => {
           <div className="shadow-lg rounded-lg overflow-hidden">
             <div className="py-3 px-5 bg-gray-50">Doughnut chart</div>
             <canvas className="p-5" id="chartDoughnut"></canvas>
-            
           </div>
         </div>
         {wallets &&
           wallets.map((wallet) => {
-            if (wallet.tableState && wallet.state)
-              return (
-                <div className="text-black px-4 bg-[#F6F8FD] w-full flex flex-col mb-3 mt-3">
-                  <div className="flex">
-                    <h1>{wallet.symbol}</h1>
-                    <h6 className="text-sm font-bold ml-2 self-center">
-                      {wallet.nativeValue}
-                    </h6>
+            if (wallet.monitorState)
+              if (wallet.tableState && wallet.state)
+                return (
+                  <div className="text-black px-4 bg-[#F6F8FD] w-full flex flex-col mb-3 mt-3">
+                    <div className="flex">
+                      <h1>{wallet.symbol}</h1>
+                      <h6 className="text-sm font-bold ml-2 self-center">
+                        {wallet.nativeValue}
+                      </h6>
+                    </div>
+                    <div className="mt-2">
+                      <h6 className="text-sm">{wallet.totalTokenValue}</h6>
+                    </div>
                   </div>
-                  <div className="mt-2">
-                    <h6 className="text-sm">{wallet.totalTokenValue}</h6>
-                  </div>
-                </div>
-              );
+                );
           })}
       </div>
     </aside>

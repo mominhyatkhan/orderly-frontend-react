@@ -1,11 +1,14 @@
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { getwallets, GetWallletData } from "../../../../pages/api/hello";
+import { getwallets, GetWallletData } from "../../../../pages/api/BackendApi";
 import { RootState } from "../../../../pages/store";
 
 import { setDashboardState } from "../../../../pages/slices/dashboardSlice";
-import { addWallet, filterWallets, filterWalletsChains } from "../../../../pages/slices/tokenslice";
-
+import {
+  addWallet,
+  filterWallets,
+  filterWalletsChains,
+} from "../../../../pages/slices/tokenslice";
 
 import GlobalTokenTable from "../SubComponents/globalTokenTable";
 import PreviousTokenTable from "../SubComponents/previousTokenTable";
@@ -15,7 +18,9 @@ import UpcomingTokenTable from "../SubComponents/upcomingTokenTable";
 const Portfolio = () => {
   const wallets = useSelector((state: RootState) => state.tokens.wallet);
   const email = useSelector((state: RootState) => state.isLogin.user.email);
+  const cards = useSelector((state: RootState) => state.coinCards);
   const dispatch = useDispatch();
+
   const changeState = (index: number) => {
     dispatch(setDashboardState(index));
   };
@@ -38,6 +43,7 @@ const Portfolio = () => {
                 name: "",
                 symbol: "",
                 tableState: true,
+                monitorState: true,
                 chainAddress: "",
                 nativeValue: 0,
                 totalTokenValue: 0,
@@ -67,7 +73,7 @@ const Portfolio = () => {
               dispatch(addWallet(wallet));
             });
           }
-        } 
+        }
       } catch (error) {
         console.error(error);
       }
@@ -83,29 +89,33 @@ const Portfolio = () => {
             <option onClick={() => filterwalletchains("all")}>
               All Chains
             </option>
-            <option onClick={() => filterwalletchains("Ethereum")}>
-              Ethereum
-            </option>
-            <option onClick={() => filterwalletchains("Binance")}>
-              Binance
-            </option>
+            {cards.map((card) => {
+              if (card.monintorState) {
+                return (
+                  <option onClick={() => filterwalletchains(card.name)}>
+                    {card.name}
+                  </option>
+                );
+              }
+            })}
           </select>
           <select className="p-1">
             <option onClick={() => filterwallet("", "all")}>All wallet</option>
             {wallets &&
               wallets.map((wallet, index) => {
                 console.log(wallet);
-                return (
-                  <option
-                    className=""
-                    key={index}
-                    onClick={() =>
-                      filterwallet(wallet.chainAddress, wallet.name)
-                    }
-                  >
-                    <span>{wallet.symbol}</span> <span>{index + 1}</span>
-                  </option>
-                );
+                if (wallet.monitorState)
+                  return (
+                    <option
+                      className=""
+                      key={index}
+                      onClick={() =>
+                        filterwallet(wallet.chainAddress, wallet.name)
+                      }
+                    >
+                      <span>{wallet.symbol}</span> <span>{index + 1}</span>
+                    </option>
+                  );
               })}
           </select>
         </div>

@@ -11,6 +11,7 @@ type Tokenlist = {
 type ChainToken = {
   state: boolean;
   tableState: boolean;
+  monitorState: boolean;
   name: string;
   symbol: string;
   chainAddress: string;
@@ -31,9 +32,9 @@ export const tokenSlice = createSlice({
       console.log("this is all wallets:", state.wallet);
       return state;
     },
-    addWalletDB:(state,action)=>{
-      state.wallet=action.payload
-      console.log('Done',action.payload)
+    addWalletDB: (state, action) => {
+      state.wallet = action.payload;
+      console.log("Done", action.payload);
     },
     filterWalletsChains: (state, action) => {
       let data = action.payload;
@@ -53,7 +54,7 @@ export const tokenSlice = createSlice({
     filterWallets: (state, action) => {
       let data = action.payload;
       state.wallet.map((item) => {
-        console.log("im chain",item.name);
+        console.log("im chain", item.name);
         if (data.name == "all") {
           item.tableState = true;
         } else {
@@ -61,22 +62,28 @@ export const tokenSlice = createSlice({
           if (item.chainAddress === data.address) {
             console.log(item.name, "=", data.name);
             if (item.name === data.name) {
-             console.log(" idher kyu aya ")
+              console.log(" idher kyu aya ");
               item.tableState = true;
-            }
-            else {
+            } else {
               item.tableState = false;
             }
-          } 
-          else {
+          } else {
             item.tableState = false;
           }
         }
       });
     },
+    changeMonitoring: (state, action) => {
+      let data = action.payload;
+      state.wallet.map((item) => {
+        if (item.name === data.name) {
+          item.monitorState = data.monitor;
+        }
+      });
+    },
   },
 });
-export const { addWallet, filterWalletsChains, filterWallets,addWalletDB } =
+export const { addWallet, filterWalletsChains, filterWallets, addWalletDB,changeMonitoring } =
   tokenSlice.actions;
 
 export default tokenSlice.reducer;

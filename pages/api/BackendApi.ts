@@ -1,6 +1,5 @@
 import axios from "axios";
 
-
 type Walletresponse = {
   TotalNative: number;
   totalTokenBalance: number;
@@ -94,4 +93,71 @@ export async function getwallets(email: string) {
     `http://localhost:8000/wallets/get-wallets?email=${email}`
   );
   return response;
+}
+export async function getContacts(email: string) {
+  let data = await axios.get(
+    `http://localhost:8000/contact/get-contacts?email=${email}`
+  );
+  return data.data;
+}
+export async function addContacts(
+  name: string,
+  address: string,
+  email: string
+) {
+  try {
+    const response = await axios.post(
+      "http://localhost:8000/contact/add-contact",
+      {
+        name,
+        address,
+        email,
+      }
+    );
+    return response.data;
+  } catch (error) {
+    console.error(error);
+  }
+}
+export async function getGroupList(email: string) {
+  let data = await axios.get(
+    `http://localhost:8000/grouplist/get-group-list?email=${email}`
+  );
+  return data.data;
+}
+export async function addGroupList(name: string, email: string) {
+  try {
+    const response = await axios.post(
+      "http://localhost:8000/grouplist/add-group-list",
+      {
+        email,
+        name,
+      }
+    );
+    return response.data;
+  } catch (error) {
+    console.error(error);
+  }
+}
+export async function getContactInGroup(email: string, name: string) {
+  let data = await axios.get(
+    `http://localhost:8000/group/get-group?email=${email}`
+  );
+  return data.data;
+}
+export async function addContactInGroup(
+  name: string,
+  email: string,
+  contactAddress: string
+) {
+  try {
+    const response = await axios.post("http://localhost:8000/group/add-group", {
+      email,
+      name,
+      contactAddress
+    });
+    return response.data;
+  } catch (error) {
+    console.error(error);
+  }
 }

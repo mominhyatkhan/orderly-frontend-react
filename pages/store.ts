@@ -1,19 +1,21 @@
 import { configureStore } from "@reduxjs/toolkit";
 import cardsSlice from "./slices/cardsSlice";
+import contactSlice from "./slices/contactSlice";
 import dashboardSlice from "./slices/dashboardSlice";
 import investmentSlice from "./slices/investmentSlice";
 import loginSlice from "./slices/loginSlice";
 import signupSlice from "./slices/signupSlice";
-import  tokenSlice  from "./slices/tokenslice";
+import tokenSlice from "./slices/tokenslice";
 
 export const store = configureStore({
   reducer: {
     isLogin: loginSlice,
     signupState: signupSlice,
     coinCards: cardsSlice,
-    dashboard:dashboardSlice,
-    tokens:tokenSlice,
-    investment:investmentSlice
+    dashboard: dashboardSlice,
+    tokens: tokenSlice,
+    investment: investmentSlice,
+    contact: contactSlice,
   },
 });
 

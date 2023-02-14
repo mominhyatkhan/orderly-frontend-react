@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { setpassword, signupMail } from "../pages/api/hello";
+import { setpassword, signupMail } from "../pages/api/BackendApi";
 
 
 

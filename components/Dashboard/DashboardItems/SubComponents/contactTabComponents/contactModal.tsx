@@ -1,4 +1,7 @@
 import { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { addContactInGroup } from "../../../../../pages/slices/contactSlice";
+import { RootState } from "../../../../../pages/store";
 
 type props = {
   isOpen: React.Dispatch<React.SetStateAction<boolean>>;
@@ -7,9 +10,12 @@ const ContactModal: React.FC<props> = ({ isOpen }) => {
   const [name, setName] = useState("");
   const [address, setAddress] = useState("");
   const [group, setGroup] = useState("");
+  const dispatch = useDispatch();
+  const groups = useSelector((state: RootState) => state.contact.groups);
   const handleContact = () => {
-    console.log("name:", name, "address:", address, "group:", group);
+    dispatch(addContactInGroup({ group: group, name: name, address: address }));
   };
+
   return (
     <div className="bg-white w-full h-max rounded-lg dark:bg-white">
       <div className=" flex bg-white rounded-lg p-10">
@@ -54,7 +60,9 @@ const ContactModal: React.FC<props> = ({ isOpen }) => {
           onChange={(e) => setGroup(e.target.value)}
         >
           <option>Select Group</option>
-          <option>simple Group</option>
+          {groups.map((group) => {
+            return <option>{group.name}</option>;
+          })}
         </select>
       </div>
       <div className="flex mt-20 justify-end self-end w-full">

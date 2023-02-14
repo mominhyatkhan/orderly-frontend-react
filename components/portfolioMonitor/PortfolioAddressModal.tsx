@@ -1,7 +1,7 @@
 
 import * as React from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { GetWallletData, saveWallet } from "../../pages/api/hello";
+import { GetWallletData, saveWallet } from "../../pages/api/BackendApi";
 import { RootState } from "../../pages/store";
 
 import { addWallet } from "../../pages/slices/tokenslice";

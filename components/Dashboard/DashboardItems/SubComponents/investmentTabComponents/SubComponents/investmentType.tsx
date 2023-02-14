@@ -1,6 +1,9 @@
-import { useState } from "react";
-
-const InvestmentType = () => {
+import { Dispatch, SetStateAction, useState } from "react";
+type Props={
+  setInvestmentType:Dispatch<SetStateAction<string>>;
+  setInvestmentAddress:Dispatch<SetStateAction<string[] | undefined>>
+}
+const InvestmentType:React.FC<Props>  = ({setInvestmentType,setInvestmentAddress}) => {
   const [isOpen, setIsOpen] = useState(false);
   return (
     <div className="flex flex-col bg-white rounded-lg dark:bg-white space-y-5">
@@ -12,6 +15,7 @@ const InvestmentType = () => {
         <select
           className=" bg-gray-100  px-4 py-2 pr-8 rounded-lg"
           onClick={() => setIsOpen(!isOpen)}
+          onChange={(e)=>setInvestmentType(e.currentTarget.value)}
         >
           <option>Individual</option>
           <option>Guys Group</option>
