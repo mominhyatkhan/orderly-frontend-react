@@ -100,6 +100,15 @@ export async function getContacts(email: string) {
   );
   return data.data;
 }
+export async function getContactByAddress(
+  email: string,
+  contactAddress: string,
+) {
+  let member = await axios.get(
+    `http://localhost:8000/contact/get-contact-by-address?email=${email}&&contactAddress=${contactAddress}`
+  );
+  return member.data[0];
+}
 export async function addContacts(
   name: string,
   address: string,
@@ -123,6 +132,7 @@ export async function getGroupList(email: string) {
   let data = await axios.get(
     `http://localhost:8000/grouplist/get-group-list?email=${email}`
   );
+
   return data.data;
 }
 export async function addGroupList(name: string, email: string) {
@@ -154,8 +164,49 @@ export async function addContactInGroupApi(
     const response = await axios.post("http://localhost:8000/group/add-group", {
       email,
       name,
-      contactAddress
+      contactAddress,
     });
+    return response;
+  } catch (error) {
+    console.error(error);
+  }
+}
+export async function deleteMember(
+  name: string,
+  address: string,
+  email: string
+) {
+  try {
+    const response = await axios.post(
+      "http://localhost:8000/group/delete-member",
+      {
+        name,
+        address,
+        email,
+      }
+    );
+    return response;
+  } catch (error) {
+    console.error(error);
+  }
+}
+export async function deleteContact( email: string,address: string) {
+  try {
+    const response = await axios.post(
+      `http://localhost:8000/contact/delete-contact?email=${email}&&address=${address}`
+      
+    );
+    return response;
+  } catch (error) {
+    console.error(error);
+  }
+}
+export async function deleteMemberFromAllGroups( email: string,address: string) {
+  try {
+    const response = await axios.post(
+      `http://localhost:8000/group/delete-from-groups?email=${email}&&address=${address}`
+      
+    );
     return response;
   } catch (error) {
     console.error(error);

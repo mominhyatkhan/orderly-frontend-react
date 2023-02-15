@@ -36,9 +36,7 @@ export const contactSlice = createSlice({
     addContactInGroup: (state, action) => {
         let data = action.payload;
         console.log('im the data',data)
-           state.groups.push(data)
-          
-     
+           state.groups=data
       },
     deleteContactInGroup: (state, action) => {
       let data = action.payload;

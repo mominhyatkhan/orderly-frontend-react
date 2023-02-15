@@ -1,7 +1,7 @@
 import { Dispatch, SetStateAction, useState } from "react";
 import { useSelector } from "react-redux";
 import {
-  addContactInGroup,
+  addContactInGroupApi,
   addGroupList,
 } from "../../../../../pages/api/BackendApi";
 import { RootState } from "../../../../../pages/store";
@@ -9,15 +9,15 @@ type Props = {
   contacts: any[];
   groups: any[];
   setIsContact: Dispatch<SetStateAction<boolean>>;
-  setReload:Dispatch<SetStateAction<boolean>>;
-  reload:boolean;
+  setReload: Dispatch<SetStateAction<boolean>>;
+  reload: boolean;
 };
 const AddContactsInGroup: React.FC<Props> = ({
   contacts,
   groups,
   setIsContact,
   setReload,
-  reload
+  reload,
 }) => {
   const [name, setName] = useState<string>("");
   const email = useSelector((state: RootState) => state.isLogin.user.email);
@@ -25,15 +25,13 @@ const AddContactsInGroup: React.FC<Props> = ({
   const [contactError, setContactError] = useState<boolean>(false);
   const handleGroup = async () => {
     try {
-      if(name==''||contactAddress=='')
-      {
-        setContactError(true)
-      }
-      else{
-      let response = await addContactInGroup(name, email, contactAddress);
-      console.log("im response",response)
-      setIsContact(false);
-      setReload(!reload)
+      if (name == "" || contactAddress == "") {
+        setContactError(true);
+      } else {
+        let response = await addContactInGroupApi(name, email, contactAddress);
+        console.log("im response", response);
+        setIsContact(false);
+        setReload(!reload);
       }
     } catch (error) {
       setContactError(true);
@@ -47,12 +45,15 @@ const AddContactsInGroup: React.FC<Props> = ({
           onChange={(e) => setContactAddress(e.target.value)}
           className="text-gray-600 "
         >
-          <option key='noone'>select Contact</option>
+          <option key="noone">select Contact</option>
           {contacts.map((contact) => {
             return (
-              <option key={contact._id} value={contact.address} className="text-gray-600">
-                <h1 className="text-gray-600">{contact.name}</h1>
-                <h2 className="text-xs text-gray-500">{contact.address}</h2>
+              <option
+                key={contact._id}
+                value={contact.address}
+                className="text-gray-600"
+              >
+                {contact.name}
               </option>
             );
           })}
@@ -65,13 +66,7 @@ const AddContactsInGroup: React.FC<Props> = ({
         >
           <option>select Group</option>
           {groups.map((group) => {
-            return (
-              <option>
-                <div className="flex flex-col">
-                  <h1 className="text-gray-600">{group.name}</h1>
-                </div>
-              </option>
-            );
+            return <option>{group.name}</option>;
           })}
         </select>
       </div>
@@ -83,7 +78,11 @@ const AddContactsInGroup: React.FC<Props> = ({
         >
           Add contact
         </button>
-        {contactError && <label className="text-red-300">Please select/add contact and Group</label>}
+        {contactError && (
+          <label className="text-red-300">
+            Please select/add contact and Group
+          </label>
+        )}
       </div>
     </div>
   );
