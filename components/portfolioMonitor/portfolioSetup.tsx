@@ -19,18 +19,7 @@ function PortfolioMonitoring() {
   const [image, setImage] = useState<string>("");
   const [address, setAddress] = useState<string[]>([]);
   const [background,setbackground]=useState<string[]>(['bg-white','bg-white','bg-white'])
-  const dispatch = useDispatch();
-
-  const showDashboard = () => {
-    dispatch(
-      setLoginState({
-        isLogged: true,
-      })
-    );
-  };
-  const showMonitor = () => {
-    dispatch(setDashboardState(1));
-  };
+  
   const setWallet = (
     name: string,
     symbol: string,
@@ -48,15 +37,15 @@ function PortfolioMonitoring() {
   const closeModal = () => setModal(false);
   return (
     
-      <div className="relative flex flex-col bg-[#F6F8FD] items-stretch h-screen">
-        <div className="flex flex-col space-x-20 w-full h-5/6">
+      <div className="relative flex flex-col bg-[#F6F8FD] items-stretch h-full">
+        <div className="flex flex-col space-x-20 w-full">
           <div className="flex flex-row space-x-20 m-24 ">
             <div>
               <label className="text-3xl">Setup Portfolio Monitoring</label>
             </div>
             <div className="w-2/3">
               <div className="relative w-full">
-                <div className="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
+                <div className="absolute inset-y-0 left-0 flex items-center pl-2 pointer-events-none">
                   <svg
                     aria-hidden="true"
                     className="w-5 h-5 text-gray-500 dark:text-gray-400"
@@ -77,7 +66,7 @@ function PortfolioMonitoring() {
                   onChange={(e) => {
                     setSearch(e.currentTarget.value);
                   }}
-                  className="bg-white text-black text-sm rounded-lg  w-full pl-10 p-2.5 dark:placeholder-black dark:text-black "
+                  className="bg-white text-black text-sm rounded-lg  w-full pl-10 p-3.5 dark:placeholder-black dark:text-black "
                   placeholder="Search by network names"
                   required
                 />
@@ -85,10 +74,10 @@ function PortfolioMonitoring() {
             </div>
           </div>
           <div >
-            <div className="flex flex-row overflow-auto space-x-32">
+            <div className="flex flex-row overflow-auto space-x-32 ml-3">
               {cards.map((item, index) => (
                 <div
-                className={`cursor-pointer ml-20 rounded  ${background[index]}`} 
+                className={`cursor-pointer rounded  ${background[index]}`} 
                   key={index}
                   onClick={() =>
                    {setWallet(
@@ -127,29 +116,7 @@ function PortfolioMonitoring() {
           </div>
         </div>}
         
-        <footer className="m-20 bg-white w-5/6 shadow md:flex md:items-center md:justify-between md:p-6 dark:bg-white">
-            <span className="ml-16 text-sm text-gray-500 sm:text-center dark:text-gray-400">
-              0 Network(s) Configured
-            </span>
-            <ul className="mr-48 flex flex-wrap items-center mt-3 text-sm text-[#6B8068]-500 dark:text-[#6B8068] sm:mt-0">
-              <li>
-                <a
-                  onClick={showMonitor}
-                  className="mr-4 hover:underline md:mr-6"
-                >
-                  Skip this step
-                </a>
-              </li>
-              <li>
-                <button
-                  className="bg-[#6b8068] w-48 h-12 px-3 py-4 hover:bg-emerald-700 text-white rounded"
-                  onClick={showDashboard}
-                >
-                  Setup Portfolio
-                </button>
-              </li>
-            </ul>
-          </footer>
+       
       </div>
   );
 }

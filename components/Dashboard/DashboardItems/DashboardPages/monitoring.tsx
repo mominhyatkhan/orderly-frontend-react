@@ -8,17 +8,21 @@ import NoWalletAdded from "../SubComponents/monitoringTabComponents/noWalletAdde
 
 const Monitoring = () => {
   const [isMonitor, setMonitor] = useState<boolean>(false);
-  const wallet=useSelector((state:RootState)=>state.tokens.wallet)
+  const wallet = useSelector((state: RootState) => state.tokens.wallet)
   return (
-    <>
+    <div>
       {isMonitor ? (
-        <PortfolioMonitoring />
+        <div className="flex flex-col space-y-[500px]"><PortfolioMonitoring />
+          <div className="flex justify-end m-14">
+            <button className="bg-[#6B8068] w-28 h-12 text-white rounded" onClick={() => setMonitor(false)}>Back</button>
+          </div>
+        </div>
       ) : wallet.length ? (
         <MonitoringWallet setMonitor={setMonitor} isMonitor={isMonitor} />
       ) : (
         <NoWalletAdded setMonitor={setMonitor} isMonitor={isMonitor} />
       )}
-    </>
+    </div>
   );
 };
 export default Monitoring;

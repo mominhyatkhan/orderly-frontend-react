@@ -63,7 +63,7 @@ export async function checkVerified(email: string) {
     const response = await axios.get(
       `http://localhost:8000/user/fetch-verified-user?email=${email}`
     );
-  } catch (error) {}
+  } catch (error) { }
 }
 export async function setpassword(password: string) {
   const response = await axios.post("http://localhost:8000/user/set-password", {
@@ -190,22 +190,42 @@ export async function deleteMember(
     console.error(error);
   }
 }
-export async function deleteContact( email: string,address: string) {
+export async function deleteContact(email: string, address: string) {
   try {
     const response = await axios.post(
       `http://localhost:8000/contact/delete-contact?email=${email}&&address=${address}`
-      
+
     );
     return response;
   } catch (error) {
     console.error(error);
   }
 }
-export async function deleteMemberFromAllGroups( email: string,address: string) {
+export async function deleteMemberFromAllGroups(email: string, address: string) {
   try {
     const response = await axios.post(
       `http://localhost:8000/group/delete-from-groups?email=${email}&&address=${address}`
-      
+
+    );
+    return response;
+  } catch (error) {
+    console.error(error);
+  }
+}
+export async function deleteGroup(email: string, name: string) {
+  try {
+    const response = await axios.post(
+      `http://localhost:8000/group/delete-group?email=${email}&&name=${name}`
+    );
+    return response;
+  } catch (error) {
+    console.error(error);
+  }
+}
+export async function deleteFromGroupList(email: string, name: string) {
+  try {
+    const response = await axios.post(
+      `http://localhost:8000/grouplist/delete-from-group-list?email=${email}&&name=${name}`
     );
     return response;
   } catch (error) {
