@@ -1,5 +1,3 @@
-
-
 const Analyzer = () => {
   return (
     <div className="m-20 w-5/6">

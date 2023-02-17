@@ -3,12 +3,8 @@ import { RootState } from "../../../pages/store";
 import { setDashboardState } from "../../../pages/slices/dashboardSlice";
 import { setLoginState } from "../../../pages/slices/loginSlice";
 
-
-
 const SideBar = () => {
-  const email = useSelector(
-    (state: RootState) => state.isLogin.user.email
-  );
+  const email = useSelector((state: RootState) => state.isLogin.user.email);
   const dispatch = useDispatch();
   const logout = () => {
     dispatch(
@@ -18,12 +14,10 @@ const SideBar = () => {
         isLogged: false,
       })
     );
-    
   };
-  const changeState=(index:number)=>{
-   
-    dispatch(setDashboardState(index))
-  }
+  const changeState = (index: number) => {
+    dispatch(setDashboardState(index));
+  };
   return (
     <aside className="flex h-full" aria-label="Sidebar">
       <div className="py-4 w-72 h-full bg-[#08101F] dark:bg-[#08101F]">
@@ -59,7 +53,7 @@ const SideBar = () => {
         <ul className="space-y-2">
           <li>
             <a
-              onClick={()=>changeState(0)}
+              onClick={() => changeState(0)}
               className="flex cursor-pointer items-center p-2 text-base font-light text-gray-900 dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700"
             >
               <span className="ml-3">Portfolio</span>
@@ -67,7 +61,7 @@ const SideBar = () => {
           </li>
           <li>
             <a
-              onClick={()=>changeState(1)}
+              onClick={() => changeState(1)}
               className="flex items-center cursor-pointer p-2 text-base font-light text-gray-900  dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700"
             >
               <span className="flex-1 ml-3  whitespace-nowrap">Monitoring</span>
@@ -75,7 +69,7 @@ const SideBar = () => {
           </li>
           <li>
             <a
-               onClick={()=>changeState(2)}
+              onClick={() => changeState(2)}
               className="flex items-center cursor-pointer p-2 text-base font-light text-gray-900  dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700"
             >
               <span className="flex-1 ml-3 whitespace-nowrap">Analyzer</span>
@@ -83,7 +77,7 @@ const SideBar = () => {
           </li>
           <li>
             <a
-               onClick={()=>changeState(3)}
+              onClick={() => changeState(3)}
               className="flex items-center cursor-pointer p-2 text-base font-light text-gray-900 dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700"
             >
               <span className="flex-1 ml-3 whitespace-nowrap">Distributor</span>
@@ -91,7 +85,7 @@ const SideBar = () => {
           </li>
           <li>
             <a
-               onClick={()=>changeState(4)}
+              onClick={() => changeState(4)}
               className="flex items-center p-2 cursor-pointer text-base font-light text-gray-900  dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700"
             >
               <span className="flex-1 ml-3 whitespace-nowrap">
@@ -101,7 +95,7 @@ const SideBar = () => {
           </li>
           <li>
             <a
-               onClick={()=>changeState(5)}
+              onClick={() => changeState(5)}
               className="flex items-center cursor-pointer p-2 text-base font-light text-gray-900  dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700"
             >
               <span className="flex-1 ml-3 whitespace-nowrap">Calendar</span>
@@ -109,7 +103,7 @@ const SideBar = () => {
           </li>
           <li>
             <a
-              onClick={()=>changeState(6)}
+              onClick={() => changeState(6)}
               className="flex items-center cursor-pointer p-2 text-base font-light text-gray-900  dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700"
             >
               <span className="flex-1 ml-3 whitespace-nowrap">Contacts</span>
@@ -117,7 +111,7 @@ const SideBar = () => {
           </li>
           <li>
             <a
-               onClick={()=>changeState(7)}
+              onClick={() => changeState(7)}
               className="flex items-center cursor-pointer p-2 text-base font-light text-gray-900  dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700"
             >
               <span className="flex-1 ml-3 whitespace-nowrap">OTC</span>

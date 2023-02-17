@@ -58,7 +58,7 @@ const Contacts = () => {
     console.log("im group data", groupdata);
   }
   const deletegroup = (name: string) => {
-    deleteFromGroupList(email,name)
+    deleteFromGroupList(email, name);
     Group.map((group) => {
       group.members.map((item: any) => {
         if (group.name == name) {
@@ -66,9 +66,9 @@ const Contacts = () => {
         }
       });
     });
-    console.log("response is here",);
+    console.log("response is here");
     setReload(!reload);
-  }
+  };
   async function fetchData() {
     let data = await getContacts(email);
     console.log(data);
@@ -175,10 +175,9 @@ const Contacts = () => {
                   className="flex p-5 flex-col w-full justify-center border-b"
                 >
                   <li className="bg-gray-100 flex flex-row w-full">
-                    <h1 className="w-full">{group.name}</h1><a
-                      onClick={() =>
-                        deletegroup(group.name)
-                      }
+                    <h1 className="w-full">{group.name}</h1>
+                    <a
+                      onClick={() => deletegroup(group.name)}
                       className="flex w-full self-center cursor-pointer justify-end"
                     >
                       <svg
@@ -193,7 +192,8 @@ const Contacts = () => {
                           <path d="M7.459,5.25l0.374,-1.12c0.374,-1.123 1.425,-1.88 2.609,-1.88c0.944,0 2.172,0 3.116,0c1.184,-0 2.235,0.757 2.609,1.88l0.374,1.12l3.459,0c0.414,-0 0.75,0.336 0.75,0.75c0,0.414 -0.336,0.75 -0.75,0.75l-16,0c-0.414,-0 -0.75,-0.336 -0.75,-0.75c0,-0.414 0.336,-0.75 0.75,-0.75l3.459,0Zm7.5,0l-0.215,-0.645c-0.17,-0.511 -0.647,-0.855 -1.186,-0.855c-0.944,-0 -2.172,-0 -3.116,0c-0.539,-0 -1.016,0.344 -1.186,0.855l-0.215,0.645l5.918,0Z" />
                         </g>
                       </svg>
-                    </a></li>
+                    </a>
+                  </li>
 
                   {group.members.map((item: any, index: number) => {
                     return (

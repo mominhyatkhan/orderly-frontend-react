@@ -83,7 +83,12 @@ export const tokenSlice = createSlice({
     },
   },
 });
-export const { addWallet, filterWalletsChains, filterWallets, addWalletDB,changeMonitoring } =
-  tokenSlice.actions;
+export const {
+  addWallet,
+  filterWalletsChains,
+  filterWallets,
+  addWalletDB,
+  changeMonitoring,
+} = tokenSlice.actions;
 
 export default tokenSlice.reducer;

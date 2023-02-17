@@ -1,5 +1,5 @@
-const TableforUpcomingTokens=()=>{
-    <div className="mt-20 bg-white">
+const TableforUpcomingTokens = () => {
+  <div className="mt-20 bg-white">
     <div className="flex">
       <table className="border-separate w-full">
         <thead>
@@ -16,6 +16,6 @@ const TableforUpcomingTokens=()=>{
         <tbody></tbody>
       </table>
     </div>
-  </div>
-}
-export default TableforUpcomingTokens
+  </div>;
+};
+export default TableforUpcomingTokens;

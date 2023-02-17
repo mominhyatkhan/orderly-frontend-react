@@ -21,7 +21,7 @@ const Calender = () => {
           </div>
         </div>
       </div>
-    <AllTokenCalender/>
+      <AllTokenCalender />
     </div>
   );
 };

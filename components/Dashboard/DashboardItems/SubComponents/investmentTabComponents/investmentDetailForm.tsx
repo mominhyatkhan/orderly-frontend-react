@@ -71,12 +71,12 @@ const InvesterDetail = () => {
           </div>
         </div>
         <div className="flex flex-col space-y-2.5">
-        <h1 className="text-gray-600">Investment signee</h1>
-        <span className="text-gray-500 font-light">John Down</span>
+          <h1 className="text-gray-600">Investment signee</h1>
+          <span className="text-gray-500 font-light">John Down</span>
         </div>
         <div className="flex flex-col space-y-3.5">
-        <h1 className="text-gray-600">Invested Amount</h1>
-        <span className="font-medium">$0.00</span>
+          <h1 className="text-gray-600">Invested Amount</h1>
+          <span className="font-medium">$0.00</span>
         </div>
       </div>
     </div>

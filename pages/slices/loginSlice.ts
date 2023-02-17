@@ -1,7 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
 
-
-
 export interface LoginState {
   user: {
     email: string;
@@ -17,7 +15,7 @@ export const loginSlice = createSlice({
   name: "user",
   initialState,
   reducers: {
-    setLoginState:(state, action) => {
+    setLoginState: (state, action) => {
       state.user = action.payload;
       console.log(state.user, action.payload, "ksskks");
     },

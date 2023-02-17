@@ -1,13 +1,13 @@
 import { createSlice } from "@reduxjs/toolkit";
 export type Personal = {
-  id:string;
+  id: string;
   name: string;
   address: string;
 };
 
 type Group = {
   name: string;
-  members:any[];
+  members: any[];
 };
 const initialState = {
   personal: [] as Personal[],
@@ -18,10 +18,10 @@ export const contactSlice = createSlice({
   initialState,
   reducers: {
     addPersonalContact: (state, action) => {
-      let data=action.payload.data
+      let data = action.payload.data;
 
-      state.personal=data;
-      console.log(state.personal,data)
+      state.personal = data;
+      console.log(state.personal, data);
     },
     deletePersonalChain: (state, action) => {
       let data = action.payload;
@@ -29,15 +29,15 @@ export const contactSlice = createSlice({
       state.personal.splice(index, 1);
     },
     addGroupContact: (state, action) => {
-      let data=action.payload.group
-      console.log(data)
-      state.groups=data;
+      let data = action.payload.group;
+      console.log(data);
+      state.groups = data;
     },
     addContactInGroup: (state, action) => {
-        let data = action.payload;
-        console.log('im the data',data)
-           state.groups=data
-      },
+      let data = action.payload;
+      console.log("im the data", data);
+      state.groups = data;
+    },
     deleteContactInGroup: (state, action) => {
       let data = action.payload;
       state.groups.map((group) => {
