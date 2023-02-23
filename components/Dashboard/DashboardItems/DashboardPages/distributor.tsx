@@ -124,15 +124,29 @@ const Distributor = () => {
       </div>
       <div className="flex flex-row  mt-6 items-center text-gray-400">
         <div className="space-x-2">
-          <button className="h-10 w-16 bg-gray-200 rounded focus:bg-white">All</button>
-          <button className="h-10 w-16 bg-gray-200 rounded focus:bg-white">In</button>
-          <button className="h-10 w-16 bg-gray-200 rounded focus:bg-white">Out</button>
+          <button className="h-10 w-16 bg-gray-200 rounded focus:bg-white">
+            All
+          </button>
+          <button className="h-10 w-16 bg-gray-200 rounded focus:bg-white">
+            In
+          </button>
+          <button className="h-10 w-16 bg-gray-200 rounded focus:bg-white">
+            Out
+          </button>
         </div>
         <div className="space-x-2 ml-8">
-          <button className="h-10 w-16 bg-gray-200 rounded focus:bg-white">All</button>
-          <button className="h-10 w-16 bg-gray-200 rounded focus:bg-white">Past</button>
-          <button className="h-10 w-28 bg-gray-200 rounded focus:bg-white">Upcoming</button>
-          <button className="h-10 w-40 bg-gray-200 rounded focus:bg-white">Pending Distribution</button>
+          <button className="h-10 w-16 bg-gray-200 rounded focus:bg-white">
+            All
+          </button>
+          <button className="h-10 w-16 bg-gray-200 rounded focus:bg-white">
+            Past
+          </button>
+          <button className="h-10 w-28 bg-gray-200 rounded focus:bg-white">
+            Upcoming
+          </button>
+          <button className="h-10 w-40 bg-gray-200 rounded focus:bg-white">
+            Pending Distribution
+          </button>
         </div>
       </div>
       <div className="mt-10 bg-white">

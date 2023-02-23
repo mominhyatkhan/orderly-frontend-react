@@ -14,6 +14,7 @@ import GlobalTokenTable from "../SubComponents/globalTokenTable";
 import PreviousTokenTable from "../SubComponents/previousTokenTable";
 import PriceCard from "../SubComponents/priceCards";
 import UpcomingTokenTable from "../SubComponents/upcomingTokenTable";
+import { addwalletsfromDb } from "../../../../pages/slices/walletSlice";
 
 const Portfolio = () => {
   const wallets = useSelector((state: RootState) => state.tokens.wallet);
@@ -37,9 +38,14 @@ const Portfolio = () => {
         if (!wallets.length) {
           const response = await getwallets(email);
           if (response.data) {
+            console.log('im response data',response.data)
+            dispatch(addwalletsfromDb(response.data))
             response.data.map(async (item: any, index: number) => {
               let wallet: any = {
                 state: true,
+                chain:item.chain,
+                isemail:item.isemail,
+                istelegram:item.istelegram,
                 name: "",
                 symbol: "",
                 tableState: true,
@@ -56,7 +62,8 @@ const Portfolio = () => {
               if (item.chain == "0x1") {
                 wallet.name = "Ethereum";
                 wallet.symbol = "ETH";
-              }dataresponse
+              }
+              dataresponse;
               if (item.chain == "0x38") {
                 wallet.name = "Binance";
                 wallet.symbol = "BSC";

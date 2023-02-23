@@ -1,8 +1,17 @@
 import { Dispatch, SetStateAction, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../../../../../pages/store";
-import { changeMonitoring, filterWalletsChains } from "../../../../../pages/slices/tokenslice";
+import {
+  changeMonitoring,
+  filterWalletsChains,
+  setemailNotification,
+  settelegramNotification,
+} from "../../../../../pages/slices/tokenslice";
 import { setportfolioMonitor } from "../../../../../pages/slices/cardsSlice";
+import {
+  setEmailNotification,
+  setTelegramNotification,
+} from "../../../../../pages/api/BackendApi";
 
 type Props = {
   setMonitor: Dispatch<SetStateAction<boolean>>;
@@ -11,11 +20,40 @@ type Props = {
 const MonitoringWallet: React.FC<Props> = ({ setMonitor, isMonitor }) => {
   const chains = useSelector((state: RootState) => state.coinCards);
   const wallets = useSelector((state: RootState) => state.tokens.wallet);
+  const email = useSelector((state: RootState) => state.isLogin.user.email);
   const dispatch = useDispatch();
   const setProfileMonitor = (name: string, monitor: boolean) => {
-    dispatch(setportfolioMonitor({name,monitor}))
-    dispatch(changeMonitoring({name,monitor}))
+    dispatch(setportfolioMonitor({ name, monitor }));
+    dispatch(changeMonitoring({ name, monitor }));
     console.log(name, monitor);
+  };
+  const handleEmailNotificationChange = (
+    name: string,
+    chainAddress: string,
+    isemail: boolean
+  ) => {
+    dispatch(
+      setemailNotification({
+        name: name,
+        chainAddress: chainAddress,
+        isemail: !isemail,
+      })
+    );
+    setEmailNotification(email, name, chainAddress, !isemail);
+  };
+  const handleTelegramNotificationChange = (
+    name: string,
+    chainAddress: string,
+    istelegram: boolean
+  ) => {
+    dispatch(
+      settelegramNotification({
+        name: name,
+        chainAddress: chainAddress,
+        istelegram: !istelegram,
+      })
+    );
+    setTelegramNotification(email, name, chainAddress, !istelegram);
   };
   return (
     <div className="flex h-full w-3/4 flex-col ml-40 mr-40 mt-28 ">
@@ -31,9 +69,9 @@ const MonitoringWallet: React.FC<Props> = ({ setMonitor, isMonitor }) => {
         </div>
       </div>
       <div className="flex flex-col mt-10">
-        {chains.map((item,index) => {
+        {chains.map((item, index) => {
           return (
-            <div key={item.chainId+index} className="mb-6">
+            <div key={item.chainId + index} className="mb-6">
               <div className="relative overflow-x-auto shadow-md sm:rounded-lg">
                 <div className="flex flex-row mb-1  text-xs text-gray-700 bg-white uppercase bg-whtie sm:rounded-lg  border-b ">
                   <div className="m-6 ml-10 w-3/6">
@@ -59,8 +97,8 @@ const MonitoringWallet: React.FC<Props> = ({ setMonitor, isMonitor }) => {
                   <div className="ml-5 w-56 text-gray-400 flex items-center flex-row justify-center space-x-2 cursor-pointer">
                     <h1>Show in portfolio</h1>
                     <div
-                      onClick={() => {  
-                          setProfileMonitor(item.name, !item.monintorState);
+                      onClick={() => {
+                        setProfileMonitor(item.name, !item.monintorState);
                       }}
                     >
                       <svg
@@ -68,8 +106,8 @@ const MonitoringWallet: React.FC<Props> = ({ setMonitor, isMonitor }) => {
                         fill="currentColor"
                         className={`${
                           item.monintorState
-                            ? "text-green-500 fill-green"
-                            : "text-gray-500"
+                            ? "text-green-700 fill-green"
+                            : "text-gray-300"
                         } w-4 h-4`}
                         stroke="currentColor"
                         strokeWidth="1.5"
@@ -115,13 +153,13 @@ const MonitoringWallet: React.FC<Props> = ({ setMonitor, isMonitor }) => {
                         scope="col"
                         className="p-1 w-28 font-normal text-uppercase"
                       >
-                        Incoming Token Notification
+                        EMAIL NOTIFICATION
                       </th>
                       <th
                         scope="col"
                         className="px-6 py-3 w-44 font-normal text-uppercase"
                       >
-                        Token Generation Event Notificaion
+                        TELEGRAM NOTIFICATION
                       </th>
                       <th
                         scope="col"
@@ -150,8 +188,36 @@ const MonitoringWallet: React.FC<Props> = ({ setMonitor, isMonitor }) => {
                             <td className="px-6 py-4">
                               {wallet.tokenlist.length}
                             </td>
-                            <td className="px-6 py-4"></td>
-                            <td className="px-6 py-4"></td>
+                            <td className="px-6 py-4">
+                              <input
+                                id="email-checkbox"
+                                type="checkbox"
+                                checked={wallet.isemail}
+                                onChange={() =>
+                                  handleEmailNotificationChange(
+                                    wallet.chain,
+                                    wallet.chainAddress,
+                                    wallet.isemail
+                                  )
+                                }
+                                className="w-4 h-4  accent-green-600"
+                              />
+                            </td>
+                            <td className="px-6 py-4">
+                              <input
+                                id="telegram-checkbox"
+                                type="checkbox"
+                                checked={wallet.istelegram}
+                                onChange={() =>
+                                  handleTelegramNotificationChange(
+                                    wallet.chain,
+                                    wallet.chainAddress,
+                                    wallet.istelegram
+                                  )
+                                }
+                                className="w-4 h-4 accent-green-600"
+                              />
+                            </td>
                             <td className="px-6 py-4  w-max cursor:Pointer">
                               <a
                                 href="#"

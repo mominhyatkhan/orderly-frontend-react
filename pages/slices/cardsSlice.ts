@@ -4,7 +4,7 @@ export interface CardsState {
   name: string;
   symbol: string;
   chainId: string;
-  monintorState:boolean;
+  monintorState: boolean;
   image: string;
   addreses: string[];
 }
@@ -19,14 +19,14 @@ const initialState: CardsState[] = [
     name: "Ethereum",
     symbol: "ETH",
     chainId: "0x1",
-    monintorState:true,
+    monintorState: true,
     image: "/etherum.png",
     addreses: ["0x19692cF317500C8720046D4744B3Af2cC3c6C94C"],
   },
   {
     name: "Binance",
     symbol: "BSC",
-    monintorState:true,
+    monintorState: true,
     chainId: "0x38",
     image: "/etherum.png",
     addreses: ["rew32"],
@@ -34,7 +34,7 @@ const initialState: CardsState[] = [
   {
     name: "Polygon",
     symbol: "MATIC",
-    monintorState:true,
+    monintorState: true,
     chainId: "0x89",
     image: "/etherum.png",
     addreses: ["trds43"],
@@ -45,17 +45,15 @@ export const cardSlice = createSlice({
   name: "user",
   initialState,
   reducers: {
-    setportfolioMonitor:(state,action)=>{
-      let data=action.payload
-      state.map((item)=>{
-        if(data.name==item.name)
-        {
-          item.monintorState=data.monitor;
+    setportfolioMonitor: (state, action) => {
+      let data = action.payload;
+      state.map((item) => {
+        if (data.name == item.name) {
+          item.monintorState = data.monitor;
         }
-      })
-    }
+      });
+    },
   },
 });
-export const { setportfolioMonitor } =
-  cardSlice.actions;
+export const { setportfolioMonitor } = cardSlice.actions;
 export default cardSlice.reducer;

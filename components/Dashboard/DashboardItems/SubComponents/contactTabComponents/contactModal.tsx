@@ -10,10 +10,10 @@ import { RootState } from "../../../../../pages/store";
 
 type props = {
   isOpen: Dispatch<React.SetStateAction<boolean>>;
-  setReload:Dispatch<SetStateAction<boolean>>
-  reload:boolean;
+  setReload: Dispatch<SetStateAction<boolean>>;
+  reload: boolean;
 };
-const ContactModal: React.FC<props> = ({ isOpen ,setReload ,reload}) => {
+const ContactModal: React.FC<props> = ({ isOpen, setReload, reload }) => {
   const [name, setName] = useState("");
   const [address, setAddress] = useState("");
   const [group, setGroup] = useState("");
@@ -21,15 +21,15 @@ const ContactModal: React.FC<props> = ({ isOpen ,setReload ,reload}) => {
   const dispatch = useDispatch();
   const groups = useSelector((state: RootState) => state.contact.groups);
   const handleContact = async () => {
-    if (group == ""||group=='Select Group') {
+    if (group == "" || group == "Select Group") {
       const contact = await addContacts(name, address, email);
-      console.log('no group added',contact)
-      setReload(!reload)
+      console.log("no group added", contact);
+      setReload(!reload);
     } else {
       const contact = await addContacts(name, address, email);
       const groupresponse = await addContactInGroupApi(group, email, address);
-      console.log('group added',contact,groupresponse)
-      setReload(!reload)
+      console.log("group added", contact, groupresponse);
+      setReload(!reload);
     }
   };
 

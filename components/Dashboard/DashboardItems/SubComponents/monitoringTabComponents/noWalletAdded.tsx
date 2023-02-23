@@ -5,7 +5,7 @@ type Props={
     isMonitor:boolean;
 }
 const NoWalletAdded:React.FC<Props> = ({setMonitor,isMonitor})=>{
-    return <div className="flex h-full flex-col ml-40 mr-40 mt-28">
+    return <div className="flex flex-col ml-40 mr-40 pt-28">
           <h1 className=" w-full text-3xl mb-8">Monitoring</h1>
           <div className="flex bg-white h-full content-center justify-center items-center">
             <div className="mt-40 mb-80 ">

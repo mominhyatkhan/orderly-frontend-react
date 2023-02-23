@@ -84,7 +84,7 @@ export async function saveWallet(
 ) {
   const response = await axios.post(
     "http://localhost:8000/wallets/add-wallet",
-    { email, address, chain }
+    {  address, chain ,email}
   );
   console.log("wallet save response:", response);
 }
@@ -94,11 +94,46 @@ export async function getwallets(email: string) {
   );
   return response;
 }
+export async function setEmailNotification(
+  email: string,
+  chain: string,
+  address: string,
+  isemail: boolean
+) {
+
+  
+  const response = await axios.post(
+    "http://localhost:8000/wallets/set-email-notification",
+    { address, chain, isemail, email }
+  );
+  console.log("response of email notification", response );
+}
+export async function setTelegramNotification(
+  email: string,
+  chain: string,
+  address: string,
+  istelegram: boolean
+) {
+  const response = await axios.post(
+    "http://localhost:8000/wallets/set-telegram-notification",
+    { address, chain, istelegram, email }
+  );
+  console.log("response of telegram notification", response );
+}
 export async function getContacts(email: string) {
   let data = await axios.get(
     `http://localhost:8000/contact/get-contacts?email=${email}`
   );
   return data.data;
+}
+export async function getContactByAddress(
+  email: string,
+  contactAddress: string
+) {
+  let member = await axios.get(
+    `http://localhost:8000/contact/get-contact-by-address?email=${email}&&contactAddress=${contactAddress}`
+  );
+  return member.data[0];
 }
 export async function addContacts(
   name: string,
@@ -123,6 +158,7 @@ export async function getGroupList(email: string) {
   let data = await axios.get(
     `http://localhost:8000/grouplist/get-group-list?email=${email}`
   );
+
   return data.data;
 }
 export async function addGroupList(name: string, email: string) {
@@ -154,8 +190,70 @@ export async function addContactInGroupApi(
     const response = await axios.post("http://localhost:8000/group/add-group", {
       email,
       name,
-      contactAddress
+      contactAddress,
     });
+    return response;
+  } catch (error) {
+    console.error(error);
+  }
+}
+export async function deleteMember(
+  name: string,
+  address: string,
+  email: string
+) {
+  try {
+    const response = await axios.post(
+      "http://localhost:8000/group/delete-member",
+      {
+        name,
+        address,
+        email,
+      }
+    );
+    return response;
+  } catch (error) {
+    console.error(error);
+  }
+}
+export async function deleteContact(email: string, address: string) {
+  try {
+    const response = await axios.post(
+      `http://localhost:8000/contact/delete-contact?email=${email}&&address=${address}`
+    );
+    return response;
+  } catch (error) {
+    console.error(error);
+  }
+}
+export async function deleteMemberFromAllGroups(
+  email: string,
+  address: string
+) {
+  try {
+    const response = await axios.post(
+      `http://localhost:8000/group/delete-from-groups?email=${email}&&address=${address}`
+    );
+    return response;
+  } catch (error) {
+    console.error(error);
+  }
+}
+export async function deleteGroup(email: string, name: string) {
+  try {
+    const response = await axios.post(
+      `http://localhost:8000/group/delete-group?email=${email}&&name=${name}`
+    );
+    return response;
+  } catch (error) {
+    console.error(error);
+  }
+}
+export async function deleteFromGroupList(email: string, name: string) {
+  try {
+    const response = await axios.post(
+      `http://localhost:8000/grouplist/delete-from-group-list?email=${email}&&name=${name}`
+    );
     return response;
   } catch (error) {
     console.error(error);
