@@ -6,6 +6,7 @@ import investmentSlice from "./slices/investmentSlice";
 import loginSlice from "./slices/loginSlice";
 import signupSlice from "./slices/signupSlice";
 import tokenSlice from "./slices/tokenslice";
+import walletSlice from "./slices/walletSlice";
 
 export const store = configureStore({
   reducer: {
@@ -16,6 +17,7 @@ export const store = configureStore({
     tokens: tokenSlice,
     investment: investmentSlice,
     contact: contactSlice,
+    wallet:walletSlice
   },
 });
 

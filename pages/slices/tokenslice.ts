@@ -10,6 +10,9 @@ type Tokenlist = {
 };
 type ChainToken = {
   state: boolean;
+  chain:string;
+  isemail: boolean;
+  istelegram: boolean;
   tableState: boolean;
   monitorState: boolean;
   name: string;
@@ -23,7 +26,7 @@ const initialState = {
   wallet: [] as ChainToken[],
 };
 export const tokenSlice = createSlice({
-  name: "signup",
+  name: "walletTokens",
   initialState,
   reducers: {
     addWallet: (state, action) => {
@@ -48,6 +51,31 @@ export const tokenSlice = createSlice({
           } else {
             item.state = false;
           }
+        }
+      });
+    },
+    setemailNotification: (state, action) => {
+      let data = action.payload;
+      console.log('im data',data)
+      state.wallet.map((item) => {
+        if (
+          item.chainAddress === data.chainAddress &&
+          item.chain === data.name
+        ) {
+          console.log("im email", data.isemail);
+          item.isemail = data.isemail;
+        }
+      });
+    },
+    settelegramNotification: (state, action) => {
+      let data = action.payload;
+      state.wallet.map((item) => {
+        if (
+          item.chainAddress === data.chainAddress &&
+          item.chain === data.name
+        ) {
+          console.log("im telegram", data.istelegram);
+          item.istelegram = data.istelegram;
         }
       });
     },
@@ -89,6 +117,8 @@ export const {
   filterWallets,
   addWalletDB,
   changeMonitoring,
+  setemailNotification,
+  settelegramNotification,
 } = tokenSlice.actions;
 
 export default tokenSlice.reducer;
