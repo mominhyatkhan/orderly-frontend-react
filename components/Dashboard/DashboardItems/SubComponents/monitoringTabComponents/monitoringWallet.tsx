@@ -11,6 +11,7 @@ import {
   setMonitorNotification,
   setportfolioMonitor,
 } from "../../../../../pages/slices/cardsSlice";
+
 import {
   setEmailNotification,
   setTelegramNotification,
@@ -70,6 +71,7 @@ const MonitoringWallet: React.FC<Props> = ({ setMonitor, isMonitor }) => {
       })
     );
   };
+
   return (
     <div className="flex h-full w-3/4 flex-col ml-40 mr-40 mt-28 ">
       <div className="flex flex-row items-center">
