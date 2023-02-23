@@ -7,7 +7,11 @@ import {
   setemailNotification,
   settelegramNotification,
 } from "../../../../../pages/slices/tokenslice";
-import { setportfolioMonitor } from "../../../../../pages/slices/cardsSlice";
+import {
+  setMonitorNotification,
+  setportfolioMonitor,
+} from "../../../../../pages/slices/cardsSlice";
+
 import {
   setEmailNotification,
   setTelegramNotification,
@@ -55,6 +59,19 @@ const MonitoringWallet: React.FC<Props> = ({ setMonitor, isMonitor }) => {
     );
     setTelegramNotification(email, name, chainAddress, !istelegram);
   };
+  const handleAllnotification = (
+    chainid: string,
+    email: string,
+    isnotification: boolean
+  ) => {
+    dispatch(
+      setMonitorNotification({
+        chainId: chainid,
+        isnotification: isnotification,
+      })
+    );
+  };
+
   return (
     <div className="flex h-full w-3/4 flex-col ml-40 mr-40 mt-28 ">
       <div className="flex flex-row items-center">
@@ -85,7 +102,15 @@ const MonitoringWallet: React.FC<Props> = ({ setMonitor, isMonitor }) => {
                     <h1 className="text-gray-300">Off</h1>
                     <label className="relative inline-flex content-center items-center cursor-pointer">
                       <input
+                        checked={item.isnotification}
                         type="checkbox"
+                        onChange={() =>
+                          handleAllnotification(
+                            item.chainId,
+                            email,
+                            !item.isnotification
+                          )
+                        }
                         value=""
                         className="sr-only peer"
                       />
