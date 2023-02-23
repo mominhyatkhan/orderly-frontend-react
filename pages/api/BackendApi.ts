@@ -84,7 +84,7 @@ export async function saveWallet(
 ) {
   const response = await axios.post(
     "http://localhost:8000/wallets/add-wallet",
-    { email, address, chain }
+    {  address, chain ,email}
   );
   console.log("wallet save response:", response);
 }
@@ -93,6 +93,32 @@ export async function getwallets(email: string) {
     `http://localhost:8000/wallets/get-wallets?email=${email}`
   );
   return response;
+}
+export async function setEmailNotification(
+  email: string,
+  chain: string,
+  address: string,
+  isemail: boolean
+) {
+
+  
+  const response = await axios.post(
+    "http://localhost:8000/wallets/set-email-notification",
+    { address, chain, isemail, email }
+  );
+  console.log("response of email notification", response );
+}
+export async function setTelegramNotification(
+  email: string,
+  chain: string,
+  address: string,
+  istelegram: boolean
+) {
+  const response = await axios.post(
+    "http://localhost:8000/wallets/set-telegram-notification",
+    { address, chain, istelegram, email }
+  );
+  console.log("response of telegram notification", response );
 }
 export async function getContacts(email: string) {
   let data = await axios.get(
