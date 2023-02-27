@@ -38,14 +38,14 @@ const Portfolio = () => {
         if (!wallets.length) {
           const response = await getwallets(email);
           if (response.data) {
-            console.log('im response data',response.data)
-            dispatch(addwalletsfromDb(response.data))
+            console.log("im response data", response.data);
+            dispatch(addwalletsfromDb(response.data));
             response.data.map(async (item: any, index: number) => {
               let wallet: any = {
                 state: true,
-                chain:item.chain,
-                isemail:item.isemail,
-                istelegram:item.istelegram,
+                chain: item.chain,
+                isemail: item.isemail,
+                istelegram: item.istelegram,
                 name: "",
                 symbol: "",
                 tableState: true,
@@ -89,42 +89,61 @@ const Portfolio = () => {
 
   return (
     <main className="flex justify-center h-full flex-col overflow-auto">
-      <div className="w-full p-10 flex flex-row">
+      <div className="w-full p-10 flex flex-row  h-auto">
         <h1 className="text-2xl font-normal">Portfolio Overview</h1>
-        <div className="flex justify-end self-end w-4/6 h-8 space-x-10">
-          <select className="p-1">
-            <option onClick={() => filterwalletchains("all")}>
-              All Chains
-            </option>
-            {cards.map((card) => {
-              if (card.monintorState) {
-                return (
-                  <option onClick={() => filterwalletchains(card.name)}>
+        <div className="  flex justify-end self-end w-4/6 h-8 space-x-10">
+          <button className=" w-36 z-30 group">
+            <p className=" text-gray-500 ">All Networks</p>
+            <ul className="pt-2 flex rounded hidden group-focus:block flex-col justify-center shadow bg-white flex">
+              <li
+                className="hover:bg-gray-200 w-full p-1"
+                onClick={() => filterwalletchains("all")}
+              >
+                All Chains
+              </li>
+              {cards.map((card) => {
+                return card.monintorState ? (
+                  <li
+                    className=" hover:bg-gray-200 w-full p-1"
+                    onClick={() => {
+                      filterwalletchains(card.name), changeState(0);
+                    }}
+                  >
                     {card.name}
-                  </option>
+                  </li>
+                ) : (
+                  <li
+                    className="text-gray-300 hover:bg-gray-400 w-full p-1"
+                    onClick={() => changeState(1)}
+                  >
+                    {card.name}
+                  </li>
                 );
-              }
-            })}
-          </select>
-          <select className="p-1">
-            <option onClick={() => filterwallet("", "all")}>All wallet</option>
-            {wallets &&
-              wallets.map((wallet, index) => {
-                console.log(wallet);
-                if (wallet.monitorState)
-                  return (
-                    <option
-                      className=""
-                      key={index}
-                      onClick={() =>
-                        filterwallet(wallet.chainAddress, wallet.name)
-                      }
-                    >
-                      <span>{wallet.symbol}</span> <span>{index + 1}</span>
-                    </option>
-                  );
               })}
-          </select>
+            </ul>
+          </button>
+
+          <button className="w-36 z-30 group">
+            <p className=" text-gray-500 ">All wallet</p>
+            <ul className="flex rounded hidden group-focus:block flex-col justify-center shadow bg-white flex ">
+              {wallets &&
+                wallets.map((wallet, index) => {
+                  console.log(wallet);
+                  if (wallet.monitorState)
+                    return (
+                      <li
+                        className=" hover:bg-gray-200 w-full p-1"
+                        key={index}
+                        onClick={() =>
+                          filterwallet(wallet.chainAddress, wallet.name)
+                        }
+                      >
+                        <span>{wallet.symbol}</span> <span>{index + 1}</span>
+                      </li>
+                    );
+                })}
+            </ul>
+          </button>
         </div>
       </div>
       <div className="flex flex-col gap-y-6 justify-center">

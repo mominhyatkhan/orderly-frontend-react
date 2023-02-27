@@ -183,7 +183,7 @@ const MonitoringWallet: React.FC<Props> = ({ setMonitor, isMonitor }) => {
                       </th>
                       <th
                         scope="col"
-                        className="px-6 py-3 w-44 font-normal text-uppercase"
+                        className="p-1 w-28 font-normal text-uppercase"
                       >
                         TELEGRAM NOTIFICATION
                       </th>
