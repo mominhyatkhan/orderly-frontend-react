@@ -21,7 +21,7 @@ const initialState: CardsState[] = [
     symbol: "ETH",
     chainId: "0x1",
     monintorState: true,
-    isnotification:true,
+    isnotification:false,
     image: "/etherum.png",
     addreses: ["0x19692cF317500C8720046D4744B3Af2cC3c6C94C"],
   },
@@ -59,8 +59,9 @@ export const cardSlice = createSlice({
     },
     setMonitorNotification: (state, action) => {
       let data = action.payload;
+      console.log(data)
       state.map((item) => {
-        if (data.name == item.name) {
+        if (data.chainId == item.chainId) {
           item.isnotification = data.isnotification;
         }
       });

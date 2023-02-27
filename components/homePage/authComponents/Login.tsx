@@ -2,6 +2,7 @@ import axios from "axios";
 import { FormEvent, useState } from "react";
 import { useDispatch } from "react-redux";
 import { checkLogin } from "../../../pages/api/BackendApi";
+import { setMonitorNotification } from "../../../pages/slices/cardsSlice";
 
 import { setLoginState } from "../../../pages/slices/loginSlice";
 import { setSignupState } from "../../../pages/slices/signupSlice";
@@ -15,7 +16,24 @@ function Login() {
       const data = await checkLogin(email, password);
       if (data.data.emailVerified) {
         dispatch(
-          setLoginState({email:email, password: password,isLogged: true,
+          setLoginState({ email: email, password: password, isLogged: true })
+        );
+        dispatch(
+          setMonitorNotification({
+            chainId: "0x1",
+            isnotification: data.data.isEthereum,
+          })
+        );
+        dispatch(
+          setMonitorNotification({
+            chainId: "0x38",
+            isnotification: data.data.isBsc,
+          })
+        );
+        dispatch(
+          setMonitorNotification({
+            chainId: "0x89",
+            isnotification: data.data.isPolygon,
           })
         );
         console.log(data);

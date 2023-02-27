@@ -84,7 +84,7 @@ export async function saveWallet(
 ) {
   const response = await axios.post(
     "http://localhost:8000/wallets/add-wallet",
-    {  address, chain ,email}
+    { address, chain, email }
   );
   console.log("wallet save response:", response);
 }
@@ -100,13 +100,11 @@ export async function setEmailNotification(
   address: string,
   isemail: boolean
 ) {
-
-  
   const response = await axios.post(
     "http://localhost:8000/wallets/set-email-notification",
     { address, chain, isemail, email }
   );
-  console.log("response of email notification", response );
+  console.log("response of email notification", response);
 }
 export async function setTelegramNotification(
   email: string,
@@ -118,7 +116,7 @@ export async function setTelegramNotification(
     "http://localhost:8000/wallets/set-telegram-notification",
     { address, chain, istelegram, email }
   );
-  console.log("response of telegram notification", response );
+  console.log("response of telegram notification", response);
 }
 export async function getContacts(email: string) {
   let data = await axios.get(
@@ -253,6 +251,20 @@ export async function deleteFromGroupList(email: string, name: string) {
   try {
     const response = await axios.post(
       `http://localhost:8000/grouplist/delete-from-group-list?email=${email}&&name=${name}`
+    );
+    return response;
+  } catch (error) {
+    console.error(error);
+  }
+}
+export async function setAllNotification(
+  email: string,
+  chainId: string,
+  isnotification: boolean
+) {
+  try {
+    const response = await axios.post(
+      `http://localhost:8000/user/update-notification?email=${email}&&isEthereum=${isnotification}&&chain=${chainId}`
     );
     return response;
   } catch (error) {

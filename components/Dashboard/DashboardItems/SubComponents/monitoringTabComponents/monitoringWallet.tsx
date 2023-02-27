@@ -13,6 +13,7 @@ import {
 } from "../../../../../pages/slices/cardsSlice";
 
 import {
+  setAllNotification,
   setEmailNotification,
   setTelegramNotification,
 } from "../../../../../pages/api/BackendApi";
@@ -59,11 +60,12 @@ const MonitoringWallet: React.FC<Props> = ({ setMonitor, isMonitor }) => {
     );
     setTelegramNotification(email, name, chainAddress, !istelegram);
   };
-  const handleAllnotification = (
+  const handleAllnotification = async (
     chainid: string,
     email: string,
     isnotification: boolean
   ) => {
+    await setAllNotification(email, chainid, isnotification);
     dispatch(
       setMonitorNotification({
         chainId: chainid,
@@ -111,7 +113,6 @@ const MonitoringWallet: React.FC<Props> = ({ setMonitor, isMonitor }) => {
                             !item.isnotification
                           )
                         }
-                        value=""
                         className="sr-only peer"
                       />
 
