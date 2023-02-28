@@ -10,7 +10,7 @@ type Tokenlist = {
 };
 type ChainToken = {
   state: boolean;
-  chain:string;
+  chain: string;
   isemail: boolean;
   istelegram: boolean;
   tableState: boolean;
@@ -42,21 +42,19 @@ export const tokenSlice = createSlice({
     filterWalletsChains: (state, action) => {
       let data = action.payload;
       state.wallet.map((item) => {
-        if (data == "all") {
-          item.state = true;
+        if (data.name == "all") {
+          item.state = data.ischainSelected;
         } else {
-          if (item.name === data) {
-            console.log(data, "=", item.name);
-            item.state = true;
-          } else {
-            item.state = false;
+          if (item.name === data.name) {
+            console.log(data.name, "=", item.name);
+            item.state = data.ischainSelected;
           }
         }
       });
     },
     setemailNotification: (state, action) => {
       let data = action.payload;
-      console.log('im data',data)
+      console.log("im data", data);
       state.wallet.map((item) => {
         if (
           item.chainAddress === data.chainAddress &&
@@ -84,20 +82,16 @@ export const tokenSlice = createSlice({
       state.wallet.map((item) => {
         console.log("im chain", item.name);
         if (data.name == "all") {
-          item.tableState = true;
+          item.tableState = data.iswalletSelected;
         } else {
           console.log(item.chainAddress, "=", data.address);
           if (item.chainAddress === data.address) {
             console.log(item.name, "=", data.name);
             if (item.name === data.name) {
               console.log(" idher kyu aya ");
-              item.tableState = true;
-            } else {
-              item.tableState = false;
+              item.tableState = data.iswalletSelected;
             }
-          } else {
-            item.tableState = false;
-          }
+          } 
         }
       });
     },

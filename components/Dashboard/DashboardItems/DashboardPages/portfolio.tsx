@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getwallets, GetWallletData } from "../../../../pages/api/BackendApi";
 import { RootState } from "../../../../pages/store";
@@ -15,22 +15,45 @@ import PreviousTokenTable from "../SubComponents/previousTokenTable";
 import PriceCard from "../SubComponents/priceCards";
 import UpcomingTokenTable from "../SubComponents/upcomingTokenTable";
 import { addwalletsfromDb } from "../../../../pages/slices/walletSlice";
+import { setchainselection } from "../../../../pages/slices/cardsSlice";
 
 const Portfolio = () => {
   const wallets = useSelector((state: RootState) => state.tokens.wallet);
   const email = useSelector((state: RootState) => state.isLogin.user.email);
   const cards = useSelector((state: RootState) => state.coinCards);
   const dispatch = useDispatch();
-
+  const [isnetwork, setIsNetwork] = useState<boolean>(false);
+  const [ischain, setIsChain] = useState<boolean>(false);
+  const [isalltrue, setIsallTrue] = useState<boolean>(true);
   const changeState = (index: number) => {
     dispatch(setDashboardState(index));
   };
-  function filterwalletchains(name: any) {
-    dispatch(filterWalletsChains(name));
+  function filterwalletchains(name: string, ischainSelected: boolean) {
+    if (name == "all") {
+      setIsallTrue(true);
+    } else {
+      setIsallTrue(false);
+    }
+    dispatch(
+      filterWalletsChains({ name: name, ischainSelected: ischainSelected })
+    );
+    dispatch(
+      setchainselection({ name: name, ischainSelected: ischainSelected })
+    );
   }
-  function filterwallet(address: string, name: string) {
+  function filterwallet(
+    address: string,
+    name: string,
+    iswalletSelected: boolean
+  ) {
     console.log(address);
-    dispatch(filterWallets({ address, name }));
+    dispatch(
+      filterWallets({
+        address: address,
+        name: name,
+        iswalletSelected: iswalletSelected,
+      })
+    );
   }
   useEffect(() => {
     (async () => {
@@ -92,58 +115,136 @@ const Portfolio = () => {
       <div className="w-full p-10 flex flex-row  h-auto">
         <h1 className="text-2xl font-normal">Portfolio Overview</h1>
         <div className="  flex justify-end self-end w-4/6 h-8 space-x-10">
-          <button className=" w-36 z-30 group">
-            <p className=" text-gray-500 ">All Networks</p>
-            <ul className="pt-2 flex rounded hidden group-focus:block flex-col justify-center shadow bg-white flex">
-              <li
-                className="hover:bg-gray-200 w-full p-1"
-                onClick={() => filterwalletchains("all")}
+          <div
+            className="z-30"
+            onMouseEnter={() => setIsNetwork(true)}
+            onMouseLeave={() => setIsNetwork(false)}
+          >
+            <button className={`w-32  group space-y-2 `}>
+              <div className="flex justify-between ">
+                <p className="pl-2 text-gray-500 ">All Networks</p>
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  strokeWidth="1.5"
+                  stroke="currentColor"
+                  className="w-6 h-6 text-gray-500"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    d="M19.5 8.25l-7.5 7.5-7.5-7.5"
+                  />
+                </svg>
+              </div>
+              <ul
+                className={` pt-2 flex-col  rounded  ${
+                  isnetwork ? "block" : "hidden"
+                } shadow bg-white flex`}
               >
-                All Chains
-              </li>
-              {cards.map((card) => {
-                return card.monintorState ? (
-                  <li
-                    className=" hover:bg-gray-200 w-full p-1"
-                    onClick={() => {
-                      filterwalletchains(card.name), changeState(0);
-                    }}
-                  >
-                    {card.name}
-                  </li>
-                ) : (
-                  <li
-                    className="text-gray-300 hover:bg-gray-400 w-full p-1"
-                    onClick={() => changeState(1)}
-                  >
-                    {card.name}
-                  </li>
-                );
-              })}
-            </ul>
-          </button>
-
-          <button className="w-36 z-30 group">
-            <p className=" text-gray-500 ">All wallet</p>
-            <ul className="flex rounded hidden group-focus:block flex-col justify-center shadow bg-white flex ">
-              {wallets &&
-                wallets.map((wallet, index) => {
-                  console.log(wallet);
-                  if (wallet.monitorState)
-                    return (
-                      <li
-                        className=" hover:bg-gray-200 w-full p-1"
-                        key={index}
-                        onClick={() =>
-                          filterwallet(wallet.chainAddress, wallet.name)
-                        }
-                      >
-                        <span>{wallet.symbol}</span> <span>{index + 1}</span>
-                      </li>
-                    );
+                <li
+                  className="hover:bg-gray-200 w-full p-1 flex flex-row space-x-2 pl-2 items-center "
+                  onClick={() => {
+                    filterwalletchains("all", !isalltrue),
+                      setIsallTrue(!isalltrue);
+                  }}
+                >
+                  <input
+                    id="email-checkbox"
+                    type="checkbox"
+                    checked={isalltrue}
+                    className="w-4 h-4  accent-[#6B8068]"
+                  />
+                  <p>All Chains</p>
+                </li>
+                {cards.map((card) => {
+                  return card.monintorState ? (
+                    <li
+                      className=" hover:bg-gray-200 w-full flex-row flex  space-x-2 items-center p-1 pl-2"
+                      onClick={() => {
+                        filterwalletchains(card.name, !card.ischainSelected);
+                      }}
+                    >
+                      <input
+                        id="email-checkbox"
+                        type="checkbox"
+                        checked={card.ischainSelected}
+                        className="w-4 h-4  accent-[#6B8068]"
+                      />
+                      <p>{card.name}</p>
+                    </li>
+                  ) : (
+                    <li
+                      className="text-gray-300 hover:bg-gray-400 w-full p-1"
+                      onClick={() => changeState(1)}
+                    >
+                      {card.name}
+                    </li>
+                  );
                 })}
-            </ul>
-          </button>
+              </ul>
+            </button>
+          </div>
+          <div
+            className="z-30"
+            onMouseEnter={() => setIsChain(true)}
+            onMouseLeave={() => setIsChain(false)}
+          >
+            <button className="w-30 z-30 group">
+              <div className="flex justify-between">
+                <p className=" text-gray-500 ">All Wallets</p>
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  strokeWidth="1.5"
+                  stroke="currentColor"
+                  className="w-6 h-6 text-gray-500"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    d="M19.5 8.25l-7.5 7.5-7.5-7.5"
+                  />
+                </svg>
+              </div>
+              <ul
+                className={` flex-col  rounded  ${
+                  ischain ? "block" : "hidden"
+                } shadow bg-white flex`}
+              >
+                {wallets &&
+                  wallets.map((wallet, index) => {
+                    console.log(wallet);
+                    if (wallet.monitorState)
+                      return (
+                        <li
+                          className="pt-2 hover:bg-gray-200 w-full p-1 flex flex-row space-x-2 items-center pl-2"
+                          key={index}
+                          onClick={() =>
+                            filterwallet(
+                              wallet.chainAddress,
+                              wallet.name,
+                              !wallet.tableState
+                            )
+                          }
+                        >
+                          <input
+                            id="email-checkbox"
+                            type="checkbox"
+                            checked={wallet.tableState}
+                            className="w-4 h-4  accent-[#6B8068]"
+                          />
+                          <p>
+                            {wallet.symbol} {index + 1}
+                          </p>
+                        </li>
+                      );
+                  })}
+              </ul>
+            </button>
+          </div>
         </div>
       </div>
       <div className="flex flex-col gap-y-6 justify-center">
