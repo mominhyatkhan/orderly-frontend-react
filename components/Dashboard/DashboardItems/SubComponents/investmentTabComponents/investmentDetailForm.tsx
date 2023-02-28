@@ -1,7 +1,7 @@
 const InvesterDetail = () => {
   return (
     <div className="">
-      <div className="  bg-white">
+      <div className="bg-white w-full">
         <div className="flex p-4 flex-row w-full">
           <div className="flex flex-row space-x-2 w-full">
             <img src="#" className="h-12 w-12" />
@@ -12,9 +12,9 @@ const InvesterDetail = () => {
               </span>
             </div>
           </div>
-          <div className="flex w-5/6 justify-end  mr-10  text-sm">
-            <div className="flex self-center space-x-10">
-              <a className="text-gray-500 cursor-pointer">
+          <div className="flex mr-10  text-sm justify-end">
+            <div className="flex self-center flex-row space-x-10">
+              <a className="text-gray-500 w-max cursor-pointer">
                 Add Refund Pending Event
               </a>
               <a className="text-gray-500 cursor-pointer">Refunded</a>
@@ -54,10 +54,10 @@ const InvesterDetail = () => {
           </div>
         </div>
       </div>
-      <div className="mt-10 flex space-x-72">
-        <div className="space-y-5">
+      <div className="mt-10 flex  w-full">
+        <div className="space-y-5 pb-10 pl-5 w-full">
           <h1 className="text-gray-600">Project Links:</h1>
-          <div className="flex flex-row space-x-9">
+          <div className="flex flex-row">
             <div className="flex flex-col space-y-8 text-gray-500">
               <span>Website:</span>
               <span>Distribution Portal:</span>
@@ -70,11 +70,11 @@ const InvesterDetail = () => {
             </div>
           </div>
         </div>
-        <div className="flex flex-col space-y-2.5">
+        <div className=" flex flex-col space-y-2.5 w-full">
           <h1 className="text-gray-600">Investment signee</h1>
           <span className="text-gray-500 font-light">John Down</span>
         </div>
-        <div className="flex flex-col space-y-3.5">
+        <div className=" flex flex-col space-y-3.5 w-full">
           <h1 className="text-gray-600">Invested Amount</h1>
           <span className="font-medium">$0.00</span>
         </div>

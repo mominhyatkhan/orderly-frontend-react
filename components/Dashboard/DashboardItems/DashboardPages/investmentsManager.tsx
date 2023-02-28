@@ -67,15 +67,14 @@ const InvestmentsManager = () => {
           </div>
           <div className="mt-10 w-full">
             <InvesterDetail />
-          </div>
-
-          {modal && (
-            <div className="overlay-div absolute top-0 right-0 z-10 w-full bg-opacity-10 bg-gray-500 flex justify-end h-full">
-              <div className="flex h-auto overflow-auto w-[560px] bg-white justify-end">
-                <InvestmentDetailModel isOpen={setModal} />
+            {modal && (
+              <div className="overlay-div absolute top-0 right-0 z-10 w-full bg-opacity-10 bg-gray-500 flex justify-end h-full">
+                <div className="flex h-auto overflow-auto w-[560px] bg-white justify-end">
+                  <InvestmentDetailModel isOpen={setModal} />
+                </div>
               </div>
-            </div>
-          )}
+            )}
+          </div>
         </div>
       </div>
     </div>
