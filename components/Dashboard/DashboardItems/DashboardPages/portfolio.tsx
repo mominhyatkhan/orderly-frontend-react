@@ -13,7 +13,6 @@ import {
 import GlobalTokenTable from "../SubComponents/globalTokenTable";
 import PreviousTokenTable from "../SubComponents/previousTokenTable";
 import PriceCard from "../SubComponents/priceCards";
-import UpcomingTokenTable from "../SubComponents/upcomingTokenTable";
 import { addwalletsfromDb } from "../../../../pages/slices/walletSlice";
 import { setchainselection } from "../../../../pages/slices/cardsSlice";
 
@@ -28,6 +27,7 @@ const Portfolio = () => {
   const changeState = (index: number) => {
     dispatch(setDashboardState(index));
   };
+  
   function filterwalletchains(name: string, ischainSelected: boolean) {
     if (name == "all") {
       setIsallTrue(true);
@@ -262,15 +262,15 @@ const Portfolio = () => {
           <PriceCard heading="Locked ATL ($)" price="0.00" />
         </div>
       </div>
-      <div className="flex mb-10 mt-10 gap-3">
+      <div className="flex flex-col mb-10 mt-10 gap-3">
         <div className="bg-white">
-          <UpcomingTokenTable />
+          <a></a>
         </div>
-        <div className="bg-white">
+        <div className="w-5/6">
           <PreviousTokenTable />
         </div>
       </div>
-      <div className=" flex overflow-y-scroll h-96 w-max mt-2 ">
+      <div className=" flex overflow-y-scroll h-96 w-5/6 mt-2 ">
         <GlobalTokenTable />
       </div>
       <div className="overflow-auto mt-10 self-center w-4/6">
