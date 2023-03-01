@@ -48,25 +48,26 @@ const PreviousTokenTable = () => {
       <div className="bg-white flex flex-row w-full">
         <div className="text-[11px] pl-4 pt-2 pb-2  space-x-2 text-gray-500 w-full">
           <a
-            className="cursor-pointer font-medium"
+          
+            className="cursor-pointer font-medium hover:bg-gray-100"
             onClick={() => setHeading(upcomingHeading)}
           >
             Upcoming Token
           </a>
           <a
-            className="cursor-pointer font-medium"
+            className="cursor-pointer font-medium hover:bg-gray-100"
             onClick={() => setHeading(previousHeading)}
           >
             Previous Token
           </a>
           <a
-            className="cursor-pointer font-medium"
+            className="cursor-pointer font-medium hover:bg-gray-100"
             onClick={() => setHeading(missedHeading)}
           >
             Missed Distribution
           </a>
           <a
-            className="cursor-pointer font-medium"
+            className="cursor-pointer font-medium hover:bg-gray-100"
             onClick={() => setHeading(pendingHeading)}
           >
             Pending Distribution
@@ -74,16 +75,16 @@ const PreviousTokenTable = () => {
         </div>
         <div className="flex w-full justify-end flex-row space-x-4 text-[11px] mr-14 text-gray-500"><button>Next 30 Days</button> <button>Time Left</button></div>
       </div>
-      <div className="bg-white w-full mt-1">
-        <table className="border-separate bg-white border-spacing-4 w-full">
-          <thead>
-            <tr className=" font-extralight">
-              <th className="font-extralight text-[10px] text-left uppercase">
+      <div className="bg-white w-full mt-1 p-[24px]">
+        <table className=" bg-white border-spacing-4 w-full">
+          <thead className="">
+            <tr className=" font-extralight bg-gray-200 h-8">
+              <th className="font-extralight text-[11px] text-left uppercase ">
                 token name
               </th>
               {heading.map((item) => {
                 return (
-                  <th className="font-extralight text-[10px] text-left uppercase">
+                  <th className="font-extralight text-[11px] text-left uppercase">
                     {item}
                   </th>
                 );
@@ -91,8 +92,8 @@ const PreviousTokenTable = () => {
             </tr>
           </thead>
           <tbody>
-            <tr>
-              <td className="text-[11px]">asd</td>
+            <tr className="border-b">
+              <td className="text-[11px] py-3">asd</td>
               <td className="text-[11px]">asd</td>
               <td className="text-[11px]">fasd</td>
               <td className="text-[11px]">asd</td>
