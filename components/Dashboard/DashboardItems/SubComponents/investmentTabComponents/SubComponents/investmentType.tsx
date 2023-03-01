@@ -1,7 +1,7 @@
 import { Dispatch, SetStateAction, useState } from "react";
 type Props={
   setInvestmentType:Dispatch<SetStateAction<string>>;
-  setInvestmentAddress:Dispatch<SetStateAction<string[] | undefined>>
+  setInvestmentAddress:Dispatch<SetStateAction<string>>
 }
 const InvestmentType:React.FC<Props>  = ({setInvestmentType,setInvestmentAddress}) => {
   const [isOpen, setIsOpen] = useState(false);
@@ -28,6 +28,7 @@ const InvestmentType:React.FC<Props>  = ({setInvestmentType,setInvestmentAddress
           Address
         </label>
         <input
+          onChange={(e)=>{setInvestmentAddress(e.target.value)}}
           placeholder="3454345Qw53Vcx3999CX5344EW534 Myself"
           className="bg-gray-100 w-full h-6  rounded-md"
         />

@@ -54,7 +54,7 @@ const InvesterDetail = () => {
           </div>
         </div>
       </div>
-      <div className="mt-10 flex  w-full">
+      <div className="mt-10 flex w-full justify-between">
         <div className="space-y-5 pb-10 pl-5 w-full">
           <h1 className="text-gray-600">Project Links:</h1>
           <div className="flex flex-row">
@@ -63,18 +63,18 @@ const InvesterDetail = () => {
               <span>Distribution Portal:</span>
               <span>Custome Link:</span>
             </div>
-            <div className="flex flex-col space-y-8 text-gray-500">
+            <div className="ml-4 flex flex-col space-y-8 text-gray-500">
               <span>pontem.network</span>
               <span>claim.pontem.network</span>
               <span>wallet.pontem.network</span>
             </div>
           </div>
         </div>
-        <div className=" flex flex-col space-y-2.5 w-full">
+        <div className=" flex flex-col space-y-2.5 w-full items-center">
           <h1 className="text-gray-600">Investment signee</h1>
           <span className="text-gray-500 font-light">John Down</span>
         </div>
-        <div className=" flex flex-col space-y-3.5 w-full">
+        <div className=" flex flex-col space-y-3.5 w-full  items-center">
           <h1 className="text-gray-600">Invested Amount</h1>
           <span className="font-medium">$0.00</span>
         </div>

@@ -15,12 +15,33 @@ const InvestmentDetailModel: React.FC<props> = ({ isOpen }) => {
   const [lockup, setLockup] = useState<number>(0);
   const [percentOfToken, setPercentOfToken] = useState<number>(0);
   const [vestingPeriod, setVestingPeriod] = useState<number>(0);
-  const [investmentType,setInvestmentType]=useState<string>("");
-  const [investmentAddress,setInvestmentAddress]=useState<string[]>();
-  const [saftFile,setSaftFile]=useState<File>();
-  const [website,setWebsite]=useState<string>();
+  const [investmentType, setInvestmentType] = useState<string>("");
+  const [investmentAddress, setInvestmentAddress] = useState<string>("");
+  const [saftFile, setSaftFile] = useState<File>();
+  const [website, setWebsite] = useState<string>("");
   const showdata = () => {
-
+    console.log(
+      "chain",
+      chain,
+      "amountInvested:",
+      amountInvested,
+      "investmentTrasactionLink",
+      investmentTrasactionLink,
+      "lockup:",
+      lockup,
+      "percentOfToken",
+      percentOfToken,
+      "vestingPeriod",
+      vestingPeriod,
+      "investmentType:",
+      investmentType,
+      "investmentAddress",
+      investmentAddress,
+      "saftFile",
+      saftFile,
+      "website",
+      website
+    );
   };
   const canceled = () => {
     setChain("");
@@ -68,7 +89,10 @@ const InvestmentDetailModel: React.FC<props> = ({ isOpen }) => {
           vestingPeriod={setVestingPeriod}
         />
         <DistributionType />
-        <InvestmentType setInvestmentType={setInvestmentType} setInvestmentAddress={setInvestmentAddress} />
+        <InvestmentType
+          setInvestmentType={setInvestmentType}
+          setInvestmentAddress={setInvestmentAddress}
+        />
         <About />
       </div>
       <div className="flex mt-20 justify-end self-end w-full">

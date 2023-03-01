@@ -8,11 +8,11 @@ type Props = {
 
 const Cards: React.FC<Props> = ({ name, symbol, image }) => {
   return (
-    <div className={`w-96 grid grid-flow-col`}>
+    <div className={` grid grid-flow-col`}>
       <div
-        className={`w-full max-w-sm border border-gray-200 rounded-lg shadow-md`}
+        className={`w-[280px] h-[144px] border border-gray-200 rounded-lg`}
       >
-        <div className="flex justify-end pt-4">
+        <div className="flex justify-end">
           <button
             id="dropdownButton"
             data-dropdown-toggle="dropdown"
@@ -42,7 +42,7 @@ const Cards: React.FC<Props> = ({ name, symbol, image }) => {
             </svg>
           </button>
         </div>
-        <div className="flex flex-col items-center pb-10">
+        <div className="flex flex-col items-center">
           <img src={image} alt="#" />
           <h5 className="mb-1 text-xl font-medium text-black dark:text-black">
             {name}
