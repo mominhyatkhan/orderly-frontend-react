@@ -111,8 +111,8 @@ const Portfolio = () => {
   }, []);
 
   return (
-    <main className="flex justify-center h-full flex-col overflow-auto">
-      <div className="w-full p-10 flex flex-row  h-auto">
+    <main className="relative pl-14 flex justify-center h-full flex-col overflow-auto">
+      <div className="w-full mt-10 mb-10 flex flex-row  h-auto">
         <h1 className="text-2xl font-normal">Portfolio Overview</h1>
         <div className="  flex justify-end self-end w-4/6 h-8 space-x-10">
           <div
@@ -247,8 +247,8 @@ const Portfolio = () => {
           </div>
         </div>
       </div>
-      <div className="flex flex-col gap-y-6 justify-center">
-        <div className="grid self-center gap-x-6 grid-flow-col">
+      <div className="flex flex-col gap-y-6 justify-between">
+        <div className="flex space-x-14">
           <PriceCard heading="Liquid Value ($)" price="0" />
           <PriceCard
             heading="Liquid ATH ($ All-Time High Value)"
@@ -256,13 +256,13 @@ const Portfolio = () => {
           />
           <PriceCard heading="Liquid ATL ($ All-Time Low Value)" price="0.00" />
         </div>
-        <div className="grid self-center gap-x-6 grid-flow-col">
+        <div className="flex space-x-14 ">
           <PriceCard heading="Locked Value ($)" price="0.00" />
           <PriceCard heading="Locked ATH ($)" price="0.00" />
           <PriceCard heading="Locked ATL ($)" price="0.00" />
         </div>
       </div>
-      <div className="flex justify-center mt-10 gap-3">
+      <div className="flex mb-10 mt-10 gap-3">
         <div className="bg-white">
           <UpcomingTokenTable />
         </div>
@@ -270,7 +270,7 @@ const Portfolio = () => {
           <PreviousTokenTable />
         </div>
       </div>
-      <div className=" ml-20 mr-20 grid overflow-y-scroll h-96 mt-2 ">
+      <div className=" flex overflow-y-scroll h-96 w-max mt-2 ">
         <GlobalTokenTable />
       </div>
       <div className="overflow-auto mt-10 self-center w-4/6">

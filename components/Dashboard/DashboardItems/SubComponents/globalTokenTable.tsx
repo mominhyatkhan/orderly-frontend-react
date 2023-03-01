@@ -5,7 +5,7 @@ const GlobalTokenTable = () => {
   const data = useSelector((state: RootState) => state.tokens.wallet);
 
   return (
-    <div className="relative overflow-auto shadow-md sm:rounded-lg max-h-96">
+    <div className="relative overflow-auto w-full shadow-md sm:rounded-lg max-h-96">
       <table className="w-full text-sm font-light text-gray-500 dark:text-gray-400">
         <thead className="font-normal text-gray-700 uppercase bg-white dark:bg-white dark:text-gray-400">
           <tr>
