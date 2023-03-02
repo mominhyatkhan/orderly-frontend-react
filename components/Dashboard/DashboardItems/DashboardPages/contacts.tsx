@@ -102,7 +102,7 @@ const Contacts = () => {
   }, [reload]);
 
   return (
-    <div className="p-28 w-full">
+    <div className="p-24 w-full">
       <div className="flex">
         <div>
           <h1 className="text-3xl">Contacts</h1>
@@ -119,11 +119,11 @@ const Contacts = () => {
       </div>
       <div className="w-full overflow mt-10 bg-white">
         <div className="w-full">
-          <div className="flex pt-3">
-            <table className="w-full ">
+          <div className="flex w-full">
+            <table className="w-full">
               <thead>
                 <tr className="border-b w-max">
-                  <th className="font-extralight  text-left text-gray-500">
+                  <th className="font-extralight p-2 text-left text-gray-500">
                     NAME
                   </th>
                   <th className="font-extralight  text-left text-gray-500">
@@ -132,18 +132,13 @@ const Contacts = () => {
                   <th className="font-extralight  text-left text-gray-500">
                     TOKEN
                   </th>
-                  <th className="font-extralight  text-left text-gray-500">
-                    ACTION
-                  </th>
+                  <th className="font-extralight text-gray-500">ACTION</th>
                 </tr>
               </thead>
               <tbody>
                 {personalContact.map((personal, index) => {
                   return (
-                    <tr
-                      key={personal.address + index}
-                      className="h-auto w-full border-b"
-                    >
+                    <tr key={personal.address + index} className=" border-b">
                       <td className="p-4">{personal.name}</td>
                       <td className="">{personal.address}</td>
                       <td></td>
@@ -176,41 +171,43 @@ const Contacts = () => {
             {Group.map((group: any) => {
               console.log("im group", group);
               return (
-                <table
-                  key={group.name + group.email}
-                  className="h-auto w-full border-b"
-                >
-                  <tr className="bg-gray-100 p-3 flex flex-row w-full">
-                    <h1 className="font-extralight w-full ml-1">
-                      {group.name}
-                    </h1>
-                    <a
-                      onClick={() => deletegroup(group.name)}
-                      className="flex w-full cursor-pointer justify-end"
-                    >
-                      <svg
-                        className="w-4 h-4 text-gray-300"
-                        viewBox="0 0 24 24"
-                        stroke="currentColor"
-                        xmlSpace="preserve"
-                        xmlns="http://www.w3.org/2000/svg"
-                      >
-                        <g id="Icon" className="">
-                          <path d="M4.251,9.031c-0,0 0.194,4.655 0.34,8.167c0.106,2.544 2.199,4.552 4.746,4.552c1.68,0 3.646,0 5.326,0c2.547,0 4.64,-2.008 4.746,-4.552c0.146,-3.512 0.34,-8.167 0.34,-8.167c0.018,-0.413 -0.304,-0.763 -0.718,-0.78c-0.413,-0.018 -0.763,0.304 -0.78,0.718c-0,-0 -0.194,4.655 -0.341,8.166c-0.072,1.741 -1.505,3.115 -3.247,3.115c-1.68,0 -3.646,0 -5.326,-0c-1.742,0 -3.175,-1.374 -3.247,-3.115c-0.147,-3.511 -0.341,-8.166 -0.341,-8.166c-0.017,-0.414 -0.367,-0.736 -0.78,-0.718c-0.414,0.017 -0.736,0.367 -0.718,0.78Z" />
-                          <path d="M7.459,5.25l0.374,-1.12c0.374,-1.123 1.425,-1.88 2.609,-1.88c0.944,0 2.172,0 3.116,0c1.184,-0 2.235,0.757 2.609,1.88l0.374,1.12l3.459,0c0.414,-0 0.75,0.336 0.75,0.75c0,0.414 -0.336,0.75 -0.75,0.75l-16,0c-0.414,-0 -0.75,-0.336 -0.75,-0.75c0,-0.414 0.336,-0.75 0.75,-0.75l3.459,0Zm7.5,0l-0.215,-0.645c-0.17,-0.511 -0.647,-0.855 -1.186,-0.855c-0.944,-0 -2.172,-0 -3.116,0c-0.539,-0 -1.016,0.344 -1.186,0.855l-0.215,0.645l5.918,0Z" />
-                        </g>
-                      </svg>
-                    </a>
-                  </tr>
-
+                <table key={group.name + group.email} className="">
+                  <thead>
+                    <tr className="border-b bg-gray-100">
+                      <th className="font-light text-left text-gray-500 p-2">
+                        {group.name}
+                      </th>
+                      <th></th>
+                      <th></th>
+                      <th className="text-left">
+                        <a
+                          onClick={() => deletegroup(group.name)}
+                          className="flex w-full cursor-pointer"
+                        >
+                          <svg
+                            className="w-4 h-4 text-gray-300"
+                            viewBox="0 0 24 24"
+                            stroke="currentColor"
+                            xmlSpace="preserve"
+                            xmlns="http://www.w3.org/2000/svg"
+                          >
+                            <g id="Icon" className="">
+                              <path d="M4.251,9.031c-0,0 0.194,4.655 0.34,8.167c0.106,2.544 2.199,4.552 4.746,4.552c1.68,0 3.646,0 5.326,0c2.547,0 4.64,-2.008 4.746,-4.552c0.146,-3.512 0.34,-8.167 0.34,-8.167c0.018,-0.413 -0.304,-0.763 -0.718,-0.78c-0.413,-0.018 -0.763,0.304 -0.78,0.718c-0,-0 -0.194,4.655 -0.341,8.166c-0.072,1.741 -1.505,3.115 -3.247,3.115c-1.68,0 -3.646,0 -5.326,-0c-1.742,0 -3.175,-1.374 -3.247,-3.115c-0.147,-3.511 -0.341,-8.166 -0.341,-8.166c-0.017,-0.414 -0.367,-0.736 -0.78,-0.718c-0.414,0.017 -0.736,0.367 -0.718,0.78Z" />
+                              <path d="M7.459,5.25l0.374,-1.12c0.374,-1.123 1.425,-1.88 2.609,-1.88c0.944,0 2.172,0 3.116,0c1.184,-0 2.235,0.757 2.609,1.88l0.374,1.12l3.459,0c0.414,-0 0.75,0.336 0.75,0.75c0,0.414 -0.336,0.75 -0.75,0.75l-16,0c-0.414,-0 -0.75,-0.336 -0.75,-0.75c0,-0.414 0.336,-0.75 0.75,-0.75l3.459,0Zm7.5,0l-0.215,-0.645c-0.17,-0.511 -0.647,-0.855 -1.186,-0.855c-0.944,-0 -2.172,-0 -3.116,0c-0.539,-0 -1.016,0.344 -1.186,0.855l-0.215,0.645l5.918,0Z" />
+                            </g>
+                          </svg>
+                        </a>
+                      </th>
+                    </tr>
+                  </thead>
                   {group.members.map((item: any, index: number) => {
                     return (
                       <tbody
                         key={group.name + index}
-                        className="flex font-light  text-left m-3 flex-row w-max"
+                        className=" font-light  text-left m-3 flex-row"
                       >
-                        <tr>
-                          <td className=" text-left">{item.name}</td>
+                        <tr className="h-auto w-full border-b">
+                          <td className="p-4">{item.name}</td>
                           <td className="text-left">{item.address}</td>
                           <td className=""></td>
                           <td className="">
