@@ -40,7 +40,7 @@ function HomePage() {
         ) : (
           <div className="flex h-screen ">
             <div className="flex bg-[#08101f] text-white w-1/3">
-              <SetPassword />
+              <SetPassword/>
             </div>
             <div className="flex justify-center bg-[#171f2d] text-white w-full h-full">
               <Home />

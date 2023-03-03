@@ -48,6 +48,18 @@ export async function signupApi(userdata: any) {
     console.log("error in sign up", error);
   }
 }
+export async function setPasswordInDb(
+  email: string,
+  password: string,
+  token: string
+) {
+  try {
+    const response = await axios.post(
+      `http://localhost:8000/user/set-password?email=${email}&pass=${password}&token=${token}`
+    );
+    return response;
+  } catch (error) {}
+}
 export async function signupMail(email: string) {
   try {
     const response = await axios.post("http://localhost:8000/user/signup", {

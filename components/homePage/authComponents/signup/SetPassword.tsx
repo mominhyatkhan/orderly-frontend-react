@@ -3,6 +3,7 @@ import { useDispatch } from "react-redux";
 import { setPassword } from "../../../../pages/slices/signupSlice";
 import PasswordValidator from "password-validator";
 import { EyeIcon, EyeOffIcon } from "@heroicons/react/solid";
+import { useRouter } from "next/router";
 const schema = new PasswordValidator();
 schema
   .is()
@@ -24,6 +25,9 @@ function validatePassword(password: string): boolean {
 }
 
 function SetPassword() {
+  const router = useRouter();
+  const {email,token}=router.query
+
   const [password, setpassword] = useState<string>("");
   const [passwordError, setPasswordError] = useState("");
   const dispatch = useDispatch();
@@ -44,13 +48,17 @@ function SetPassword() {
       setPasswordError("");
     }
   }
+const setPasswordDb=()=>{
+  
+  dispatch(setPassword({ password }))
 
+}
   return (
     <div className="flex w-full">
       <form
         onSubmit={(e) => {
           e.preventDefault(),
-            !passwordError && dispatch(setPassword({ password }));
+            !passwordError && setPasswordDb;
         }}
         className="flex w-full"
       >
