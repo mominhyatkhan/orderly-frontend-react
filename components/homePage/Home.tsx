@@ -24,10 +24,10 @@ function Home() {
             </p>
           </a>
         </div>
-        <div className="">
+        <div className="w-80 h-full ">
           <a
             href="#"
-            className="py-8 px-4  w-72 h-36 text-s block bg-white border border-gray-200 rounded-lg shadow-md hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700"
+            className="py-8 px-4 text-s block bg-white border border-gray-200 rounded-lg shadow-md hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700"
           >
             <h5 className="mb-2 font-bold tracking-tight text-gray-900 dark:text-white">
               OTC Deals on deck
@@ -37,7 +37,7 @@ function Home() {
             </p>
           </a>
         </div>
-        <div className="w-72 h-36 ">
+        <div className="w-80 h-full">
           <a
             href="#"
             className="py-8 px-4  text-s block bg-white border border-gray-200 rounded-lg shadow-md hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700"
