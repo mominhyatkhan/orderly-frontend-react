@@ -13,10 +13,10 @@ const VestingComponent: React.FC<props> = ({
     <div className="flex flex-col bg-white rounded-lg  dark:bg-white space-y-2.5">
       <h1>Vesting Details</h1>
       <div className="mb-4 bg-white">
-        <div className="flex flex-row w-full">
+        <div className="flex flex-row w-full mt-2 mb-2">
           <label
             htmlFor="investmentLink"
-            className="block text-sm font-medium leading-5 text-gray-700"
+            className="block text-sm font-medium leading-5 text-[#687780]"
           >
             Lockup Duration
           </label>
@@ -90,7 +90,34 @@ const VestingComponent: React.FC<props> = ({
             <label className="ml-2">days</label>
           </div>
         </div>
-        <div className="w-full flex flex-row justify-between items-center border p-2">
+        <div className="flex flex-row w-full mt-5 mb-2">
+          <label
+            htmlFor="investmentLink"
+            className="block text-sm font-medium leading-5 text-[#687780]"
+          >
+            Token at TGE (%)
+          </label>
+          <div className="flex flex-row items-center w-3/4 justify-end space-x-1">
+            <h1 className="text-gray-300">Off</h1>
+            <label className="relative inline-flex content-center items-center cursor-pointer">
+              <input
+                type="checkbox"
+                checked={true}
+                // onChange={() =>
+                //   handleAllnotification(
+                //     item.chainId,
+                //     email,
+                //     !item.isnotification
+                //   )
+                // }
+                className="sr-only peer "
+              />
+              <div className="w-7 h-4 bg-gray-100 peer-focus:outline-none peer-focus:ring-0 rounded-full peer dark:bg-gray-200 peer-checked:after:translate-x-full peer-checked:after:border-[#6B8068] after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-[#6B8068] after:border-gray-300 after:border after:rounded-full after:h-3 after:w-3 after:transition-all dark:border-gray-200 peer-checked:bg-gray-200"></div>
+            </label>
+            <h1 className="text-gray-300">On</h1>
+          </div>
+        </div>
+        <div className="w-full flex flex-row justify-between items-center border p-2 rounded-md">
           <div className="w-5/6">
             <div className="mb-2">
               <input
