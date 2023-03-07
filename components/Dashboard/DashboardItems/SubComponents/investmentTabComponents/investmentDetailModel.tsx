@@ -86,7 +86,7 @@ const InvestmentDetailModel: React.FC<props> = ({ isOpen }) => {
         <VestingComponent
           lockup={setLockup}
           percentofToken={setPercentOfToken}
-          vestingPeriod={setVestingPeriod}
+          tokenPercentValue={percentOfToken}
         />
         <DistributionType />
         <InvestmentType
