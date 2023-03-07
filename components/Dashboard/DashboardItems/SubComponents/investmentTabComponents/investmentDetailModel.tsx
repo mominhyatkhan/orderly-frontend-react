@@ -9,6 +9,7 @@ type props = {
 };
 const InvestmentDetailModel: React.FC<props> = ({ isOpen }) => {
   const [chain, setChain] = useState<string>("");
+  const [wallet,setwallet]=useState<string>('')
   const [amountInvested, setAmountInvested] = useState<number>(0);
   const [investmentTrasactionLink, setInvestmentTransactionLink] =
     useState<string>("");
@@ -79,6 +80,7 @@ const InvestmentDetailModel: React.FC<props> = ({ isOpen }) => {
           </button>
         </div>
         <GenralComponent
+          tokenAddress={setwallet}
           Chain={setChain}
           amountInvested={setAmountInvested}
           investmentTransactionLink={setInvestmentTransactionLink}
@@ -90,6 +92,7 @@ const InvestmentDetailModel: React.FC<props> = ({ isOpen }) => {
         />
         <DistributionType />
         <InvestmentType
+          individualaddress={wallet}
           setInvestmentType={setInvestmentType}
           setInvestmentAddress={setInvestmentAddress}
         />

@@ -5,8 +5,10 @@ type props = {
   Chain: React.Dispatch<React.SetStateAction<string>>;
   amountInvested: React.Dispatch<React.SetStateAction<number>>;
   investmentTransactionLink: React.Dispatch<React.SetStateAction<string>>;
+  tokenAddress: React.Dispatch<React.SetStateAction<string>>;
 };
 const GenralComponent: React.FC<props> = ({
+  tokenAddress,
   Chain,
   amountInvested,
   investmentTransactionLink,
@@ -53,7 +55,7 @@ const GenralComponent: React.FC<props> = ({
           <select
             className="h-14 bg-gray-100 appearance-none w-full bg-white hover:border-gray-500 px-4 py-2 pr-8 rounded-lg"
             onClick={(e) => {
-              setIsOpen(!isOpen), Chain(e.currentTarget.value);
+              setIsOpen(!isOpen), tokenAddress(e.currentTarget.value);
             }}
           >
             <option>Select an Token</option>
