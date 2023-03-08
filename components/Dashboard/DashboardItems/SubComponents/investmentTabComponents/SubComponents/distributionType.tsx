@@ -6,40 +6,7 @@ const DistributionType = () => {
   const [isScheduleAdded, setIsScheduleAdded] = useState(false);
   const [showSchedule, setShowSchedule] = useState(false);
   const [ShowConstruct, setShowConstruct] = useState(false);
-  const [fields, setFields] = useState([
-    [
-      { name: "TGE", value: 0 },
-      { name: "Lockup", value: 0 },
-      { name: "Percentage", value: 0 },
-      { name: "Period", value: "" },
-    ],
-  ]);
-  const handleAddField = () => {
-    setFields([
-      ...fields,
-      [
-        { name: "TGE", value: 0 },
-        { name: "Lockup", value: 0 },
-        { name: "Percentage", value: 0 },
-        { name: "Period", value: "" },
-      ],
-    ]);
-  };
-  const handleChange = (
-    index1: number,
-    index2: number,
-    field: string | number,
-    e: ChangeEvent<HTMLInputElement>
-  ) => {
-    const newFields = [...fields];
-    //@ts-ignore
-    newFields[index1][index2][field] = e.target.value;
-    console.log(fields, e.target.value);
-    setFields(newFields);
-  };
-  const addSchedule = () => {
-    console.log(fields);
-  };
+
   const handledistribution = (value: string) => {
     if (value == "Dynamic distribution") {
       setShowSchedule(true);
@@ -56,7 +23,7 @@ const DistributionType = () => {
           htmlFor="investmentLink"
           className="block text-sm font-medium leading-5 text-gray-700"
         >
-         Vesting Period
+          Vesting Period
         </label>
         <div className="flex flex-row items-center w-3/4 justify-end space-x-1">
           <h1 className="text-gray-300">Off</h1>
@@ -95,28 +62,59 @@ const DistributionType = () => {
         </select>
       </div>
       <div className="flex flex-col bg-gray-100">
-        {isScheduleAdded &&
-          fields.map((fieldArray, index) => {
-            return (
-              <div key={index} className="ml-5 flex flex-row">
-                {fieldArray.map((field) => {
-                  return (
-                    <div className="flex flex-col w-1/4  m-2">
-                      <h1 className="text-xs text-gray-500">{field.name}</h1>
-                      <h1>{field.value}</h1>
-                    </div>
-                  );
-                })}
-                <a className="self-center h-full text-4xl font-thin mr-2">X</a>
-              </div>
-            );
-          })}
+        {isScheduleAdded && <div>fields</div>}
       </div>
 
+      {showSchedule && (
+        <div className="flex flex-col space-y-4">
+          <div>
+            <h1>Withdrawal</h1>
+          </div>
+          <div className="flex flex-row w-full justify-between">
+            <div className="flex items-center">
+              <input
+                type="radio"
+                id="automatic"
+                name="mode"
+                value="automatic"
+                className="focus:ring-indigo-500 h-4 w-4 text-indigo-600 border-gray-300 accent-[#6b8068]"
+              />
+              <label
+                htmlFor="automatic"
+                className="ml-3 block text-sm font-medium text-gray-700"
+              >
+                Automatic to investment wallet
+              </label>
+            </div>
+            <div className="flex items-center">
+              <input
+                checked={true}
+                type="radio"
+                id="manual"
+                name="mode"
+                value="manual"
+                className="focus:ring-indigo-500 h-4 w-4 text-indigo-600 border-gray-300 accent-[#6b8068]"
+              />
+              <label
+                htmlFor="manual"
+                className="ml-3 block text-sm font-medium text-gray-700"
+              >
+                Manual withdrawal
+              </label>
+            </div>
+          </div>
+          <div className="h-14 bg-gray-100 appearance-none w-full bg-white hover:border-gray-500 px-4 py-2 pr-8 rounded-lg">
+            <label className="block text-sm font-medium leading-5 text-gray-700">
+              Portal
+            </label>
+            <input className="bg-gray-100 w-full h-6  rounded-md" />
+          </div>
+        </div>
+      )}
       {ShowConstruct ? (
         <div>
           <a
-            className="flex justify-end text-4xl font-thin mr-2 cursor-pointer"
+            className="flex justify-end text-xl font-thin mr-2 cursor-pointer"
             onClick={() => {
               setShowConstruct(false), setShowSchedule(false);
             }}
@@ -137,34 +135,46 @@ const DistributionType = () => {
         </button>
       )}
       {showSchedule && (
-        <div className="flex flex-col space-x-4 text-[#6B8068] font-medium">
-          <div className="">
-            {fields.map((fieldArray, index1) => (
-              <div key={index1} className="grid grid-cols-2 w-full">
-                {fieldArray.map((field: any, index2) => (
-                  <div key={index2} className="w-1/2 p-2">
-                    <label className="text-sm font-medium">{field.name}</label>
-                    <input
-                      className="border border-gray-400 p-2 w-56"
-                      type={
-                        field.name === "Percentage" || field.name === "TGE"
-                          ? "number"
-                          : "text"
-                      }
-                      placeholder={`Enter ${field.name}`}
-                      value={field.value}
-                      onChange={(e) => handleChange(index1, index2, "value", e)}
-                    />
-                  </div>
-                ))}
+        <div className="flex flex-col font-medium border p-4">
+          <div className="space-y-2 mb-2">
+            <div>
+              <h1>Heading</h1>
+            </div>
+            <div className="flex w-full flex-row space-x-2">
+              <div className="h-14 bg-gray-100 appearance-none w-full bg-white hover:border-gray-500 px-4 py-2 pr-8 rounded-lg">
+                <label className="block text-sm font-medium leading-5 text-gray-700">
+                  TGE
+                </label>
+                <input className="bg-gray-100 w-full h-6  rounded-md" />
               </div>
-            ))}
+              <div className="h-14 bg-gray-100 appearance-none w-full bg-white hover:border-gray-500 px-4 py-2 pr-8 rounded-lg">
+                <label className="block text-sm font-medium leading-5 text-gray-700">
+                  Period
+                </label>
+                <input className="bg-gray-100 w-full h-6  rounded-md" />
+              </div>
+            </div>
+            <div className="flex flex-row space-x-2">
+              <div className="h-14 bg-gray-100 appearance-none w-full bg-white hover:border-gray-500 px-4 py-2 pr-8 rounded-lg">
+                <label className="block text-sm font-medium leading-5 text-gray-700">
+                  Lockup
+                </label>
+                <input className="bg-gray-100 w-full h-6  rounded-md" />
+              </div>
+              <div className="h-14 bg-gray-100 appearance-none w-full bg-white hover:border-gray-500 px-4 py-2 pr-8 rounded-lg">
+                <label className="block text-sm font-medium leading-5 text-gray-700">
+                  Percentage
+                </label>
+                <input className="bg-gray-100 w-full h-6  rounded-md" />
+              </div>
+            </div>
           </div>
-          <div className="space-x-4 cursor-pointer">
-            <a onClick={handleAddField}>+ Add Lockup</a>
+          <div className="flex space-x-2 cursor-pointer text-[#6B8068]">
+            <a>+ Add Lockup</a>
             <a
+              className="cursor-pointer text-[#6B8068]"
               onClick={() => {
-                setIsScheduleAdded(true), addSchedule;
+                setIsScheduleAdded(true);
               }}
             >
               + Add Schedule
