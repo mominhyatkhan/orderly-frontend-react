@@ -82,9 +82,9 @@ function SetPassword() {
                 onClick={handleTogglePassword}
               >
                 {showPassword ? (
-                  <EyeOffIcon className="h-5 w-5 opacity-40" />
-                ) : (
                   <EyeIcon className="h-5 w-5 opacity-40" />
+                ) : (
+                  <EyeOffIcon className="h-5 w-5 opacity-40" />
                 )}
               </button>
             </div>
