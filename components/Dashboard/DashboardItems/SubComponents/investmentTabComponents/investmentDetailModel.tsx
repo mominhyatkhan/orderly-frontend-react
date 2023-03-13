@@ -90,7 +90,7 @@ const InvestmentDetailModel: React.FC<props> = ({ isOpen }) => {
           percentofToken={setPercentOfToken}
           tokenPercentValue={percentOfToken}
         />
-        <DistributionType />
+        <DistributionType tge={percentOfToken}/>
         <InvestmentType
           individualaddress={wallet}
           setInvestmentType={setInvestmentType}

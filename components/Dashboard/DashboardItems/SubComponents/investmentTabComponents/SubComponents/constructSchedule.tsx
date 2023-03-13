@@ -1,6 +1,8 @@
 import { ChangeEvent, useState } from "react";
-
-const ConstructSchedule = () => {
+type Props = {
+  tge: number;
+};
+const ConstructSchedule: React.FC<Props> = ({ tge }) => {
   return (
     <div className="">
       <div className="flex flex-col space-x-4 text-[#6B8068] font-medium">
@@ -27,7 +29,9 @@ const ConstructSchedule = () => {
                 <label className="block text-sm font-medium leading-5 text-gray-700">
                   TGE
                 </label>
-                <input className="bg-gray-100 w-full h-6  rounded-md" />
+                <label className="bg-gray-100 w-full h-6  rounded-md">
+                  {tge}
+                </label>
               </div>
             </div>
           </div>
