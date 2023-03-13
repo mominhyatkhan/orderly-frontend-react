@@ -6,7 +6,7 @@ const DistributionType = () => {
   const [isScheduleAdded, setIsScheduleAdded] = useState(false);
   const [showSchedule, setShowSchedule] = useState(false);
   const [ShowConstruct, setShowConstruct] = useState(false);
-
+  const [isManual, setManual] = useState<boolean>(true);
   const handledistribution = (value: string) => {
     if (value == "Dynamic distribution") {
       setShowSchedule(true);
@@ -16,6 +16,7 @@ const DistributionType = () => {
       console.log(value);
     }
   };
+  console.log(isManual);
   return (
     <div className="flex flex-col bg-white rounded-lg dark:bg-white space-y-2.5">
       <div className="flex flex-row w-full">
@@ -73,10 +74,14 @@ const DistributionType = () => {
           <div className="flex flex-row w-full justify-between">
             <div className="flex items-center">
               <input
+                checked={!isManual}
                 type="radio"
                 id="automatic"
                 name="mode"
                 value="automatic"
+                onChange={(e) => {
+                  setManual(!isManual), console.log("auto", isManual);
+                }}
                 className="focus:ring-indigo-500 h-4 w-4 text-indigo-600 border-gray-300 accent-[#6b8068]"
               />
               <label
@@ -88,12 +93,15 @@ const DistributionType = () => {
             </div>
             <div className="flex items-center">
               <input
-                checked={true}
+                checked={isManual}
                 type="radio"
                 id="manual"
                 name="mode"
                 value="manual"
                 className="focus:ring-indigo-500 h-4 w-4 text-indigo-600 border-gray-300 accent-[#6b8068]"
+                onChange={(e) => {
+                  setManual(!isManual), console.log("manual", isManual);
+                }}
               />
               <label
                 htmlFor="manual"
@@ -103,85 +111,93 @@ const DistributionType = () => {
               </label>
             </div>
           </div>
-          <div className="h-14 bg-gray-100 appearance-none w-full bg-white hover:border-gray-500 px-4 py-2 pr-8 rounded-lg">
-            <label className="block text-sm font-medium leading-5 text-gray-700">
-              Portal
-            </label>
-            <input className="bg-gray-100 w-full h-6  rounded-md" />
-          </div>
+          {isManual && (
+            <div className="h-14 bg-gray-100 appearance-none w-full bg-white hover:border-gray-500 px-4 py-2 pr-8 rounded-lg">
+              <label className="block text-sm font-medium leading-5 text-gray-700">
+                Portal
+              </label>
+              <input className="bg-gray-100 w-full h-6  rounded-md" />
+            </div>
+          )}
         </div>
       )}
-      {ShowConstruct ? (
-        <div>
-          <a
-            className="flex justify-end text-xl font-thin mr-2 cursor-pointer"
-            onClick={() => {
-              setShowConstruct(false), setShowSchedule(false);
-            }}
-          >
-            X
-          </a>
-          <ConstructSchedule />
-        </div>
-      ) : (
-        <button
-          type="button"
-          className="bg-[#6b8068] w-full h-10  hover:bg-emerald-700 text-white rounded"
-          onClick={() => {
-            setShowConstruct(true), setShowSchedule(false);
-          }}
-        >
-          Construct Schedule
-        </button>
-      )}
-      {showSchedule && (
-        <div className="flex flex-col font-medium border p-4">
-          <div className="space-y-2 mb-2">
-            <div>
-              <h1>Heading</h1>
-            </div>
-            <div className="flex w-full flex-row space-x-2">
-              <div className="h-14 bg-gray-100 appearance-none w-full bg-white hover:border-gray-500 px-4 py-2 pr-8 rounded-lg">
-                <label className="block text-sm font-medium leading-5 text-gray-700">
-                  TGE
-                </label>
-                <input className="bg-gray-100 w-full h-6  rounded-md" />
-              </div>
-              <div className="h-14 bg-gray-100 appearance-none w-full bg-white hover:border-gray-500 px-4 py-2 pr-8 rounded-lg">
-                <label className="block text-sm font-medium leading-5 text-gray-700">
-                  Period
-                </label>
-                <input className="bg-gray-100 w-full h-6  rounded-md" />
-              </div>
-            </div>
-            <div className="flex flex-row space-x-2">
-              <div className="h-14 bg-gray-100 appearance-none w-full bg-white hover:border-gray-500 px-4 py-2 pr-8 rounded-lg">
-                <label className="block text-sm font-medium leading-5 text-gray-700">
-                  Lockup
-                </label>
-                <input className="bg-gray-100 w-full h-6  rounded-md" />
-              </div>
-              <div className="h-14 bg-gray-100 appearance-none w-full bg-white hover:border-gray-500 px-4 py-2 pr-8 rounded-lg">
-                <label className="block text-sm font-medium leading-5 text-gray-700">
-                  Percentage
-                </label>
-                <input className="bg-gray-100 w-full h-6  rounded-md" />
-              </div>
-            </div>
-          </div>
-          <div className="flex space-x-2 cursor-pointer text-[#6B8068]">
-            <a>+ Add Lockup</a>
+      {!isManual ? (
+        ShowConstruct ? (
+          <div>
             <a
-              className="cursor-pointer text-[#6B8068]"
+              className="flex justify-end text-xl font-thin mr-2 cursor-pointer"
               onClick={() => {
-                setIsScheduleAdded(true);
+                setShowConstruct(false), setShowSchedule(false);
               }}
             >
-              + Add Schedule
+              X
             </a>
+            <ConstructSchedule />
           </div>
-        </div>
+        ) : (
+          <button
+            type="button"
+            className="bg-[#6b8068] w-full h-10  hover:bg-emerald-700 text-white rounded"
+            onClick={() => {
+              setShowConstruct(true), setShowSchedule(false);
+            }}
+          >
+            Construct Schedule
+          </button>
+        )
+      ) : (
+        ""
       )}
+      {!isManual
+        ? showSchedule && (
+            <div className="flex flex-col font-medium border p-4">
+              <div className="space-y-2 mb-2">
+                <div>
+                  <h1>Heading</h1>
+                </div>
+                <div className="flex w-full flex-row space-x-2">
+                  <div className="h-14 bg-gray-100 appearance-none w-full bg-white hover:border-gray-500 px-4 py-2 pr-8 rounded-lg">
+                    <label className="block text-sm font-medium leading-5 text-gray-700">
+                      TGE
+                    </label>
+                    <input className="bg-gray-100 w-full h-6  rounded-md" />
+                  </div>
+                  <div className="h-14 bg-gray-100 appearance-none w-full bg-white hover:border-gray-500 px-4 py-2 pr-8 rounded-lg">
+                    <label className="block text-sm font-medium leading-5 text-gray-700">
+                      Period
+                    </label>
+                    <input className="bg-gray-100 w-full h-6  rounded-md" />
+                  </div>
+                </div>
+                <div className="flex flex-row space-x-2">
+                  <div className="h-14 bg-gray-100 appearance-none w-full bg-white hover:border-gray-500 px-4 py-2 pr-8 rounded-lg">
+                    <label className="block text-sm font-medium leading-5 text-gray-700">
+                      Lockup
+                    </label>
+                    <input className="bg-gray-100 w-full h-6  rounded-md" />
+                  </div>
+                  <div className="h-14 bg-gray-100 appearance-none w-full bg-white hover:border-gray-500 px-4 py-2 pr-8 rounded-lg">
+                    <label className="block text-sm font-medium leading-5 text-gray-700">
+                      Percentage
+                    </label>
+                    <input className="bg-gray-100 w-full h-6  rounded-md" />
+                  </div>
+                </div>
+              </div>
+              <div className="flex space-x-2 cursor-pointer text-[#6B8068]">
+                <a>+ Add Lockup</a>
+                <a
+                  className="cursor-pointer text-[#6B8068]"
+                  onClick={() => {
+                    setIsScheduleAdded(true);
+                  }}
+                >
+                  + Add Schedule
+                </a>
+              </div>
+            </div>
+          )
+        : ""}
     </div>
   );
 };
