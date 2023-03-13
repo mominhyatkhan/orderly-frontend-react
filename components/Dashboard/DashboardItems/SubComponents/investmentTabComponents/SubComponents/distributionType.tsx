@@ -14,7 +14,7 @@ const DistributionType: React.FC<Props> = ({ tge }) => {
       setShowSchedule(true);
       setShowConstruct(false);
     } else {
-      setShowSchedule(false);  
+      setShowSchedule(false);
       console.log(value);
     }
     setSelected(true);
@@ -36,7 +36,9 @@ const DistributionType: React.FC<Props> = ({ tge }) => {
               type="checkbox"
               checked={isvesting}
               className="sr-only peer "
-              onChange={() => setVesting(!isvesting)}
+              onChange={() => {
+                setVesting(!isvesting), setSelected(false);
+              }}
             />
             <div className="w-7 h-4 bg-gray-100 peer-focus:outline-none peer-focus:ring-0 rounded-full peer dark:bg-gray-200 peer-checked:after:translate-x-full peer-checked:after:border-[#6B8068] after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-[#6B8068] after:border-gray-300 after:border after:rounded-full after:h-3 after:w-3 after:transition-all dark:border-gray-200 peer-checked:bg-gray-200"></div>
           </label>
@@ -61,60 +63,61 @@ const DistributionType: React.FC<Props> = ({ tge }) => {
               <option>Anual Distribution</option>
             </select>
           </div>
-          {isSelected&&<div className="flex flex-col space-y-4 mb-2 mt-2">
-            <div>
-              <h1>Withdrawal</h1>
+          {isSelected && (
+            <div className="flex flex-col space-y-4 mb-2 mt-2">
+              <div>
+                <h1>Withdrawal</h1>
+              </div>
+              <div className="flex flex-row w-full justify-between">
+                <div className="flex items-center">
+                  <input
+                    checked={!isManual}
+                    type="radio"
+                    id="automatic"
+                    name="mode"
+                    value="automatic"
+                    onChange={(e) => {
+                      setManual(!isManual), console.log("auto", isManual);
+                    }}
+                    className="focus:ring-indigo-500 h-4 w-4 text-indigo-600 border-gray-300 accent-[#6b8068]"
+                  />
+                  <label
+                    htmlFor="automatic"
+                    className="ml-3 block text-sm font-medium text-gray-700"
+                  >
+                    Automatic to investment wallet
+                  </label>
+                </div>
+                <div className="flex items-center">
+                  <input
+                    checked={isManual}
+                    type="radio"
+                    id="manual"
+                    name="mode"
+                    value="manual"
+                    className="focus:ring-indigo-500 h-4 w-4 text-indigo-600 border-gray-300 accent-[#6b8068]"
+                    onChange={(e) => {
+                      setManual(!isManual), console.log("manual", isManual);
+                    }}
+                  />
+                  <label
+                    htmlFor="manual"
+                    className="ml-3 block text-sm font-medium text-gray-700"
+                  >
+                    Manual withdrawal
+                  </label>
+                </div>
+              </div>
+              {isManual && (
+                <div className="h-14 bg-gray-100 appearance-none w-full bg-white hover:border-gray-500 px-4 py-2 pr-8 rounded-lg">
+                  <label className="block text-sm font-medium leading-5 text-gray-700">
+                    Portal
+                  </label>
+                  <input className="bg-gray-100 w-full h-6  rounded-md" />
+                </div>
+              )}
             </div>
-            <div className="flex flex-row w-full justify-between">
-              <div className="flex items-center">
-                <input
-                  checked={!isManual}
-                  type="radio"
-                  id="automatic"
-                  name="mode"
-                  value="automatic"
-                  onChange={(e) => {
-                    setManual(!isManual), console.log("auto", isManual);
-                  }}
-                  className="focus:ring-indigo-500 h-4 w-4 text-indigo-600 border-gray-300 accent-[#6b8068]"
-                />
-                <label
-                  htmlFor="automatic"
-                  className="ml-3 block text-sm font-medium text-gray-700"
-                >
-                  Automatic to investment wallet
-                </label>
-              </div>
-              <div className="flex items-center">
-                <input
-                  checked={isManual}
-                  type="radio"
-                  id="manual"
-                  name="mode"
-                  value="manual"
-                  className="focus:ring-indigo-500 h-4 w-4 text-indigo-600 border-gray-300 accent-[#6b8068]"
-                  onChange={(e) => {
-                    setManual(!isManual), console.log("manual", isManual);
-                  }}
-                />
-                <label
-                  htmlFor="manual"
-                  className="ml-3 block text-sm font-medium text-gray-700"
-                >
-                  Manual withdrawal
-                </label>
-              </div>
-            </div>
-            {isManual && (
-              <div className="h-14 bg-gray-100 appearance-none w-full bg-white hover:border-gray-500 px-4 py-2 pr-8 rounded-lg">
-                <label className="block text-sm font-medium leading-5 text-gray-700">
-                  Portal
-                </label>
-                <input className="bg-gray-100 w-full h-6  rounded-md" />
-              </div>
-            )}
-          </div>
-}
+          )}
           {!isManual && !showSchedule ? (
             ShowConstruct ? (
               <div className="">
