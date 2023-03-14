@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 type props = {
-  lockup: React.Dispatch<React.SetStateAction<number>>;
+  lockup: React.Dispatch<React.SetStateAction<number[]>>;
   percentofToken: React.Dispatch<React.SetStateAction<number>>;
   tokenPercentValue: number;
 };

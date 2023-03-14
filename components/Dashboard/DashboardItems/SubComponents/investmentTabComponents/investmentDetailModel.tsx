@@ -9,17 +9,18 @@ type props = {
 };
 const InvestmentDetailModel: React.FC<props> = ({ isOpen }) => {
   const [chain, setChain] = useState<string>("");
-  const [wallet,setwallet]=useState<string>('')
+  const [wallet, setwallet] = useState<string>("");
   const [amountInvested, setAmountInvested] = useState<number>(0);
   const [investmentTrasactionLink, setInvestmentTransactionLink] =
     useState<string>("");
-  const [lockup, setLockup] = useState<number>(0);
-  const [percentOfToken, setPercentOfToken] = useState<number>(0);
+  const [lockup, setLockup] = useState<number[]>([]);
+  const [percentOfToken, setPercentOfToken] = useState<number[]>([]);
   const [vestingPeriod, setVestingPeriod] = useState<number>(0);
   const [investmentType, setInvestmentType] = useState<string>("");
   const [investmentAddress, setInvestmentAddress] = useState<string>("");
   const [saftFile, setSaftFile] = useState<File>();
   const [website, setWebsite] = useState<string>("");
+  const [tge, setTge] = useState<number>(0);
   const showdata = () => {
     console.log(
       "chain",
@@ -43,14 +44,16 @@ const InvestmentDetailModel: React.FC<props> = ({ isOpen }) => {
       "website",
       website
     );
+    isOpen(false)
   };
   const canceled = () => {
     setChain("");
     setAmountInvested(0);
     setInvestmentTransactionLink("");
-    setLockup(0);
-    setPercentOfToken(0);
+    setLockup([]);
+    setPercentOfToken([]);
     setVestingPeriod(0);
+    isOpen(false)
   };
   return (
     <div className=" w-full h-max rounded-lg shadow dark:bg-white">
@@ -87,10 +90,16 @@ const InvestmentDetailModel: React.FC<props> = ({ isOpen }) => {
         />
         <VestingComponent
           lockup={setLockup}
-          percentofToken={setPercentOfToken}
-          tokenPercentValue={percentOfToken}
+          percentofToken={setTge}
+          tokenPercentValue={tge}
         />
-        <DistributionType tge={percentOfToken}/>
+        <DistributionType
+          tge={tge}
+          setLockups={setLockup}
+          lockups={lockup}
+          setPercentage={setPercentOfToken}
+          percentage={percentOfToken}
+        />
         <InvestmentType
           individualaddress={wallet}
           setInvestmentType={setInvestmentType}
